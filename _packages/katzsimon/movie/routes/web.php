@@ -15,4 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix'=>'admin', 'middleware' => ['web', 'auth.admin']], function () {
     Route::resource('movies', MovieController::class, ['as'=>'admin']);
+
+    Route::post('factory/movies', [FactoryController::class, 'makeMovie'])->name('admin.factory.movies');
 });

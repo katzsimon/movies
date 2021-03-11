@@ -44,6 +44,7 @@ class SetupMovieCommand extends Command
         Extend::model($baseDir.'/Models/Movie.php');
 
         Extend::controller($baseDir.'/Http/Controllers/MovieController.php');
+        Extend::controller($baseDir.'/Http/Controllers/FactoryController.php');
 
         Extend::request($baseDir.'/Http/Requests/AdminMovieRequest.php');
 

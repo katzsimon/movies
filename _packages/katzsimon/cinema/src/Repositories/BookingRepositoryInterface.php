@@ -9,5 +9,12 @@ interface BookingRepositoryInterface extends BaseRepositoryInterface
 {
 
 
+    /**
+     * @param int $limit
+     * @param string $order
+     * @return Collection
+     */
+    public function getUpcoming($limit=5, $order='asc'): Collection;
+
 
 }

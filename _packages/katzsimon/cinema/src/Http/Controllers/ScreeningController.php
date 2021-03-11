@@ -35,8 +35,8 @@ class ScreeningController extends Controller
      */
     public function index(Request $request)
     {
-        $upcomingScreenings = $this->repository->upcomingScreenings('desc');
-        $pastScreenings = $this->repository->pastScreenings('desc');
+        $upcomingScreenings = $this->repository->upcomingScreenings('asc');
+        $pastScreenings = $this->repository->pastScreenings('asc');
 
         $data = [
             'pastScreenings'=>ScreeningResource::collection($pastScreenings)->toArray(request()),

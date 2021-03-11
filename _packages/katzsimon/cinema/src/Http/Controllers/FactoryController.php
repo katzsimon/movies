@@ -38,13 +38,15 @@ class FactoryController extends Controller
     {
         $numberScreening = $request->get('numberScreening', 1);
         $numberMovie = intval($request->get('numberMovie', 1));
+        if ($numberMovie===0) $numberMovie = 1;
+
 
         for($i=1; $i<=$numberMovie; $i++) {
             $movie = $movie->factory()->create();
             $outputs = $item->factory($numberScreening)->movie($movie->id)->create();
         }
 
-        return $this->output(['view'=>'katzsimon::admin.dashboard', 'message'=>['type'=>'success', 'message'=>"{$numberScreening} Screenings Created"]]);
+        return $this->redirect(['route'=>'admin.dashboard', 'message'=>['type'=>'success', 'message'=>"{$numberScreening} Screenings Created"]]);
 
     }
 
@@ -69,7 +71,7 @@ class FactoryController extends Controller
             $outputs = $item->factory($numberBooking)->create();
         }
 
-        return $this->output(['view'=>'katzsimon::admin.dashboard', 'message'=>['type'=>'success', 'message'=>"{$numberBooking} Bookings Created"]]);
+        return $this->redirect(['route'=>'admin.dashboard', 'message'=>['type'=>'success', 'message'=>"{$numberBooking} Bookings Created"]]);
 
     }
 

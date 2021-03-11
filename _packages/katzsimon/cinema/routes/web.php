@@ -25,6 +25,9 @@ Route::group(['prefix'=>'admin', 'middleware' => ['web', 'auth.admin']], functio
     Route::resource('cinemas', CinemaController::class, ['as'=>'admin']);
     Route::resource('cinemas.theatres', TheatreController::class, ['as'=>'admin']);
     Route::resource('screenings', ScreeningController::class, ['as'=>'admin']);
+
+    Route::post('factory/screenings', [FactoryController::class, 'makeScreenings'])->name('admin.factory.screenings');
+    Route::post('factory/bookings', [FactoryController::class, 'makeBookings'])->name('admin.factory.bookings');
 });
 
 
