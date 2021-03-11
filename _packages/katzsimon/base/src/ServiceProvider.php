@@ -16,7 +16,17 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function boot()
     {
 
+        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+        $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
 
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'katzsimon');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                \Katzsimon\Base\Console\Commands\SetupCommand::class,
+            ]);
+        }
 
     }
 
