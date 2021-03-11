@@ -26,8 +26,9 @@ class ScreeningResource extends JsonResource
 
         return [
             'id' => $this->id,
-            'theatre_id' => $this->theatre_id,
-            'movie_id' => $this->movie_id,
+            'cinema_id' => $this->theatre->cinema_id??'',
+            'theatre_id' => $this->theatre_id??'',
+            'movie_id' => $this->movie_id??'',
             'date' => $datetime->format('Y-m-d'),
             'time' => $datetime->format('H:i'),
             'datetime_formatted' => $datetime->format('H:i \\o\\n l, j F Y'),

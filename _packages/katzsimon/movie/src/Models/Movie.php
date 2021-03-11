@@ -34,6 +34,15 @@ class Movie extends \App\Models\Model
         'item'=>'movie',
     ];
 
+    public static function options($options=[]) {
+        $items = Movie::orderBy('name', 'asc')->get();
 
+        $options = [];
+        $options[''] = '';
+        foreach ($items as $item) {
+            $options[$item->id] = $item->name;
+        }
+        return $options;
+    }
 
 }

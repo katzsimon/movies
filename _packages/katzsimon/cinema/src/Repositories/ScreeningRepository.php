@@ -22,4 +22,28 @@ class ScreeningRepository extends BaseRepository implements ScreeningRepositoryI
         parent::__construct($model);
     }
 
+
+    /**
+     * Get the all the Upcoming Screenings
+     *
+     * @param string $order
+     * @return Collection
+     */
+    public function upcomingScreenings($order='asc'): Collection
+    {
+        return $this->newQuery()->where('datetime', '>=', Date('Y-m-d H:i:s'))->orderBy('datetime', $order)->get();
+    }
+
+
+    /**
+     * Get all the Past Screenings
+     *
+     * @param string $order
+     * @return Collection
+     */
+    public function pastScreenings($order='asc'): Collection
+    {
+        return $this->newQuery()->where('datetime', '<', Date('Y-m-d H:i:s'))->orderBy('datetime', $order)->get();
+    }
+
 }

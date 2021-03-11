@@ -40,4 +40,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function options($options=[]) {
+
+        $items = User::orderBy('name', 'asc')->get();
+
+        $options = [];
+        $options[] = '';
+        foreach ($items as $item) {
+            $options[$item->id] = "{$item->name} - {$item->email}";
+        }
+        return $options;
+
+    }
 }

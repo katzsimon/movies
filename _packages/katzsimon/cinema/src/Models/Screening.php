@@ -91,7 +91,7 @@ class Screening extends \App\Models\Model
      */
     public static function options($options=[]) {
 
-        $items = Screening::orderBy('date', 'asc')->orderBy('time', 'asc')->get();
+        $items = Screening::orderBy('datetime', 'asc')->get();
 
         $options = [];
         $options[] = '';
@@ -102,7 +102,19 @@ class Screening extends \App\Models\Model
 
     }
 
+    /**
+     * Calculates the current seats available for the Screening
+     *
+     * @param string $value
+     * @return int
+     */
+    public function getSeatsAvailableAttribute($value='') {
+        $maxTheatreSeats = intval($this->theatre->max_seats??0);
+        $bookings = Booking::where('screening_id', $this->id)->sum('seats');
+        $seatsBooked = intval($bookings);
 
+        return $maxTheatreSeats - $seatsBooked;
+    }
 
 
     /**

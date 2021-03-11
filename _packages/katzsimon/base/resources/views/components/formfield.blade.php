@@ -13,9 +13,6 @@
     foreach($data as $key=>$attrib) {
         $dataAttribs["data-{$key}"] = $attrib;
     }
-//if (!empty($data)) dd($dataAttribs);
-
-
 
     $error = '';
     if (session()->has('errors')) $error = session()->get('errors')->get($name, [])[0]??'';

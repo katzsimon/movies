@@ -741,6 +741,11 @@ article .table {
   margin-bottom: 0.25rem;
 }
 
+input[readonly] {
+  --tw-bg-opacity: 1;
+  background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
+}
+
 .card {
   --tw-border-opacity: 1;
   border-color: rgba(156, 163, 175, var(--tw-border-opacity));
@@ -903,6 +908,19 @@ a:hover {
 
 .h-100 {
   min-height: 100%;
+}
+
+.link:hover {
+  --tw-text-opacity: 1;
+  color: rgba(59, 130, 246, var(--tw-text-opacity));
+}
+
+.link {
+  text-decoration: underline;
+}
+
+.link:hover {
+  text-decoration: underline;
 }
 
 .nav-active {

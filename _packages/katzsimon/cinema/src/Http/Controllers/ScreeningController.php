@@ -35,9 +35,15 @@ class ScreeningController extends Controller
      */
     public function index(Request $request)
     {
-        $items = $this->repository->all();
+        $upcomingScreenings = $this->repository->upcomingScreenings('desc');
+        $pastScreenings = $this->repository->pastScreenings('desc');
 
-        return $this->output(['view'=>"katzsimon::admin.{$this->ui['items']}.index", 'data'=>['items'=>$items]]);
+        $data = [
+            'pastScreenings'=>ScreeningResource::collection($pastScreenings)->toArray(request()),
+            'upcomingScreenings'=>ScreeningResource::collection($upcomingScreenings)->toArray(request())
+        ];
+
+        return $this->output(['view'=>"katzsimon::admin.{$this->ui['items']}.index", 'data'=>$data]);
     }
 
 

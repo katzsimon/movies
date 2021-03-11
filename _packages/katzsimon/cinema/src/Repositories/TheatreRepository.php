@@ -20,4 +20,16 @@ class TheatreRepository extends BaseRepository implements TheatreRepositoryInter
         parent::__construct($model);
     }
 
+    /**
+     * Get all the Theatres for a specific Cinema
+     *
+     * @param Cinema $parent
+     * @param string $order
+     * @return Collection
+     */
+    public function allFromCinema(Cinema $parent, $order='asc'): Collection
+    {
+        return $this->newQuery()->where('cinema_id', $parent->id)->orderBy('id', $order)->get();
+    }
+
 }

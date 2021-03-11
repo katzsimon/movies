@@ -10,6 +10,9 @@
 
                         @if(Auth::check())
                             <a href="{{ route('admin.movies.index') }}" class="btn-nav">Movies</a>
+                            <a href="{{ route('admin.cinemas.index') }}" class="btn-nav">Cinemas</a>
+                            <a href="{{ route('admin.screenings.index') }}" class="btn-nav">Screenings</a>
+                            <a href="{{ route('admin.bookings.index') }}" class="btn-nav">Bookings</a>
                         @else
                         @endif
 
@@ -57,6 +60,9 @@
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             @if(Auth::check())
                 <a href="{{ route('admin.movies.index') }}" class="btn-nav-mobile">Movies</a>
+                <a href="{{ route('admin.cinemas.index') }}" class="btn-nav-mobile">Cinemas</a>
+                <a href="{{ route('admin.screenings.index') }}" class="btn-nav-mobile">Screenings</a>
+                <a href="{{ route('admin.bookings.index') }}" class="btn-nav-mobile">Bookings</a>
             @endif
         </div>
         <div class="pt-4 pb-3 border-t border-gray-700">
