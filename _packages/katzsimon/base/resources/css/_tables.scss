@@ -1,0 +1,50 @@
+.table-items {
+    thead {
+        background-color:#eee !important;
+        th {
+            text-transform: uppercase;
+        }
+    }
+    thead tr th:last-child {
+        width:200px;
+        text-align: right;
+    }
+    tbody tr td:last-child {
+        text-align: right;
+    }
+}
+.table {
+    margin-bottom:0;
+}
+.table.table-middle td, .table.table-middle th {
+    vertical-align: middle;
+}
+.table-hover {
+    tbody tr:hover {
+        td, th, {
+            @apply bg-gray-100;
+        }
+    }
+}
+.table {
+    @apply w-full text-gray-900
+}
+
+.table thead th {
+    @apply align-bottom border-b-2 border-gray-300
+}
+
+.table td, .table th {
+    @apply p-3 border-t border-gray-300
+}
+
+.table.table-bordered {
+    @apply border border-gray-300
+}
+
+.table-bordered td, .table-bordered th {
+    @apply border border-gray-300
+}
+th {
+    text-align: inherit;
+}

@@ -741,6 +741,141 @@ article .table {
   margin-bottom: 0.25rem;
 }
 
+.card {
+  --tw-border-opacity: 1;
+  border-color: rgba(156, 163, 175, var(--tw-border-opacity));
+  border-radius: 0.25rem;
+  border-width: 1px;
+}
+
+.card .card-header {
+  --tw-bg-opacity: 1;
+  background-color: rgba(209, 213, 219, var(--tw-bg-opacity));
+  --tw-border-opacity: 1;
+  border-color: rgba(107, 114, 128, var(--tw-border-opacity));
+  border-bottom-width: 1px;
+  padding: 1rem;
+}
+
+.card .card-header .card-title {
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  margin-bottom: 0px;
+}
+
+.card .card-footer {
+  --tw-border-opacity: 1;
+  border-color: rgba(107, 114, 128, var(--tw-border-opacity));
+  border-top-width: 1px;
+  padding: 1rem;
+}
+
+.card .card-body {
+  padding: 1rem;
+}
+
+.table-items thead {
+  background-color: #eee !important;
+}
+
+.table-items thead th {
+  text-transform: uppercase;
+}
+
+.table-items thead tr th:last-child {
+  width: 200px;
+  text-align: right;
+}
+
+.table-items tbody tr td:last-child {
+  text-align: right;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table.table-middle td, .table.table-middle th {
+  vertical-align: middle;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  --tw-bg-opacity: 1;
+  background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+}
+
+.table {
+  --tw-text-opacity: 1;
+  color: rgba(17, 24, 39, var(--tw-text-opacity));
+  width: 100%;
+}
+
+.table thead th {
+  --tw-border-opacity: 1;
+  border-color: rgba(209, 213, 219, var(--tw-border-opacity));
+  border-bottom-width: 2px;
+  vertical-align: bottom;
+}
+
+.table td, .table th {
+  --tw-border-opacity: 1;
+  border-color: rgba(209, 213, 219, var(--tw-border-opacity));
+  border-top-width: 1px;
+  padding: 0.75rem;
+}
+
+.table.table-bordered {
+  --tw-border-opacity: 1;
+  border-color: rgba(209, 213, 219, var(--tw-border-opacity));
+  border-width: 1px;
+}
+
+.table-bordered td, .table-bordered th {
+  --tw-border-opacity: 1;
+  border-color: rgba(209, 213, 219, var(--tw-border-opacity));
+  border-width: 1px;
+}
+
+th {
+  text-align: inherit;
+}
+
+.toaster {
+  --tw-bg-opacity: 1;
+  background-color: rgba(0, 0, 0, var(--tw-bg-opacity));
+  border-radius: 0.25rem;
+  display: flex;
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  padding: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  position: fixed;
+  right: 3rem;
+  top: 4rem;
+  --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
+}
+
+.toaster.success {
+  --tw-bg-opacity: 1;
+  background-color: rgba(110, 231, 183, var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgba(6, 95, 70, var(--tw-text-opacity));
+}
+
+.toaster.danger {
+  --tw-bg-opacity: 1;
+  background-color: rgba(252, 165, 165, var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgba(153, 27, 27, var(--tw-text-opacity));
+}
+
 svg {
   width: 1rem;
   height: 1rem;

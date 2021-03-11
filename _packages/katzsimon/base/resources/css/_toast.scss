@@ -1,0 +1,12 @@
+.toaster {
+    @apply fixed top-16 right-12 bg-black text-white p-4 px-6 font-bold text-lg flex rounded shadow-lg;
+    box-shadow:  0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
+    &.success
+    {
+        @apply bg-green-300 text-green-800;
+    }
+    &.danger
+    {
+        @apply bg-red-300 text-red-800;
+    }
+}

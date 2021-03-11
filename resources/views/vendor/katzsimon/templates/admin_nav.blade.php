@@ -3,13 +3,13 @@
         <div class="flex items-center justify-between h-16">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
-                    <img class="h-8 w-8" src="/images/logo.svg" alt="Logo">
+                    <img class="h-8 w-8" src="/images/logo-white.svg" alt="Logo">
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
 
                         @if(Auth::check())
-                            <a href="{{ route('admin.dashboard') }}" class="btn-nav">Dashboard</a>
+                            <a href="{{ route('admin.movies.index') }}" class="btn-nav">Movies</a>
                         @else
                         @endif
 
@@ -55,14 +55,19 @@
     <!-- Mobile menu, show/hide based on menu state. -->
     <div class="md:hidden" id="mobile-menu"  v-show="mobileMenuOpen">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="/dashboard" class="btn-nav-mobile">Dashboard</a>
+            @if(Auth::check())
+                <a href="{{ route('admin.movies.index') }}" class="btn-nav-mobile">Movies</a>
+            @endif
         </div>
         <div class="pt-4 pb-3 border-t border-gray-700">
             <div class="mt-3 px-2 space-y-1">
-                <a href="/login" class="btn-nav-mobile">Login</a>
-                <a href="/register" class="btn-nav-mobile">Register</a>
-                <a href="/dashboard" class="btn-nav-mobile">Dashboard</a>
-                <a href="/logout" class="btn-nav-mobile">Logout</a>
+                @if(Auth::check())
+                    <a href="/dashboard" class="btn-nav-mobile">Dashboard</a>
+                    <a href="/logout" class="btn-nav-mobile">Logout</a>
+                @else
+                    <a href="/login" class="btn-nav-mobile">Login</a>
+                    <a href="/register" class="btn-nav-mobile">Register</a>
+                @endif
             </div>
         </div>
     </div>

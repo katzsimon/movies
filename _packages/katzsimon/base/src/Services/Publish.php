@@ -75,5 +75,25 @@ class Publish
         return true;
     }
 
+    /**
+     * Publish a Model Factory into the base app
+     *
+     * @param string $source
+     * @param array $options
+     * @return bool
+     */
+    public static function factory($source='', $options=[]) {
+        if (empty($source)) return false;
+
+        $sourceFile = file_get_contents("{$source}");
+
+        $posTest = strpos($source, "/database/");
+        $destination = substr($source, $posTest);
+
+        if (!Storage::disk('base')->exists($destination)) Storage::disk('base')->put($destination, $sourceFile);
+
+        return true;
+    }
+
 
 }
