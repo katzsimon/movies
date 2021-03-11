@@ -32,30 +32,26 @@ class AdminAuthController extends Controller
 
         Auth::login($user);
 
-        $data = [
-            'user'=>$user
-        ];
-
         return redirect()->route('admin.dashboard');
     }
 
 
 
-    public function login(Request $request, User $item) {
+    public function login(Request $request) {
 
         if (Auth::check()) {
-            return $this->redirect(['route'=>'admin.dashboard']);
+            return redirect()->route('admin.dashboard');
         }
 
-        return view('katzsimon::admin.login', ['item'=>$item]);
+        return redirect()->route('admin.login');
     }
 
 
 
-    public function handleLogin(AdminLoginRequest $request, User $item) {
+    public function handleLogin(AdminLoginRequest $request) {
 
         if (Auth::attempt($request->only(['email', 'password']))) {
-            return $this->redirect(['route'=>'admin.dashboard']);
+            return redirect()->route('admin.dashboard');
         }
 
         return redirect()->route('admin.login');

@@ -1,4 +1,4 @@
-@extends('katzsimon::templates.admin')
+@extends('katzsimon::templates.app')
 
 @section('title')
     Login
@@ -7,7 +7,7 @@
 
 @section('content')
     <div class="box">
-        {!! Form::open(['url' => route("admin.login"), 'method'=>'post']) !!}
+        {!! Form::open(['url' => route("login"), 'method'=>'post']) !!}
         @include('katzsimon::components.formfield', [
             'type'=>'text',
             'name'=>'email',

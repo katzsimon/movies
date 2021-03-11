@@ -22,6 +22,19 @@ __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 
+/***/ }),
+
+/***/ "./_packages/katzsimon/base/resources/css/app.scss":
+/*!*********************************************************!*\
+  !*** ./_packages/katzsimon/base/resources/css/app.scss ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
 /***/ })
 
 /******/ 	});
@@ -85,7 +98,8 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 		
 /******/ 		var deferredModules = [
 /******/ 			["./_packages/katzsimon/base/resources/js/admin.js"],
-/******/ 			["./_packages/katzsimon/base/resources/css/admin.scss"]
+/******/ 			["./_packages/katzsimon/base/resources/css/admin.scss"],
+/******/ 			["./_packages/katzsimon/base/resources/css/app.scss"]
 /******/ 		];
 /******/ 		// no chunk on demand loading
 /******/ 		

@@ -19,11 +19,11 @@
             <div class="hidden md:block">
                 <div class="ml-4 flex items-center md:ml-6  space-x-4">
                     @if(Auth::check())
-                        <a href="/admin/dashboard" class="text-gray-400 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:no-underline">Dashboard</a>
-                        <a href="/admin/logout" class="text-gray-400 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:no-underline">Logout</a>
+                        <a href="/admin/dashboard" class="btn-nav">Dashboard</a>
+                        <a href="/admin/logout" class="btn-nav">Logout</a>
                     @else
-                        <a href="/admin/login" class="text-gray-400 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:no-underline">Login</a>
-                        <a href="/admin/register" class="text-gray-400 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:no-underline">Register</a>
+                        <a href="/admin/login" class="btn-nav">Login</a>
+                        <a href="/admin/register" class="btn-nav">Register</a>
                     @endif
                 </div>
             </div>
@@ -55,14 +55,14 @@
     <!-- Mobile menu, show/hide based on menu state. -->
     <div class="md:hidden" id="mobile-menu"  v-show="mobileMenuOpen">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <inertia-link :href="$route('admin.dashboard')" class="btn-nav-mobile" :class="isUrl('/admin/dashboard') ? 'bg-gray-900 text-white' : ''" v-if="$page.props.authed">Dashboard</inertia-link>
+            <a href="/dashboard" class="btn-nav-mobile">Dashboard</a>
         </div>
         <div class="pt-4 pb-3 border-t border-gray-700">
             <div class="mt-3 px-2 space-y-1">
-                <inertia-link href="/admin/login" v-if="$page.props.guest" class="btn-nav-mobile">Login</inertia-link>
-                <inertia-link href="/admin/register" v-if="$page.props.guest" class="btn-nav-mobile">Register</inertia-link>
-                <inertia-link href="/admin/dashboard" v-if="$page.props.authed" class="btn-nav-mobile">Dashboard</inertia-link>
-                <inertia-link href="/admin/logout" v-if="$page.props.authed" class="btn-nav-mobile">Logout</inertia-link>
+                <a href="/login" class="btn-nav-mobile">Login</a>
+                <a href="/register" class="btn-nav-mobile">Register</a>
+                <a href="/dashboard" class="btn-nav-mobile">Dashboard</a>
+                <a href="/logout" class="btn-nav-mobile">Logout</a>
             </div>
         </div>
     </div>

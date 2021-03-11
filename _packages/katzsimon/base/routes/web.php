@@ -13,20 +13,17 @@
 */
 
 use App\Http\Controllers\Katzsimon\Base\AdminController;
+use App\Http\Controllers\Katzsimon\Base\AppController;
+use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix'=>'admin', 'middleware' => ['web']], function () {
-
     Route::get('/', [AdminController::class, 'admin'])->name('admin');
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('auth.admin');
-
 });
 
 
 Route::group(['middleware' => ['web']], function () {
-
-    Route::get('/', function () {
-        return view('katzsimon::test');
-    });
-
+    Route::get('/', [AppController::class, 'show'])->name('home');
+    Route::get('account', [AppController::class, 'account'])->name('account')->middleware(['auth']);
 });
 

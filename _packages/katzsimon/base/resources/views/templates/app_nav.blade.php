@@ -9,7 +9,7 @@
                     <div class="ml-10 flex items-baseline space-x-4">
 
                         @if(Auth::check())
-                            <a href="{{ route('admin.dashboard') }}" class="btn-nav">Dashboard</a>
+                            <a href="{{ route('account') }}" class="btn-nav">Account</a>
                         @else
                         @endif
 
@@ -19,11 +19,11 @@
             <div class="hidden md:block">
                 <div class="ml-4 flex items-center md:ml-6  space-x-4">
                     @if(Auth::check())
-                        <a href="/admin/dashboard" class="btn-nav">Dashboard</a>
-                        <a href="/admin/logout" class="btn-nav">Logout</a>
+                        <a href="/account" class="btn-nav">Account</a>
+                        <a href="/logout" class="btn-nav">Logout</a>
                     @else
-                        <a href="/admin/login" class="btn-nav">Login</a>
-                        <a href="/admin/register" class="btn-nav">Register</a>
+                        <a href="/login" class="btn-nav">Login</a>
+                        <a href="/register" class="btn-nav">Register</a>
                     @endif
                 </div>
             </div>
@@ -55,13 +55,13 @@
     <!-- Mobile menu, show/hide based on menu state. -->
     <div class="md:hidden" id="mobile-menu"  v-show="mobileMenuOpen">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="/dashboard" class="btn-nav-mobile">Dashboard</a>
+            <a href="/account" class="btn-nav-mobile">Account</a>
         </div>
         <div class="pt-4 pb-3 border-t border-gray-700">
             <div class="mt-3 px-2 space-y-1">
                 <a href="/login" class="btn-nav-mobile">Login</a>
                 <a href="/register" class="btn-nav-mobile">Register</a>
-                <a href="/dashboard" class="btn-nav-mobile">Dashboard</a>
+                <a href="/account" class="btn-nav-mobile">Account</a>
                 <a href="/logout" class="btn-nav-mobile">Logout</a>
             </div>
         </div>

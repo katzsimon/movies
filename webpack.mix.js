@@ -13,6 +13,7 @@ const tailwindcss = require('tailwindcss');
 
 const packages = process.env.MIX_PACKAGES_PATH
 
+// Admin Assets
 mix
     .setPublicPath('public_html/')
     .js(`${packages}/base/resources/js/admin.js`, 'js')
@@ -22,5 +23,17 @@ mix
         postCss: [ tailwindcss('./tailwind.config.js') ],
     })
     ;
+
+
+// App Assets
+mix
+    .setPublicPath('public_html/')
+    .js(`${packages}/base/resources/js/app.js`, 'js')
+    .sass(`${packages}/base/resources/css/app.scss`, 'css', [])
+    .options({
+        processCssUrls: false,
+        postCss: [ tailwindcss('./tailwind.config.js') ],
+    })
+;
 
 mix.browserSync({proxy:'movies.test',notify:false});
