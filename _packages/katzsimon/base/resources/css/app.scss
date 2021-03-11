@@ -9,11 +9,32 @@
 
     @import '_buttons';
     @import '_forms';
+    @import '_cards';
+    @import '_tables';
 
     @import '_general';
 
-    .nav-active {
-        @apply bg-gray-900 text-white;
+    .booking {
+        border:1px solid #ccc;
+        padding:1rem;
+        margin-bottom:1rem;
+        position:relative;
+    }
+    .booking:last-child {
+        margin-bottom:0;
+    }
+    .btn-cancel-booking {
+        position:absolute;
+        right:1rem;
+        bottom:1rem;
+    }
+    @media (max-width:960px) {
+        .btn-cancel-booking {
+            position: relative;
+            right:auto;
+            bottom:auto;
+            margin-top:0.5rem;
+        }
     }
 
 }

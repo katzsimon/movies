@@ -136,5 +136,62 @@ class Screening extends \App\Models\Model
         return $options;
     }
 
+    /**
+     * Build options for select element
+     * Of Upcoming Movies only
+     * Used in the Booking Page
+     *
+     * Optionally can pass in a list of the upcoming movies, if this is empty it will retrieve it
+     *
+     * @param array $upcomingMovies
+     * @return array
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    public static function optionsUpcomingMovies($upcomingMovies=[]) {
+
+        if (empty($upcomingMovies)) {
+            $repository = app()->make(\Katzsimon\Cinema\Repositories\ScreeningRepository::class);
+            $items = $repository->upcomingMoviesScreening($screenings??null);
+        } else {
+            $items = $upcomingMovies;
+        }
+
+        $options = [];
+        $options[''] = '';
+        foreach ($items as $item) {
+            $options[$item->id] = "{$item->name}";
+        }
+        return $options;
+    }
+
+    /**
+     * Build options for select element
+     * Of Screenings for a Specific Movie
+     * Used in the Booking Page
+     *
+     * Parameter can be a list of Screenings or a Movie ID
+     *
+     * @param array $screeningsOrMovieId
+     * @return array
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    public static function optionsScreeningsForMovie($screeningsOrMovieId=[]) {
+
+        if (is_numeric($screeningsOrMovieId)) {
+            // Get the Screenings if a Movie ID is passed in
+            $repository = app()->make(\Katzsimon\Cinema\Repositories\ScreeningRepository::class);
+            $items = $repository->upcomingOfMovie($screenings??null);
+        } else {
+            $items = $screeningsOrMovieId;
+        }
+
+        $options = [];
+        $options[''] = '';
+        foreach ($items as $item) {
+            $options[$item->id] = "{$item->theatre->cinema->name} - {$item->theatre->name} at {$item->datetime} ({$item->human_time})";
+        }
+        return $options;
+    }
+
 
 }

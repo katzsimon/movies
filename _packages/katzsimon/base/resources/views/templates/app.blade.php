@@ -23,6 +23,28 @@
             @include('katzsimon::components.toast')
         @endif
     </div>
+    <script type="text/javascript">
+        window.addEventListener("DOMContentLoaded", function(event) {
+            (function() {
+                var navs = document.querySelectorAll(".btn-nav, .btn-mav-mobile");
+                for (var i = 0; i < navs.length; i++) {
+                    (function () {
+                        var nav = navs[i];
+                        var url = nav.getAttribute("href");
+                        var path = window.location.pathname;
+                        if (path!=='/' && url.includes(window.location.pathname)) nav.classList.add('active');
+                    }());
+                }
+
+                var btnMobileMenu = document.querySelector("#btnMobileMenu");
+                var mobileMenu = document.querySelector("#mobile-menu");
+
+                btnMobileMenu.addEventListener('click', function (e) {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }());
+        });
+    </script>
 
 
 @endsection

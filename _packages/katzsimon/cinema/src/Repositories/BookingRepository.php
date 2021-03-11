@@ -40,4 +40,46 @@ class BookingRepository extends BaseRepository implements BookingRepositoryInter
             ->get();
     }
 
+    /**
+     * Get only the Upcoming Bookings for a specific User
+     *
+     * @param int $userId
+     * @param string $order
+     * @return Collection
+     */
+    public function getByUserUpcoming($userId=0, $order='asc'): Collection
+    {
+
+        return $this->newQuery()
+            ->with('screening')
+            ->with('user')
+            ->join('screenings', 'bookings.screening_id', '=', 'screenings.id')
+            ->where('bookings.user_id', $userId)
+            ->where('screenings.datetime', '>', Date('Y-m-d H:i:s'))
+            ->select('*', 'bookings.id as id')
+            ->orderBy('screenings.datetime')
+            ->get();
+    }
+
+    /**
+     * Get only the Past Bookings for a specific User
+     *
+     * @param int $userId
+     * @param string $order
+     * @return Collection
+     */
+    public function getByUserPast($userId=0, $order='asc'): Collection
+    {
+
+        return $this->newQuery()
+            ->with('screening')
+            ->with('user')
+            ->join('screenings', 'bookings.screening_id', '=', 'screenings.id')
+            ->where('bookings.user_id', $userId)
+            ->where('screenings.datetime', '<', Date('Y-m-d H:i:s'))
+            ->select('*', 'bookings.id as id')
+            ->orderBy('screenings.datetime')
+            ->get();
+    }
+
 }

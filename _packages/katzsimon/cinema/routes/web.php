@@ -33,6 +33,20 @@ Route::group(['prefix'=>'admin', 'middleware' => ['web', 'auth.admin']], functio
 
 
 
+// App Routes
+Route::group(['middleware' => ['web']], function () {
+    Route::get('cinemas', [AppController::class, 'indexCinemas'])->name('cinemas');
+    Route::get('upcoming-movies', [AppController::class, 'upcomingMovies'])->name('movies.upcoming');
+    Route::get('screenings/{movie}', [AppController::class, 'upcomingMovieScreenings'])->name('screenings');
 
+    Route::group(['middleware' => ['auth']], function () {
+        Route::post('booking', [AppBookingController::class, 'handleBooking'])->name('booking.handle');
+        Route::post('booking/cancel/{booking}', [AppBookingController::class, 'cancelBooking'])->name('booking.cancel');
+        Route::get('booking/movie/{movie}', [AppBookingController::class, 'bookingMovie'])->name('booking.movie');
+        Route::get('booking/screening/{screening}', [AppBookingController::class, 'bookingScreening'])->name('booking.screening');
+        Route::get('booking', [AppBookingController::class, 'booking'])->name('booking');
+    });
+
+});
 
 

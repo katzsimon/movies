@@ -22,6 +22,31 @@ class CinemaRepository extends BaseRepository implements CinemaRepositoryInterfa
     }
 
 
+    /**
+     * Get a list of the Cinemas, with their Upcoming Movies and Screenings
+     * Used for the App / Cinemas page
+     *
+     * @return array
+     */
+    public function getCinemasWithMovies(): array
+    {
+        $results = DB::table('cinemas')
+            ->leftJoin('theatres', 'cinemas.id', '=', 'theatres.cinema_id')
+            ->leftJoin('screenings', 'theatres.id', '=', 'screenings.theatre_id')
+            ->leftJoin('movies', 'screenings.movie_id', '=', 'movies.id')
+            ->select('cinemas.name as cinema', 'cinemas.location as location', 'theatres.name as theatre', 'movies.name as movie', 'movies.id as movie_id')
+            ->where('screenings.datetime', '>', Date('Y-m-d H:i:s'))
+            ->get();
+
+        $data = [];
+        foreach ($results as $result) {
+            if (!isset($data[$result->cinema])) $data[$result->cinema] = ['location'=>$result->location, 'movies'=>[]];
+            if (!isset($data[$result->cinema]['movies'][$result->movie_id])) $data[$result->cinema]['movies'][$result->movie_id] = $result->movie;
+        }
+
+        return $data;
+
+    }
 
 
 }

@@ -104,8 +104,12 @@ class AppController extends Controller
      */
     public function upcomingMovieScreenings(Request $request, Movie $movie) {
 
-        $items = $this->repositoryScreening->upcomingOfMovie($movie->id);
-        return $this->output(['output'=>'json', 'items'=>$items]);
+
+        $data = [
+            'items'=>$this->repositoryScreening->upcomingOfMovie($movie->id),
+            'movie'=>new MovieResource($movie)
+        ];
+        return $this->output(['view'=>'katzsimon::app.screenings.index', 'data'=>$data]);
     }
 
     /**

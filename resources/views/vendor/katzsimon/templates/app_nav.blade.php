@@ -3,15 +3,19 @@
         <div class="flex items-center justify-between h-16">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
-                    <img class="h-8 w-8" src="/images/logo.svg" alt="Logo">
+                    <a href="{{ route('home') }}"><img class="h-8 w-8" src="/images/logo-white.svg" alt="Logo"></a>
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
 
-                        @if(Auth::check())
-                            <a href="{{ route('account') }}" class="btn-nav">Account</a>
-                        @else
-                        @endif
+                            <a href="{{ route('home') }}" class="btn-nav">Home</a>
+                            <a href="{{ route('cinemas') }}" class="btn-nav">Cinemas</a>
+                            <a href="{{ route('movies') }}" class="btn-nav">All Movies</a>
+                            <a href="{{ route('movies.upcoming') }}" class="btn-nav">Upcoming Movies</a>
+
+                            @if(Auth::check())
+                                <a href="{{ route('booking') }}" class="btn-nav">Make a Booking</a>
+                            @endif
 
                     </div>
                 </div>
@@ -55,7 +59,14 @@
     <!-- Mobile menu, show/hide based on menu state. -->
     <div class="md:hidden" id="mobile-menu"  v-show="mobileMenuOpen">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="/account" class="btn-nav-mobile">Account</a>
+            <a href="{{ route('cinemas') }}" class="btn-nav-mobile">Cinemas</a>
+            <a href="{{ route('movies') }}" class="btn-nav-mobile">All Movies</a>
+            <a href="{{ route('movies.upcoming') }}" class="btn-nav-mobile">Upcoming Movies</a>
+
+            @if(Auth::check())
+                <a href="{{ route('booking') }}" class="btn-nav-mobile">Make a Booking</a>
+            @endif
+
         </div>
         <div class="pt-4 pb-3 border-t border-gray-700">
             <div class="mt-3 px-2 space-y-1">

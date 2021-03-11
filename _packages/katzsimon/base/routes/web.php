@@ -23,7 +23,7 @@ Route::group(['prefix'=>'admin', 'middleware' => ['web']], function () {
 
 
 Route::group(['middleware' => ['web']], function () {
-    Route::get('/', [AppController::class, 'show'])->name('home');
+    Route::get('/', [AppController::class, 'home'])->name('home');
     Route::get('account', [AppController::class, 'account'])->name('account')->middleware(['auth']);
 });
 

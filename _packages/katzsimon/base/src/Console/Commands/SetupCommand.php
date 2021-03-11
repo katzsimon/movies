@@ -49,6 +49,9 @@ class SetupCommand extends Command
 
         Publish::view($baseDir.'/../resources/views/templates/admin_nav.blade.php');
         Publish::view($baseDir.'/../resources/views/templates/app_nav.blade.php');
+        Publish::view($baseDir.'/../resources/views/pages/admin/dashboard.blade.php');
+        Publish::view($baseDir.'/../resources/views/pages/app/account.blade.php');
+        Publish::view($baseDir.'/../resources/views/pages/app/home.blade.php');
 
         Publish::test($baseDir.'/../tests/BaseCRUDTest.php');
         Publish::test($baseDir.'/../tests/BaseRepositoryTest.php');

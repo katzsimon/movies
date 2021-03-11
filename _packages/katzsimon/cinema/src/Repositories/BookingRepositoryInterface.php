@@ -16,5 +16,19 @@ interface BookingRepositoryInterface extends BaseRepositoryInterface
      */
     public function getUpcoming($limit=5, $order='asc'): Collection;
 
+    /**
+     * @param int $userId
+     * @param string $order
+     * @return Collection
+     */
+    public function getByUserUpcoming($userId=0, $order='asc'): Collection;
+
+
+    /**
+     * @param int $userId
+     * @param string $order
+     * @return Collection
+     */
+    public function getByUserPast($userId=0, $order='asc'): Collection;
 
 }
