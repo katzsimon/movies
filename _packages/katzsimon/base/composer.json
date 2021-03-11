@@ -1,0 +1,25 @@
+{
+    "name": "katzsimon/base",
+    "description": "Base Package",
+    "type": "library",
+    "license": "MIT",
+    "version": "1.0.0",
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload": {
+      "psr-4": {
+        "Katzsimon\\Base\\":"src/"
+      }
+    },
+    "autoload-dev": {
+      "psr-4": {
+      }
+    },
+    "extra": {
+      "laravel": {
+        "providers": [
+          "Katzsimon\\Base\\ServiceProvider"
+        ]
+      }
+    }
+}

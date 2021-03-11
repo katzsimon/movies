@@ -1,0 +1,25 @@
+{
+    "name": "katzsimon/auth",
+    "description": "Auth Package",
+    "type": "library",
+    "license": "MIT",
+    "version": "1.0.0",
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload": {
+      "psr-4": {
+        "Katzsimon\\Auth\\":"src/"
+      }
+    },
+    "autoload-dev": {
+      "psr-4": {
+      }
+    },
+    "extra": {
+      "laravel": {
+        "providers": [
+          "Katzsimon\\Auth\\ServiceProvider"
+        ]
+      }
+    }
+}

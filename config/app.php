@@ -165,7 +165,10 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Katzsimon\Base\ServiceProvider::class,
+        Katzsimon\Auth\ServiceProvider::class,
+        Katzsimon\Movie\ServiceProvider::class,
+        Katzsimon\Cinema\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
