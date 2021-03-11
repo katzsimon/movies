@@ -1,7 +1,7 @@
 /.idea
 /node_modules
-/public_html/hot
-/public_html/storage
+/public/hot
+/public/storage
 /public_html/hot
 /public_html/storage
 /storage
