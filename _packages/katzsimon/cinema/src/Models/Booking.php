@@ -42,12 +42,40 @@ class Booking extends \App\Models\Model
 
         static::saving(function($item) {
             if (empty($item->reference)) {
+                // Create a random reference if it is empty
                 $item->reference = Str::random(8);
             }
         });
 
     }
 
+    /**
+     * Only cancel the Booking if it is more than 60 minutes in the Future
+     *
+     * Use $checkOnly to only check if it can be cancelled but not actually cancel it
+     *   Used to check if the "Cancel Booking" button should be showed
+     *
+     * @param false $checkOnly
+     * @return bool
+     * @throws \Exception
+     */
+    public function cancelBooking($checkOnly=false) {
+
+        $datetimeBooking = Carbon::parse("{$this->screening->datetime}:00");
+        $now = Carbon::now();
+
+        // Check if the Screening time is more than 60 minutes in the future
+        $diff = $now->diffInMinutes($datetimeBooking, false);
+        if ($diff>60) {
+            // Only cancel the Booking is more than 60 minutes in the future
+            if(!$checkOnly) $this->delete();
+            return true;
+        }
+
+        // Don't cancel the booking if the screening is in the next 60 minutes
+        return false;
+
+    }
 
 
 }

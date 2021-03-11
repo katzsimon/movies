@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 // Admin Routes
 Route::group(['prefix'=>'admin', 'middleware' => ['web', 'auth.admin']], function () {
+    Route::post('booking/{booking}/cancel', [BookingController::class, 'cancelBooking'])->name('admin.bookings.cancel');
     Route::resource('bookings', BookingController::class, ['as'=>'admin']);
     Route::resource('cinemas', CinemaController::class, ['as'=>'admin']);
     Route::resource('cinemas.theatres', TheatreController::class, ['as'=>'admin']);

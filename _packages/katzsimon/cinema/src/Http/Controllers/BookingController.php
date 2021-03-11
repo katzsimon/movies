@@ -148,7 +148,7 @@ class BookingController extends Controller
         if ($cancelled) {
             $message = ['message'=>'The booking has been cancelled', 'type'=>'success'];
         } else {
-            $message = ['message'=>'The booking cannot be cancelled within 60 minutes of the screening time', 'type'=>'error'];
+            $message = ['message'=>'The booking can only be cancelled when the screening is more than 60 minutes in the future', 'type'=>'error'];
         }
 
         return $this->redirect(['route'=>"admin.{$this->ui['items']}.index", 'with'=>['message'=>json_encode($message)]]);

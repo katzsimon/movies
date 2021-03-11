@@ -33,7 +33,7 @@
                     <td>{{ $item['seats']??'' }}</td>
                     <td>{{ $item['reference']??'' }}</td>
                     <td class="">
-                        @include('katzsimon::components.item_menu', ['id'=>$item['id'], 'name'=>$ui['name']])
+                        @include('katzsimon::components.item_menu', ['id'=>$item['id'], 'name'=>$ui['name'], 'extraMenuItems'=>[['text'=>'Cancel Booking', 'href'=>route('admin.bookings.cancel', $item['id']), 'method'=>'POST']]])
                     </td>
                 </tr>
             @endforeach
