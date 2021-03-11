@@ -43,7 +43,7 @@ class AdminAuthController extends Controller
             return redirect()->route('admin.dashboard');
         }
 
-        return redirect()->route('admin.login');
+        return view('katzsimon::admin.login');
     }
 
 
