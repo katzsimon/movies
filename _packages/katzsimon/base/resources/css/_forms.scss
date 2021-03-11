@@ -1,0 +1,6 @@
+.form-control {
+    @apply border border-gray-400 rounded px-3 py-2 flex-grow;
+}
+.control-label {
+    @apply font-bold mb-1;
+}

@@ -12,6 +12,15 @@
 |
 */
 
+use App\Http\Controllers\Katzsimon\Base\AdminController;
+
+Route::group(['prefix'=>'admin', 'middleware' => ['web']], function () {
+
+    Route::get('/', [AdminController::class, 'admin'])->name('admin');
+    Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('auth.admin');
+
+});
+
 
 Route::group(['middleware' => ['web']], function () {
 

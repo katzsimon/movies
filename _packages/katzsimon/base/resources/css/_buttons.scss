@@ -1,0 +1,22 @@
+.btn-nav {
+    @apply text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:no-underline;
+}
+.btn-nav-mobile {
+    @apply text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-3 my-3 rounded-md font-medium hover:no-underline block text-base;
+}
+.btn-nav, .btn-nav-mobile {
+    &.active {
+        @apply bg-gray-900 text-white;
+    }
+}
+.btn {
+    @apply inline-block font-normal text-center px-3 py-2 leading-normal text-base rounded cursor-pointer;
+}
+
+.btn-primary {
+    @apply text-white bg-blue-600;
+}
+
+.btn-primary:hover {
+    @apply text-white bg-blue-700
+}

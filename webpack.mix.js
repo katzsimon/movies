@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-
+const tailwindcss = require('tailwindcss');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,11 +11,16 @@ const mix = require('laravel-mix');
  |
  */
 
+const packages = process.env.MIX_PACKAGES_PATH
+
 mix
     .setPublicPath('public_html/')
-    .js('resources/js/app.js', 'js')
-    .postCss('resources/css/app.css', 'css', [
-        //
-    ]);
+    .js(`${packages}/base/resources/js/admin.js`, 'js')
+    .sass(`${packages}/base/resources/css/admin.scss`, 'css', [])
+    .options({
+        processCssUrls: false,
+        postCss: [ tailwindcss('./tailwind.config.js') ],
+    })
+    ;
 
 mix.browserSync({proxy:'movies.test',notify:false});

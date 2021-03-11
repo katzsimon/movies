@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+
+    @import '_layout';
+
+    @import '_buttons';
+    @import '_forms';
+
+    @import '_general';
+
+    .nav-active {
+        @apply bg-gray-900 text-white;
+    }
+
+}

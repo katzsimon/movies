@@ -47,6 +47,10 @@ class SetupCommand extends Command
         Extend::controller($baseDir.'/Http/Controllers/AdminController.php');
         Extend::controller($baseDir.'/Http/Controllers/AppController.php');
 
+        Publish::view($baseDir.'/../resources/views/templates/admin_nav.blade.php');
+
+        $this->line('Base Package has been setup');
+
         return 0;
     }
 }
