@@ -49,6 +49,9 @@ class SetupMovieCommand extends Command
 
         Publish::factory($baseDir.'/../database/factories/MovieFactory.php');
 
+        Publish::test($baseDir.'/../tests/Feature/MovieTest.php');
+        Publish::test($baseDir.'/../tests/Unit/MovieRepositoryTest.php');
+
         $this->line('Movie Package has been setup');
 
         return 0;

@@ -50,6 +50,9 @@ class SetupCommand extends Command
         Publish::view($baseDir.'/../resources/views/templates/admin_nav.blade.php');
         Publish::view($baseDir.'/../resources/views/templates/app_nav.blade.php');
 
+        Publish::test($baseDir.'/../tests/BaseCRUDTest.php');
+        Publish::test($baseDir.'/../tests/BaseRepositoryTest.php');
+
         $this->line('Base Package has been setup');
 
         return 0;
