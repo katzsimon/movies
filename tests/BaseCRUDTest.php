@@ -85,7 +85,6 @@ abstract class BaseCRUDTest extends TestCase
         $response = $this->postJson($this->baseUrl, $item->toArray(), ['FORCE_CONTENT_TYPE'=>'json'])
             ->assertStatus(200);
 
-
         // Check that the database contains the item created by the factory
         $this->assertDatabaseHas($this->table, $item->toArray());
     }
