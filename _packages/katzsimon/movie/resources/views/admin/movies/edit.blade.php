@@ -4,6 +4,9 @@
     {{ $ui['names'] }}
 @endsection
 
+@section('breadcrumbs')
+    @include('katzsimon::components.breadcrumbs', ['breadcrumbs'=>$breadcrumbs])
+@endsection
 
 @section('content')
     <div class="box">

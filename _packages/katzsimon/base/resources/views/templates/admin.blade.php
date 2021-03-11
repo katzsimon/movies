@@ -8,10 +8,7 @@
         <header class="bg-white shadow">
             <div class="max-w-7xl mx-auto py-6 px-6">
                 @if(View::hasSection('title')) <h1 class="text-3xl font-bold">@yield('title') </h1> @endif
-
-                <!--
-                <b-breadcrumb  v-if="breadcrumbs" :items="breadcrumbs" class="breadcrumb "></b-breadcrumb>
-                -->
+                @yield('breadcrumbs')
             </div>
         </header>
         <main class=" bg-gray-200 flex-grow">
