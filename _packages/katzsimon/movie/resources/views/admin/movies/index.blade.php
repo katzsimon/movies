@@ -12,7 +12,9 @@
 
     <div class="box">
         <div class="mb-2">
-
+            @foreach($genres as $genre)
+                <a href="{{ route('admin.movies.index.genre', [$genre['title']??'']) }}" class="text-blue-400 hover:text-blue-700 hover:no-underline mr-3 inline-block">{{ $genre['title']??'' }} ({{ $genre['count']??0 }})</a>
+            @endforeach
         </div>
         <table class="table table-bordered table-hover table-middle table-items">
             <thead>
@@ -34,7 +36,7 @@
                     <td>{{ $item['genre']??'' }}</td>
                     <td class="text-center">{{ $item['rating']??'' }}</td>
                     <td class="">
-                        @include('katzsimon::components.item_menu', ['id'=>$item['id'], 'name'=>$ui['name']])
+                        @include('katzsimon::components.item_menu', ['id'=>$item['id'], 'name'=>$ui['name'], 'extraMenuItems'=>[['text'=>'Delete Movie with Screenings', 'href'=>route('admin.movies.destroy.screenings', $item['id']), 'method'=>'DELETE']]])
                     </td>
                 </tr>
             @endforeach

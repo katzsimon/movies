@@ -8,6 +8,7 @@ use App\Models\Movie;
 use Illuminate\Http\Request;
 use Katzsimon\Base\Http\Controllers\Controller;
 use Katzsimon\Movie\Repositories\MovieRepositoryInterface;
+use Katzsimon\Movie\Resources\MovieResource;
 
 
 /**
@@ -38,13 +39,17 @@ class MovieController extends Controller
      */
     public function index(Request $request, $genre='')
     {
+        if (empty($genre) || $genre==='All') {
+            $items = $this->repository->all('desc');
+        } else {
+            $items = $this->repository->getByCriteria(['genre'=>$genre], ['orderBy'=>'id desc']);
+        }
 
-
-        $items = $this->repository->all('desc');
-
+        $genres = $this->repository->getGenres();
 
         $data = [
-            'data'=>$items,
+            'data'=>MovieResource::collection($items)->toArray(request()),
+            'genres'=>$genres,
         ];
 
         return $this->output(['view'=>'katzsimon::admin.movies.index', 'data'=>$data]);
@@ -133,6 +138,23 @@ class MovieController extends Controller
         //
         $item->delete();
         return $this->redirect(['route' => 'admin.movies.index', 'item' => $item]);
+
+    }
+
+    /**
+     * Delete the Movie with its Screenings
+     *
+     * @param Request $request
+     * @param Movie $item
+     * @return false|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
+     * @throws \Exception
+     */
+    public function destroyWithScreenings(Request $request, Movie $item)
+    {
+        //
+        $item->screenings()->delete();
+        $item->delete();
+        return $this->redirect(['route' => 'admin.movies.index', 'item' => $item, 'with'=>['message'=>"Movie has been deleted with it's Screenings"]]);
 
     }
 

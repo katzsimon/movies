@@ -28,11 +28,19 @@ class Movie extends \App\Models\Model
         'starring'
     ];
 
-
-
     protected $ui = [
         'item'=>'movie',
     ];
+
+    public function screenings()
+    {
+        return $this->hasMany('App\Models\Screening', 'movie_id', 'id');
+    }
+
+    public function future_screenings()
+    {
+        return $this->hasMany('App\Models\Screening', 'movie_id', 'id')->where('datetime', '>=', Date('Y-m-d H:i:s'));
+    }
 
     public static function options($options=[]) {
         $items = Movie::orderBy('name', 'asc')->get();
