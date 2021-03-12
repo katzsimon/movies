@@ -23,6 +23,7 @@
                 <th>NAME</th>
                 <th>GENRE</th>
                 <th class="text-center">RATING</th>
+                @include('katzsimon::components.item_index_extra_cols')
                 <th class="">
                     @include('katzsimon::components.item_create', ['item'=>$ui['items'], 'name'=>$ui['name']])
                 </th>
@@ -35,8 +36,9 @@
                     <td>{{ $item['name']??'' }}</td>
                     <td>{{ $item['genre']??'' }}</td>
                     <td class="text-center">{{ $item['rating']??'' }}</td>
+                    @include('katzsimon::components.item_index_extra_cols')
                     <td class="">
-                        @include('katzsimon::components.item_menu', ['id'=>$item['id'], 'name'=>$ui['name'], 'extraMenuItems'=>[['text'=>'Delete Movie with Screenings', 'href'=>route('admin.movies.destroy.screenings', $item['id']), 'method'=>'DELETE']]])
+                        @include('katzsimon::components.item_menu', ['id'=>$item['id'], 'name'=>$ui['name']])
                     </td>
                 </tr>
             @endforeach

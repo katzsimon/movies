@@ -119,11 +119,12 @@ class BaseRepository implements BaseRepositoryInterface
      * Get all instances or the Model
      *
      * @param string $order
+     * @param array $relations
      * @return Collection
      */
-    public function all($order='asc'): Collection
+    public function all($order='asc', array $relations = []): Collection
     {
-        return $this->newQuery()->orderBy('id', $order)->get();
+        return $this->newQuery()->with($relations)->orderBy('id', $order)->get();
     }
 
 

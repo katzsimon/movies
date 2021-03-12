@@ -23,7 +23,7 @@ class MovieResource extends JsonResource
             'rating' => $this->rating??'',
             'starring' => $this->starring??'',
             'description' => $this->description??'',
-            'screening_count' => count($this->future_screenings)
+            'screening_count' => count($this->screenings??[])
         ];
     }
 }

@@ -17,6 +17,11 @@
                 Delete {{ $name }}
             </button>
             {!! Form::close() !!}
+
+            @if(View::exists("katzsimon::admin.{$ui['items']}._menu_extra"))
+                @include("katzsimon::admin.{$ui['items']}._menu_extra")
+            @endif
+
             @if(isset($extraMenuItems) && count($extraMenuItems)>0)
                 @foreach($extraMenuItems as $menuItem)
                     @if(isset($menuItem['method']))

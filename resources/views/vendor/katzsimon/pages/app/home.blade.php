@@ -50,7 +50,6 @@
                     @empty
                         <div>You have no bookings yet</div>
                     @endforelse
-
                 </div>
             </div>
         @endif

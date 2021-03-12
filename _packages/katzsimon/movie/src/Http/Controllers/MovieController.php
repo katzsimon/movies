@@ -141,21 +141,6 @@ class MovieController extends Controller
 
     }
 
-    /**
-     * Delete the Movie with its Screenings
-     *
-     * @param Request $request
-     * @param Movie $item
-     * @return false|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
-     * @throws \Exception
-     */
-    public function destroyWithScreenings(Request $request, Movie $item)
-    {
-        //
-        $item->screenings()->delete();
-        $item->delete();
-        return $this->redirect(['route' => 'admin.movies.index', 'item' => $item, 'with'=>['message'=>"Movie has been deleted with it's Screenings"]]);
 
-    }
 
 }

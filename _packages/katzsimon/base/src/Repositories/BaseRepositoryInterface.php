@@ -52,9 +52,11 @@ interface BaseRepositoryInterface
     public function limit(int $limit): Collection;
 
     /**
+     * @param string $order
+     * @param array $relations
      * @return Collection
      */
-    public function all($order='asc'): Collection;
+    public function all($order='asc', array $relations = []): Collection;
 
     /**
      * @return Model
