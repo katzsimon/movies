@@ -49,7 +49,6 @@ class ScreeningFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                //'datetime'=>Carbon::parse($this->faker->dateTimeBetween('-1 month', '-1 day'))->format('Y-m-d H:i'),
                 'datetime'=>$this->randomTime(true),
             ];
         });

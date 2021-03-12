@@ -79,7 +79,7 @@ class AppBookingTest extends DuskTestCase
 
     /**
      * Check that a booking will fail without all the required inputs
-     * 
+     *
      * @throws \Throwable
      */
     public function testMakeBookingIncorrect()

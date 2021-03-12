@@ -59,7 +59,7 @@ class Booking extends \App\Models\Model
      * Use $checkOnly to only check if it can be cancelled but not actually cancel it
      *   Used to check if the "Cancel Booking" button should be showed
      *
-     * @param false $checkOnly
+     * @param true $deleteBooking
      * @return bool
      * @throws \Exception
      */

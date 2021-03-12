@@ -1,0 +1,21 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+
+    paths:
+        - app
+        - _packages
+
+    excludePaths:
+        - _packages/*/factories/*
+        - _packages/*/migrations/*
+
+    # The level 8 is the highest level
+    level: 5
+
+    ignoreErrors:
+        - '#Access to an undefined property [a-zA-Z0-9\\_]+#'
+
+    treatPhpDocTypesAsCertain: false
+    checkMissingIterableValueType: false

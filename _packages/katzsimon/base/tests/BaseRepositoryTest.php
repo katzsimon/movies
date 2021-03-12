@@ -129,12 +129,14 @@ abstract class BaseRepositoryTest extends TestCase
      * Compare 2 Models by checking if all the attributes in the Source exist in the Target
      * Once a Model is created/saved, new attributes can exist, so this takes that into account for comparison
      *
-     * @param $source
-     * @param $target
+     * @param null $source
+     * @param null $target
      * @return bool
      */
-    public function matchModels($source, $target)
+    public function matchModels($source=null, $target=null)
     {
+        if (is_null($source) || is_null($target)) return false;
+
         $attributes = $source->getAttributes();
 
         foreach ($attributes as $key=>$value) {
@@ -149,13 +151,13 @@ abstract class BaseRepositoryTest extends TestCase
      * Returns true as long as the source fields exist in the target,
      * Target can have additional fields
      *
-     * @param $source
-     * @param $target
+     * @param null $source
+     * @param null $target
      * @return bool
      */
-    public function matchArrays($source, $target)
+    public function matchArrays($source=null, $target=null)
     {
-        if (!is_array($source) || !is_array($target)) return false;
+        if (is_null($source) || is_null($target) || !is_array($source) || !is_array($target)) return false;
         // Get the difference between the source and target
         $fieldsCompared = array_diff($source, $target);
         // If empty than all source fields exist in target
@@ -165,10 +167,10 @@ abstract class BaseRepositoryTest extends TestCase
     /**
      * Checks that all the attributes in a Model are empty
      *
-     * @param $source
+     * @param null $source
      * @return bool
      */
-    public function hasEmptyAttributes($source)
+    public function hasEmptyAttributes($source=null)
     {
         $attributes = $source->getAttributes();
         foreach ($attributes as $attribute) {

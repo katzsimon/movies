@@ -137,7 +137,7 @@ abstract class BaseCRUDTest extends TestCase
 
         $item = $this->model->factory()->create();
 
-        $response = $this->get("{$this->baseUrl}/{$item->getKey()}", [], ['FORCE_CONTENT_TYPE'=>'json']);
+        $response = $this->get("{$this->baseUrl}/{$item->getKey()}", ['FORCE_CONTENT_TYPE'=>'json']);
         $status = $response->status();
 
         if ($status===200) {
