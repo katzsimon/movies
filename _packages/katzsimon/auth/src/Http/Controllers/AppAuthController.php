@@ -24,7 +24,6 @@ class AppAuthController extends Controller
 
     public function handleLogin(AppLoginRequest $request) {
 
-
         if (Auth::attempt($request->validated())) {
             return redirect()->route('account');
         }

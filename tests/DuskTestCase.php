@@ -11,6 +11,10 @@ abstract class DuskTestCase extends BaseTestCase
 {
     use CreatesApplication;
 
+    // Need to manually change env files if running tests through PHPStorm
+    protected $envChange = true;
+
+
     /**
      * Prepare for Dusk test execution.
      *
@@ -36,7 +40,8 @@ abstract class DuskTestCase extends BaseTestCase
         ])->unless($this->hasHeadlessDisabled(), function ($items) {
             return $items->merge([
                 '--disable-gpu',
-                '--headless',
+                //'--headless',
+                '--window-size=1920,1080',
             ]);
         })->all());
 
@@ -58,4 +63,44 @@ abstract class DuskTestCase extends BaseTestCase
         return isset($_SERVER['DUSK_HEADLESS_DISABLED']) ||
                isset($_ENV['DUSK_HEADLESS_DISABLED']);
     }
+
+
+    public function setUp():void
+    {
+
+        parent::setUp();
+
+        /*
+         * Change the env files manually if running test via PHPStorm
+         *
+         * Renaming:
+         * .env -> .env.temp
+         * .env.dusk.local -> .env
+         */
+        if ($this->envChange && !file_exists(base_path('.env.temp')) && file_exists(base_path('.env.dusk'))) {
+            rename(base_path('.env'), base_path('.env.temp'));
+            copy(base_path('.env.dusk'), base_path('.env'));
+        }
+
+    }
+
+    public function tearDown():void
+    {
+        parent::tearDown();
+
+        /*
+         * Restore the env files after testing
+         *
+         * Renaming:
+         * delete .env
+         * .env.temp -> .env
+         */
+        if ($this->envChange && file_exists(base_path('.env.temp')) && file_exists(base_path('.env'))) {
+            unlink(base_path('.env'));
+            rename(base_path('.env.temp'), base_path('.env'));
+        }
+
+    }
+
+
 }
