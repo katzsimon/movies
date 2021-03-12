@@ -20,6 +20,7 @@ abstract class BaseCRUDTest extends TestCase
     protected $model = null;
     protected $table = null;
     protected $baseUrl = null;
+    protected $truncateTables = true;
 
     protected $createdModel = null;
 
@@ -33,6 +34,12 @@ abstract class BaseCRUDTest extends TestCase
         $this->table = $this->model->getTable();
         $this->setupUser();
         config()->set('settings.output.admin', 'json');
+        if ($this->truncateTables) $this->truncate();
+    }
+
+    public function truncate()
+    {
+        $this->model->truncate();
     }
 
 
@@ -65,10 +72,11 @@ abstract class BaseCRUDTest extends TestCase
 
         // Check index :: Get the json response from index and check if the above factory is in it
         $response = $this->get($this->baseUrl)->assertStatus(200);
-        $data = $response->json()['items']??[];
+        $data = $response->json()['data']??[];
 
 
         // Check that the returned data from the index, has at least as many items created by the factory
+        $this->assertGreaterThan(0, count($data));
         $this->assertGreaterThanOrEqual(count($data), count($items));
 
     }
@@ -84,7 +92,6 @@ abstract class BaseCRUDTest extends TestCase
         // Check create :: Create model
         $response = $this->postJson($this->baseUrl, $item->toArray(), ['FORCE_CONTENT_TYPE'=>'json'])
             ->assertStatus(200);
-
 
         // Check that the database contains the item created by the factory
         $this->assertDatabaseHas($this->table, $item->toArray());

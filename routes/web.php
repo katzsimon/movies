@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Katzsimon\Movie\MovieController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,8 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['prefix'=>'admin', 'middleware' => ['web', 'auth.admin']], function () {
+    Route::delete('movies/{movie}/screenings', [MovieController::class, 'destroyWithScreenings'])->name('admin.movies.destroy.screenings');
 });
-*/
