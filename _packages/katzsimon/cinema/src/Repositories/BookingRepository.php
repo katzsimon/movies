@@ -33,6 +33,7 @@ class BookingRepository extends BaseRepository implements BookingRepositoryInter
     public function getUpcoming($limit=5, $order='asc'): Collection
     {
         return $this->newQuery()
+            ->with('user')
             ->join('screenings', 'bookings.screening_id', '=', 'screenings.id')
             ->where('screenings.datetime', '>=', Date('Y-m-d H:i:s'))
             ->orderBy('screenings.datetime', $order)

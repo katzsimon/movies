@@ -3,6 +3,7 @@
 class Movie extends \Katzsimon\Movie\Models\Movie
 {
 
+
     public function screenings()
     {
         return $this->hasMany('App\Models\Screening', 'movie_id', 'id');

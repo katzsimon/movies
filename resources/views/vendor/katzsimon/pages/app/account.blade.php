@@ -57,7 +57,7 @@
 
 
             @if(count($pastBookings)>0)
-                <div class="card">
+                <div class="card mt-6">
                     <div class="card-header">
                         <div class="card-title">
                             Past Bookings

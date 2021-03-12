@@ -10,6 +10,7 @@ use Katzsimon\Base\Repositories\BaseRepository;
 
 class ScreeningRepository extends BaseRepository implements ScreeningRepositoryInterface
 {
+    protected $movie;
 
     /**
      * ScreeningRepository constructor.
@@ -59,7 +60,7 @@ class ScreeningRepository extends BaseRepository implements ScreeningRepositoryI
         $orderSort = $order[1] ?? 'asc';
 
         return $this->movie->newQuery()->select('*', 'movies.id as id')
-            ->with('future_screenings')
+            ->with('screenings')
             ->join('screenings', 'screenings.movie_id', '=', 'movies.id')
             ->where('screenings.datetime', '>=', Date('Y-m-d H:i:s'))
             ->groupBy('screenings.movie_id')
@@ -90,7 +91,7 @@ class ScreeningRepository extends BaseRepository implements ScreeningRepositoryI
     public function featuredMovies($limit=3): Collection
     {
         return $this->movie->newQuery()->select('*', 'movies.id as id')
-            ->with('future_screenings')
+            ->with('screenings')
             ->join('screenings', 'screenings.movie_id', '=', 'movies.id')
             ->where('screenings.datetime', '>=', Date('Y-m-d H:i:s'))
             ->groupBy('screenings.movie_id')

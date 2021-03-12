@@ -36,7 +36,7 @@ class BookingController extends Controller
      */
     public function index(Request $request)
     {
-        $items = $this->repository->all('desc');
+        $items = $this->repository->all('desc', ['user']);
 
         return $this->output(['view'=>"katzsimon::admin.{$this->ui['items']}.index", 'items'=>$items]);
     }
