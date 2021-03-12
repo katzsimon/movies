@@ -12,7 +12,7 @@
 	'name'=>'user_id',
 	'label'=>'User',
 	'value'=>$create ? '' : $item->user_id??null,
-	'options'=>\App\Models\User::options()
+	'options'=>$user_options??[]
 ])
 
 @include('katzsimon::components.formfield', [
@@ -20,7 +20,7 @@
 	'name'=>'screening_id',
 	'label'=>'Screening',
 	'value'=>$create ? '' : $item->screening_id??null,
-	'options'=>\App\Models\Screening::options()
+	'options'=>$screening_options??[]
 ])
 
 @include('katzsimon::components.formfield', [

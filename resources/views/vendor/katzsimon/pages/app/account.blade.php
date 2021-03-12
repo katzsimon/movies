@@ -37,8 +37,16 @@
 
                                 <div>Reference: <strong>{{ $booking['reference'] }}</strong></div>
                                 <div class="text-h6"><strong>{{ $booking['screening_movie'] }}</strong></div>
-                                <div>{!! $booking['screening_theatre'] !!}</div>
+                                <div>{!! $booking['screening_cinema'] !!}, {!! $booking['screening_theatre'] !!}</div>
                                 <div><strong>{{ $booking['screening_when'] }}</strong></div>
+
+                                @if($booking['can_cancel']===true)
+                                    {!! Form::open(['url' => route('booking.cancel', $booking['id']), 'method'=>'DELETE']) !!}
+                                    <button type="submit" class="btn btn-primary absolute top-3 right-3">
+                                        Cancel Booking
+                                    </button>
+                                    {!! Form::close() !!}
+                                @endif
 
                             </div>
                         @endforeach

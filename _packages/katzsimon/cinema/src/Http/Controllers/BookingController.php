@@ -49,6 +49,7 @@ class BookingController extends Controller
      */
     public function create(Booking $item)
     {
+        $item = $this->repository->empty();
         $data = [
             'item'=>$item,
             'user_options'=>\App\Models\User::options(),

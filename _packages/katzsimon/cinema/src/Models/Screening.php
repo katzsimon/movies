@@ -113,6 +113,7 @@ class Screening extends \App\Models\Model
     }
 
 
+
     /**
      * Build options for select element
      * Of the available seats that can still be booked for a specific Screening
@@ -188,6 +189,7 @@ class Screening extends \App\Models\Model
         }
         return $options;
     }
+
 
 
 }

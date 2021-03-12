@@ -26,6 +26,10 @@ class Booking extends \App\Models\Model
         'item'=>'booking',
     ];
 
+    protected $cancelMinutesThreshold = 60;
+
+    protected $with = ['screening'];
+
     public function screening()
     {
         return $this->hasOne('App\Models\Screening', 'id', 'screening_id');
@@ -59,22 +63,43 @@ class Booking extends \App\Models\Model
      * @return bool
      * @throws \Exception
      */
-    public function cancelBooking($checkOnly=false) {
+    public function cancelBooking($deleteBooking=true) {
+
+
+        if (empty($this->screening)) {
+            if ($deleteBooking) {
+                $this->delete();
+                return true;
+            } else {
+                return false;
+            }
+        }
 
         $datetimeBooking = Carbon::parse("{$this->screening->datetime}:00");
         $now = Carbon::now();
 
         // Check if the Screening time is more than 60 minutes in the future
         $diff = $now->diffInMinutes($datetimeBooking, false);
-        if ($diff>60) {
+        if ($diff>$this->cancelMinutesThreshold) {
             // Only cancel the Booking is more than 60 minutes in the future
-            if(!$checkOnly) $this->delete();
+            if($deleteBooking) $this->delete();
             return true;
         }
 
         // Don't cancel the booking if the screening is in the next 60 minutes
         return false;
 
+    }
+
+
+    /**
+     * Check if the Booking can be cancelled
+     *
+     * @return bool
+     * @throws \Exception
+     */
+    public function getCanCancelAttribute() {
+        return $this->cancelBooking(false);
     }
 
 

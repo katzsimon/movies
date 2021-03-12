@@ -59,4 +59,19 @@ class BookingFactory extends Factory
             ];
         });
     }
+
+    /**
+     * Specify the datetime for the Screening
+     *
+     * @param $datetime
+     * @return BookingFactory
+     */
+    public function dateTime($datetime)
+    {
+        return $this->state(function (array $attributes) use($datetime)  {
+            return [
+                'screening_id' => \App\Models\Screening::factory()->dateTime($datetime),
+            ];
+        });
+    }
 }

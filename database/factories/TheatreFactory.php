@@ -23,7 +23,7 @@ class TheatreFactory extends Factory
     {
         return [
             'cinema_id' => \App\Models\Cinema::factory(),
-            'name' => 'Cinema '.rand(1, 20),
+            'name' => 'Theatre '.rand(1, 20),
             'max_seats'=> rand(20, 30),
         ];
     }

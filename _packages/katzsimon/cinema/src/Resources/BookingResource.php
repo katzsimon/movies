@@ -39,7 +39,7 @@ class BookingResource extends JsonResource
             'screening_when'=>Carbon::parse($this->datetime)->format("Y-m-d \\a\\t H:i")." ({$humanTime})",
             'movie_id'=>$this->screening->movie_id??'',
             'datetime'=>$this->screening->datetime??'',
-            'can_cancel'=>$this->screening->can_cancel??false,
+            'can_cancel'=>$this->can_cancel??false,
             'seats' => $this->seats??0,
             'reference' => $this->reference??'',
         ];
