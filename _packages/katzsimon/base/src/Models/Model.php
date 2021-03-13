@@ -37,8 +37,9 @@ class Model extends \Illuminate\Database\Eloquent\Model
             $ui['parent-names'] = $ui['parent-names'] ?? Str::plural($ui['parent-name']);
         }
 
+
         $ui['title'] = $ui['title'] ?? $ui['names'];
-        $ui['url_index'] = $ui['url_index'] ?? config('settings.url.spa')."/admin/{$ui['items']}/";
+        $ui['url_index'] = $ui['url_index'] ?? config('settings.url')."/admin/{$ui['items']}/";
         return $ui;
     }
 

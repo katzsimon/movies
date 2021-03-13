@@ -81,7 +81,7 @@ class MovieController extends Controller
 
         $item = $this->repository->create( $request->validated() );
 
-        return $this->redirect(['route'=>'admin.movies.index', 'item'=>$item]);
+        return $this->redirect(['route'=>'admin.movies.index', 'item'=>$item, 'message'=>["type"=>"success", "message"=>"{$this->ui['name']} has been created"]]);
     }
 
     /**
@@ -121,7 +121,7 @@ class MovieController extends Controller
         //
         $item = $this->repository->update( $item, $request->validated() );
 
-        return $this->redirect(['route'=>'admin.movies.index', 'item'=>$item]);
+        return $this->redirect(['route'=>'admin.movies.index', 'item'=>$item, 'message'=>["type"=>"success", "message"=>"{$this->ui['name']} has been updated"]]);
     }
 
     /**
@@ -137,7 +137,7 @@ class MovieController extends Controller
     {
         //
         $item->delete();
-        return $this->redirect(['route' => 'admin.movies.index', 'item' => $item]);
+        return $this->redirect(['route' => 'admin.movies.index', 'item' => $item, 'message'=>["type"=>"success", "message"=>"{$this->ui['name']} has been deleted"]]);
 
     }
 

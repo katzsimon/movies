@@ -1,3 +1,20 @@
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
+//@import 'node_modules/bootstrap-vue/src/index.scss';
+
+// Include variables and utilities first
+@import "node_modules/bootstrap-vue/src/variables";
+@import "node_modules/bootstrap-vue/src/utilities";
+
+// General styling needed for special form controls
+@import "node_modules/bootstrap-vue/src/custom-controls";
+
+// Include custom SCSS for components
+@import "node_modules/bootstrap-vue/src/components/modal/index";
+@import "node_modules/bootstrap-vue/src/components/toast/index";
+
+
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

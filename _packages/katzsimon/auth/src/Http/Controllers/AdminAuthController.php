@@ -14,10 +14,11 @@ use Illuminate\Support\Facades\Hash;
 class AdminAuthController extends Controller
 {
 
+    protected $admin = true;
 
     public function register()
     {
-        return view('katzsimon::admin.register');
+        return $this->output(['view'=>'katzsimon::admin.register']);
     }
 
 
@@ -32,18 +33,20 @@ class AdminAuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('admin.dashboard');
+        return $this->redirect(['route'=>'admin.dashboard', 'message'=>'Login Successful']);
     }
 
 
 
-    public function login(Request $request) {
+    public function login(Request $request, User $item) {
+
+
 
         if (Auth::check()) {
             return redirect()->route('admin.dashboard');
         }
 
-        return view('katzsimon::admin.login');
+        return $this->output(['view'=>'katzsimon::admin.login', 'item'=>$item]);
     }
 
 
@@ -54,7 +57,7 @@ class AdminAuthController extends Controller
             return redirect()->route('admin.dashboard');
         }
 
-        return redirect()->route('admin.login');
+        return $this->redirect(['route'=>'admin.login', 'with'=>['message'=>['title'=>'Error!', 'message'=>'Incorrect Login Details', 'context'=>'danger']]]);
     }
 
 
@@ -64,7 +67,7 @@ class AdminAuthController extends Controller
 
         Auth::logout();
 
-        return redirect()->route('admin.login');
+        return $this->redirect(['route'=>'admin.login']);
 
     }
 

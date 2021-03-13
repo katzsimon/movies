@@ -54,12 +54,12 @@ class Booking extends \App\Models\Model
     }
 
     /**
-     * Only cancel the Booking if it is more than 60 minutes in the Future
+     * Only cancel the Booking if it is more than $cancelMinutesThreshold minutes in the Future
      *
-     * Use $checkOnly to only check if it can be cancelled but not actually cancel it
+     * Set $deleteBooking to false to only check if it can be cancelled but not actually cancel it
      *   Used to check if the "Cancel Booking" button should be showed
      *
-     * @param true $deleteBooking
+     * @param bool $deleteBooking
      * @return bool
      * @throws \Exception
      */

@@ -69,7 +69,7 @@ class CinemaController extends Controller
         //
         $item = $this->repository->create( $request->validated() );
 
-        return $this->redirect(['route'=>"admin.{$this->ui['items']}.index"]);
+        return $this->redirect(['route'=>"admin.{$this->ui['items']}.index", 'message'=>["type"=>"success", "message"=>"{$this->ui['name']} has been created"]]);
     }
 
     /**
@@ -110,7 +110,7 @@ class CinemaController extends Controller
 
         $this->repository->update( $item, $request->validated() );
 
-        return $this->redirect(['route'=>"admin.{$this->ui['items']}.index"]);
+        return $this->redirect(['route'=>"admin.{$this->ui['items']}.index", 'message'=>["type"=>"success", "message"=>"{$this->ui['name']} has been updated"]]);
 
     }
 
@@ -127,6 +127,6 @@ class CinemaController extends Controller
         //
         $item->delete();
 
-        return $this->redirect(['route'=>"admin.{$this->ui['items']}.index"]);
+        return $this->redirect(['route'=>"admin.{$this->ui['items']}.index", 'message'=>["type"=>"success", "message"=>"{$this->ui['name']} has been deleted"]]);
     }
 }

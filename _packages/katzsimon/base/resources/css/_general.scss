@@ -6,7 +6,7 @@ a:hover {
     @apply no-underline;
 }
 .breadcrumb {
-    @apply bg-transparent border-t border-gray-400 m-0 mr-2 mt-2 p-0 pt-2;
+    @apply bg-transparent border-t border-gray-400 m-0 mr-2 mt-2 p-0 pt-2 rounded-none;
 }
 .center {
     text-align:center;

@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
+use Inertia\Inertia;
 
 class Controller extends BaseController
 {
@@ -50,6 +51,7 @@ class Controller extends BaseController
 
         $output = $options['output'] ?? request()->get('output', '');
 
+
         if (empty($output) && $json) $output = 'json';
         if (empty($output)) $output = config($this->getOutput());
 
@@ -62,7 +64,7 @@ class Controller extends BaseController
             $ui = false;
         }
 
-
+        $component = $options['component'] ?? '';
         $parent = $options['parent'] ?? null;
         if (!empty($parent)) $data['parent'] = $parent;
 
@@ -137,7 +139,23 @@ class Controller extends BaseController
         $data['breadcrumbs'] = $breadcrumbs;
         $data['ui'] = $ui;
 
+        if ($output==='inertia') {
 
+
+            if (empty($component) && !empty($view)) {
+                list($namespace, $path) = explode('::', $view);
+
+                $paths = explode('.', $path);
+                $package = $paths[1] ?? '';
+                $last = count($paths)-1;
+                $paths[$last] = ucwords($paths[$last]);
+                $path = implode('/', $paths);
+
+                $component = "katzsimon::{$package}::".$path;
+            }
+
+            return Inertia::render($component, $data);
+        }
 
         if ($output==='blade') {
             // Return the blade view
@@ -162,9 +180,12 @@ class Controller extends BaseController
         $route = $options['route'] ?? '';
         $parameters = $options['params'] ?? [];
 
+        $inertia = request()->header('x-inertia')==='true';
+
         $output = $options['output'] ?? request()->header('force-content-type')??'';
         $source = $options['source'] ?? request()->header('request-source')??'';
 
+        if ($inertia) $output = 'inertia';
         if (empty($output)) $output = config($this->getOutput());
 
         $with = $options['with'] ?? null;
@@ -189,6 +210,22 @@ class Controller extends BaseController
         }
 
         if (!empty($route)) {
+
+
+            if ($inertia && Str::contains($route, 'index')) {
+                // Redirect for Inertia
+                $ui = $this->getUI();
+                //dd($ui);
+                if (!empty($parameters)) {
+                    // If there is a parent model, build the URL with the parent id
+                    $urlIndex = str_replace('{params}', $parameters[0], $ui['url_index']);
+                    $urlIndex = config('settings.url').$urlIndex;
+                } else {
+                    // Redirect to the standard index URL
+                    $urlIndex = $ui['url_index'];
+                }
+                return Redirect::to($urlIndex);
+            }
 
             // Redirect to intended route if exists (with authentication fail), or specified route
             if (!empty($parameters)) {

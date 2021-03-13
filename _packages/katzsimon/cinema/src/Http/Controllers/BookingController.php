@@ -70,14 +70,15 @@ class BookingController extends Controller
     {
         $item = $this->repository->create( $request->validated() );
 
-        return $this->redirect(['route'=>"admin.{$this->ui['items']}.index"]);
+        return $this->redirect(['route'=>"admin.{$this->ui['items']}.index", 'message'=>["type"=>"success", "message"=>"{$this->ui['name']} has been created"]]);
     }
+
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Booking  $item
-     * @return \Illuminate\Http\Response
+     * @param Booking $item
+     * @return false|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Inertia\Response|string
      */
     public function show(Booking $item)
     {
@@ -118,7 +119,7 @@ class BookingController extends Controller
         //
         $this->repository->update( $item, $request->validated() );
 
-        return $this->redirect(['route'=>"admin.{$this->ui['items']}.index"]);
+        return $this->redirect(['route'=>"admin.{$this->ui['items']}.index", 'message'=>["type"=>"success", "message"=>"{$this->ui['name']} has been updated"]]);
 
     }
 
@@ -132,7 +133,7 @@ class BookingController extends Controller
     {
         //
         $item->delete();
-        return $this->redirect(['route'=>"admin.{$this->ui['items']}.index"]);
+        return $this->redirect(['route'=>"admin.{$this->ui['items']}.index", 'message'=>["type"=>"success", "message"=>"{$this->ui['name']} has been deleted"]]);
     }
 
     /**

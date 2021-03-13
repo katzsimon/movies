@@ -20,9 +20,6 @@
                 <th class="">Location</th>
                 <th class="">
                     @include('katzsimon::components.item_create', ['item'=>$ui['items'], 'name'=>$ui['name']])
-                    {{--
-                    <layout-item-create :item="ui.items" :name="ui.name"></layout-item-create>
-                    --}}
                 </th>
             </tr>
             </thead>

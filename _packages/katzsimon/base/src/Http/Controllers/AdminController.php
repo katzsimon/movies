@@ -9,11 +9,13 @@ use Illuminate\Support\Facades\Event;
 class AdminController extends Controller
 {
 
+    protected $admin = true;
+
     public function admin(Request $request) {
         if (Auth::check()) {
-            return redirect()->route('admin.dashboard');
+            return $this->redirect(['route'=>'admin.dashboard']);
         }
-        return redirect()->route('admin.login');
+        return $this->redirect(['route'=>'admin.login']);
     }
 
 

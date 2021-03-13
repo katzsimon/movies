@@ -10,13 +10,19 @@
     }
 }
 .btn {
-    @apply inline-block font-normal text-center px-3 py-2 leading-normal text-base rounded cursor-pointer;
+    @apply inline-block font-normal text-center px-3 py-2 leading-normal text-base rounded cursor-pointer font-bold;
 }
 
 .btn-primary {
     @apply text-white bg-blue-600;
 }
-
 .btn-primary:hover {
     @apply text-white bg-blue-700
+}
+
+.btn-light {
+    @apply text-black bg-gray-300;
+}
+.btn-light:hover {
+    @apply text-black bg-gray-400
 }

@@ -84,7 +84,7 @@ class TheatreController extends Controller
         //
         $item = $this->repository->create( $request->validated() );
 
-        return $this->redirect(['route'=>"admin.{$this->ui['parent-items']}.{$this->ui['items']}.index", 'params'=>[$parent]]);
+        return $this->redirect(['route'=>"admin.{$this->ui['parent-items']}.{$this->ui['items']}.index", 'params'=>[$parent], 'message'=>["type"=>"success", "message"=>"{$this->ui['name']} has been created"]]);
     }
 
 
@@ -135,7 +135,7 @@ class TheatreController extends Controller
 
         $this->repository->update( $item, $request->validated() );
 
-        return $this->redirect(['route'=>"admin.{$this->ui['parent-items']}.{$this->ui['items']}.index", 'params'=>[$parent->id]]);
+        return $this->redirect(['route'=>"admin.{$this->ui['parent-items']}.{$this->ui['items']}.index", 'params'=>[$parent->id], 'message'=>["type"=>"success", "message"=>"{$this->ui['name']} has been updated"]]);
 
     }
 
@@ -153,7 +153,7 @@ class TheatreController extends Controller
         //
         $item->delete();
 
-        return $this->redirect(['route'=>"admin.{$this->ui['parent-items']}.{$this->ui['items']}.index", 'params'=>[$parent]]);
+        return $this->redirect(['route'=>"admin.{$this->ui['parent-items']}.{$this->ui['items']}.index", 'params'=>[$parent], 'message'=>["type"=>"success", "message"=>"{$this->ui['name']} has been deleted"]]);
 
     }
 }

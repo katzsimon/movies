@@ -17,10 +17,18 @@
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.2.8",
-        "tailwindcss": "^2.0.3"
+        "tailwindcss": "^2.0.3",
+        "vue-loader": "^15.9.5",
+        "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "@inertiajs/inertia": "^0.8.5",
+        "@inertiajs/inertia-vue": "^0.5.5",
+        "@inertiajs/progress": "^0.2.4",
+        "bootstrap": "^4.6.0",
+        "bootstrap-vue": "^2.21.2",
         "sass": "^1.32.8",
-        "sass-loader": "^11.0.1"
+        "sass-loader": "^11.0.1",
+        "vue": "^2.6.12"
     }
 }

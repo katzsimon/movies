@@ -43,7 +43,6 @@
 
 @include('katzsimon::components.item_submit', [
 	'item'=>$ui['items'],
-	'buttonText'=>'Submit',
 ])
 
 
