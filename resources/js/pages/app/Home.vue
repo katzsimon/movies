@@ -1,16 +1,16 @@
 <template>
     <div>
 
-        <app-heading>My Account</app-heading>
+        <app-heading>Home</app-heading>
 
     </div>
 </template>
-
 <script>
 import AppHeading from "@packagesBase/components/AppHeading";
 import Loading from "@packagesBase/components/Loading";
+
 export default {
-    name: "Account",
+    name: "Home",
     components:{
         AppHeading,
         Loading
@@ -30,5 +30,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

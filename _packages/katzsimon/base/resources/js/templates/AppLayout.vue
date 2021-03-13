@@ -11,7 +11,6 @@
 
 <script>
 import toast from "@packagesBase/mixins/toast";
-
 import AppNav from "@/templates/AppNav";
 
 

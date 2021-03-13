@@ -53,8 +53,15 @@ class SetupCommand extends Command
         Publish::view($baseDir.'/../resources/views/pages/app/account.blade.php');
         Publish::view($baseDir.'/../resources/views/pages/app/home.blade.php');
 
+        // Admin Resources
         Publish::resource($baseDir.'/../resources/js/templates/AdminNav.vue');
         Publish::resource($baseDir.'/../resources/js/pages/admin/Dashboard.vue');
+
+        // App Resources
+        Publish::resource($baseDir.'/../resources/js/plugins/router_routes.js');
+        Publish::resource($baseDir.'/../resources/js/templates/AppNav.vue');
+        Publish::resource($baseDir.'/../resources/js/pages/app/Home.vue');
+        Publish::resource($baseDir.'/../resources/js/pages/app/Account.vue');
 
         Publish::test($baseDir.'/../tests/BaseCRUDTest.php');
         Publish::test($baseDir.'/../tests/BaseRepositoryTest.php');

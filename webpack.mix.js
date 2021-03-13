@@ -34,6 +34,7 @@ if (mode==='vue' || mode==='app' || mode==='') {
     console.log('Mix Compiling Vue');
 
     mix
+        .webpackConfig(require('./webpack.config'))
         .setPublicPath('public_html/')
         .js(`${packages}/base/resources/js/app.js`, 'js').vue({ version: 2 })
         .sass(`${packages}/base/resources/css/app.scss`, 'css', [])

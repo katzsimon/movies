@@ -157,6 +157,15 @@ class Controller extends BaseController
             return Inertia::render($component, $data);
         }
 
+        if ($output==='vueapp') {
+
+            $view = 'katzsimon::app';
+
+            $data['output'] = 'vue';
+
+            return view($view, $data);
+        }
+
         if ($output==='blade') {
             // Return the blade view
 
