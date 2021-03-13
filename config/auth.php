@@ -42,7 +42,7 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver' => env('API_GUARD', 'sanctum')==='sanctum' ? 'token' : 'passport',
             'provider' => 'users',
             'hash' => false,
         ],

@@ -14,7 +14,7 @@ const mode = process.env.MIX_MODE;
 const packages = process.env.MIX_PACKAGES_PATH
 
 // Admin Assets
-if (mode==='inertia' || mode==='admin' || mode==='') {
+if (mode==='inertia' || mode==='admin' || mode==='both' || mode==='') {
     console.log('Mix Compiling Inertia');
 
     mix
@@ -30,7 +30,7 @@ if (mode==='inertia' || mode==='admin' || mode==='') {
 }
 
 // App Assets
-if (mode==='vue' || mode==='app' || mode==='') {
+if (mode==='vue' || mode==='app' || mode==='both' || mode==='') {
     console.log('Mix Compiling Vue');
 
     mix
