@@ -9,26 +9,28 @@
             </v-btn>
 
 
-        <v-btn :to="{ name: 'home' }" class="ma-2 d-none d-md-flex" text plain outlined exact>Home</v-btn>
 
-        <v-btn :to="{ name: 'screenings' }" class="ma-2" text plain outlined>Screenings</v-btn>
-        <v-btn :to="{ name: 'movies' }" class="ma-2" text plain outlined>Movies</v-btn>
+        <v-btn :to="{ name: 'cinemas' }" class="btn-nav-app ma-2" text plain outlined>Cinemas</v-btn>
+        <v-btn :to="{ name: 'movies' }" class="btn-nav-app ma-2" text plain outlined>All Movies</v-btn>
+        <v-btn :to="{ name: 'upcoming-movies' }" class="btn-nav-app ma-2" text plain outlined>Upcoming Movies</v-btn>
 
-        <v-btn :to="{ name: 'upcoming-movies' }" class="ma-2" text plain outlined>Upcoming Movies</v-btn>
+        <v-btn :to="{ name: 'upcoming-movies' }" class="btn-nav-app ma-2"  v-if="$store.getters.isLoggedIn" text plain outlined>Make a Booking</v-btn>
 
         <v-spacer></v-spacer>
 
-        <v-btn :to="{ name:'login' }" class="ma-2" v-if="$store.getters.notLoggedIn">Login</v-btn>
-        <v-btn :to="{ name:'register' }" class="ma-2" v-if="$store.getters.notLoggedIn">Register</v-btn>
+        <v-btn :to="{ name:'login' }" class="btn-nav-app ma-2" v-if="$store.getters.notLoggedIn">Login</v-btn>
+        <v-btn :to="{ name:'register' }" class="btn-nav-app ma-2" v-if="$store.getters.notLoggedIn">Register</v-btn>
 
-        <v-btn :to="{ name:'account' }"  v-if="$store.getters.isLoggedIn" class="ma-2">My Account</v-btn>
-        <v-btn to="#"  v-if="$store.getters.isLoggedIn" class="ma-2" @click="onLogout" id="btnLogout">Logout</v-btn>
+        <v-btn :to="{ name:'account' }"  v-if="$store.getters.isLoggedIn" class="btn-nav-app ma-2">My Account</v-btn>
+        <v-btn to="#"  v-if="$store.getters.isLoggedIn" class="btn-nav-app ma-2" @click="onLogout" id="btnLogout">Logout</v-btn>
 
-        <v-img
-            max-height="36"
-            max-width="36"
-            src="/images/logo-white.svg"
-        ></v-img>
+        <v-btn :to="{ name:'home' }" text plain >
+            <v-img
+                max-height="36"
+                max-width="36"
+                src="/images/logo-white.svg"
+            ></v-img>
+        </v-btn>
 
     </v-app-bar>
 
@@ -55,9 +57,29 @@
 
             <v-list-item-group v-model="group" active-class="blue--text text--accent-4">
 
-                <v-list-item :to="{ name: 'home' }" v-if="$store.getters.notLoggedIn" exact>
+                <v-list-item :to="{ name: 'home' }" exact>
                     <v-list-item-title >Home</v-list-item-title>
                 </v-list-item>
+
+                <v-list-item :to="{ name: 'cinemas' }" exact>
+                    <v-list-item-title >Cinemas</v-list-item-title>
+                </v-list-item>
+
+                <v-list-item :to="{ name: 'movies' }" exact>
+                    <v-list-item-title >All Movie</v-list-item-title>
+                </v-list-item>
+
+                <v-list-item :to="{ name: 'upcoming-movies' }" exact>
+                    <v-list-item-title >Upcoming Movies</v-list-item-title>
+                </v-list-item>
+
+                <v-list-item :to="{ name: 'booking' }" v-if="$store.getters.isLoggedIn" exact>
+                    <v-list-item-title >Make a Booking</v-list-item-title>
+                </v-list-item>
+
+
+
+
 
                 <v-list-item :to="{ name: 'account' }" v-if="$store.getters.isLoggedIn"  class="mt-10">
                     <v-list-item-title >Account</v-list-item-title>
@@ -101,5 +123,9 @@ export default {
 </script>
 
 <style scoped>
-
+@media (max-width:1024px) {
+    .btn-nav-app  {
+       display:none;
+    }
+}
 </style>
