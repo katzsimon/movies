@@ -25,6 +25,8 @@ class AppBookingTest extends DuskTestCase
 
         $this->repositoryScreening = app()->make(\Katzsimon\Cinema\Repositories\ScreeningRepository::class);
         $this->repositoryMovie = app()->make(\Katzsimon\Movie\Repositories\MovieRepository::class);
+
+        config()->set('settings.output.app', 'blade');
     }
 
     public function tearDown():void

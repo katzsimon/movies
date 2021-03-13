@@ -7,7 +7,7 @@
 
 
     @if(View::hasSection('page-content') || $output==='blade')
-        <link href="{{ asset('/css/app_blade.css') }}" rel="stylesheet">
+        <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
     @else
         <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
         <script src="{{ asset('/js/app.js') }}" defer></script>

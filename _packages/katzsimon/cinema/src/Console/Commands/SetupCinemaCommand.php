@@ -75,6 +75,7 @@ class SetupCinemaCommand extends Command
         Publish::test($baseDir.'/../tests/Feature/BookingTest.php');
         Publish::test($baseDir.'/../tests/Feature/CinemaTest.php');
         Publish::test($baseDir.'/../tests/Feature/ScreeningTest.php');
+        Publish::test($baseDir.'/../tests/Feature/CancelBookingsTest.php');
 
 
         return 0;

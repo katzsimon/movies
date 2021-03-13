@@ -756,11 +756,6 @@ article .table {
   margin-bottom: 0.25rem;
 }
 
-input[readonly] {
-  --tw-bg-opacity: 1;
-  background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
-}
-
 .card {
   --tw-border-opacity: 1;
   border-color: rgba(156, 163, 175, var(--tw-border-opacity));

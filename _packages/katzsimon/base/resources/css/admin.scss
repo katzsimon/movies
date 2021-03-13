@@ -32,6 +32,10 @@
 
     @import '_general';
 
+    input[readonly] {
+        @apply bg-gray-200;
+    }
+
 
 
 }

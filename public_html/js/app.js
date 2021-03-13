@@ -2013,7 +2013,8 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0__.default({
 
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.baseURL = "http://localhost:3000";
+console.log('app url: ', "http://movies.test");
+window.axios.defaults.baseURL = "http://movies.test";
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.headers.common['Accept'] = 'application/json';
 window.axios.defaults.headers.common['Content-Type'] = 'application/json';
@@ -2867,6 +2868,289 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./_packages/katzsimon/cinema/resources/js/pages/app/Booking.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./_packages/katzsimon/cinema/resources/js/pages/app/Booking.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _packagesBase_components_AppHeading__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @packagesBase/components/AppHeading */ "./_packages/katzsimon/base/resources/js/components/AppHeading.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "Booking",
+  components: {
+    AppHeading: _packagesBase_components_AppHeading__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  data: function data() {
+    return {
+      errors: [],
+      buttonLoading: false,
+      screening: {},
+      dialog: false,
+      movieId: '',
+      screeningId: '',
+      reference: '',
+      movies: [],
+      seatsToBook: '',
+      screenings: [],
+      seats: [],
+      booking: {},
+      bookingStatus: '',
+      bookingMessage: '',
+      bookingReference: ''
+    };
+  },
+  props: {},
+  metaInfo: {
+    title: 'Book a Movie'
+  },
+  computed: {
+    initScreeningId: function initScreeningId() {
+      // The Screening ID when page loads
+      var screening = this.$route.params.screening;
+
+      if (typeof screening === 'undefined') {
+        screening = 0;
+      }
+
+      return parseInt(screening);
+    },
+    initMovieId: function initMovieId() {
+      // The Movie ID when page loads
+      var movie = this.$route.params.movie;
+
+      if (typeof movie === 'undefined') {
+        movie = 0;
+      }
+
+      return parseInt(movie);
+    },
+    dialogColor: function dialogColor() {
+      // Make the confirmation dialog red if there is an error when making the booking
+      if (this.bookingStatus === 'error') return 'red';
+      return 'primary';
+    }
+  },
+  methods: {
+    onSubmitBooking: function onSubmitBooking() {
+      var _this = this;
+
+      // Make the Booking
+      this.errors = [];
+      axios.post("api/booking", {
+        movie_id: this.movieId,
+        screening_id: this.screeningId,
+        seats: this.seatsToBook
+      }).then(function (res) {
+        _this.bookingStatus = res.data.status;
+        _this.bookingMessage = res.data.message;
+        _this.bookingReference = res.data.reference;
+        _this.dialog = true;
+        _this.buttonLoading = false;
+      })["catch"](function (error) {
+        console.log('Error! ', error);
+        _this.errors = error.response.data.errors;
+        _this.buttonLoading = false;
+      });
+    },
+    onBooked: function onBooked() {
+      // Handler after the Booking confirmation dialog has been showed
+      this.dialog = false;
+      this.$router.push({
+        name: 'account'
+      });
+    },
+    setMovie: function setMovie() {
+      // Change the page URL to reflect setting the Movie
+      this.screenings = [];
+      this.seats = [];
+      this.$router.push({
+        name: 'booking-movie',
+        params: {
+          movie: this.movieId
+        }
+      });
+      this.init();
+    },
+    setScreening: function setScreening() {
+      // Change the page URL to reflect setting the Show
+      this.seats = [];
+      this.seatsToBook = '';
+      this.$router.push({
+        name: 'booking-screening',
+        params: {
+          screening: this.screeningId
+        }
+      });
+      this.init();
+    },
+    prepareOptions: function prepareOptions(input) {
+      // Convert the select options from the response so they can be used with the select elements
+      var output = [];
+      output.push({
+        value: '',
+        text: ''
+      });
+      Object.keys(input).forEach(function (key) {
+        var value = input[key];
+        if (value !== '') output.push({
+          value: key,
+          text: value
+        });
+      });
+      return output;
+    },
+    loadBookingDetails: function loadBookingDetails() {
+      var _this2 = this;
+
+      // Load Booking details, without a specified Movie or Screening
+      axios.get("api/booking").then(function (res) {
+        _this2.movies = _this2.prepareOptions(res.data.movie_options);
+        _this2.movieId = res.data.movie_id.toString();
+        _this2.screenings = _this2.prepareOptions(res.data.screening_options);
+        _this2.screeningId = res.data.screening_id.toString();
+        _this2.seats = _this2.prepareOptions(res.data.seat_options);
+      })["catch"](function (error) {
+        console.log('Error! ', error);
+      });
+    },
+    loadBookingScreeningDetails: function loadBookingScreeningDetails(id) {
+      var _this3 = this;
+
+      // Load the Booking details with a specified Screening
+      axios.get("api/booking/screening/".concat(id)).then(function (res) {
+        _this3.movies = _this3.prepareOptions(res.data.movie_options);
+        _this3.movieId = res.data.movie_id.toString();
+        _this3.screenings = _this3.prepareOptions(res.data.screening_options);
+        _this3.screeningId = res.data.screening_id.toString();
+        _this3.seats = _this3.prepareOptions(res.data.seat_options);
+      })["catch"](function (error) {
+        console.log('Error! ', error);
+      });
+    },
+    loadBookingMovieDetails: function loadBookingMovieDetails(id) {
+      var _this4 = this;
+
+      // Load the Booking details with a specified Movie
+      axios.get("api/booking/movie/".concat(id)).then(function (res) {
+        _this4.movies = _this4.prepareOptions(res.data.movie_options);
+        _this4.movieId = res.data.movie_id.toString();
+        _this4.screenings = _this4.prepareOptions(res.data.screening_options);
+        _this4.screeningId = res.data.screening_id.toString();
+      })["catch"](function (error) {
+        console.log('Error! ', error);
+      });
+    },
+    init: function init() {
+      // Determine which details to load, depending on whether a movie and/or screening has been selected
+      if (this.initScreeningId === 0 && this.initMovieId === 0) {
+        this.movies = [];
+        this.screenings = [];
+        this.seats = [];
+        this.loadBookingDetails();
+      } else if (this.initScreeningId > 0 && this.initMovieId === 0) {
+        this.loadBookingScreeningDetails(this.initScreeningId);
+      } else if (this.initScreeningId === 0 && this.initMovieId > 0) {
+        this.loadBookingMovieDetails(this.initMovieId);
+      }
+    }
+  },
+  watch: {
+    $route: function $route(to, from) {
+      // Reload the page when the query parameters change
+      this.init();
+    }
+  },
+  mounted: function mounted() {
+    this.init();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./_packages/katzsimon/cinema/resources/js/pages/app/Cinemas.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./_packages/katzsimon/cinema/resources/js/pages/app/Cinemas.vue?vue&type=script&lang=js& ***!
@@ -3239,6 +3523,137 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3248,10 +3663,62 @@ __webpack_require__.r(__webpack_exports__);
     Loading: _packagesBase_components_Loading__WEBPACK_IMPORTED_MODULE_1__.default
   },
   data: function data() {
-    return {};
+    return {
+      bookingsFuture: [],
+      bookingsPast: [],
+      dialogCancel: false,
+      dialogCancelConfirmation: false,
+      cancelId: 0,
+      cancelMovieName: '',
+      cancellationStatus: '',
+      cancellationMessage: '',
+      loading: false
+    };
   },
-  mounted: function mounted() {},
-  methods: {}
+  mounted: function mounted() {
+    this.loadBookings();
+  },
+  methods: {
+    loadBookings: function loadBookings() {
+      var _this = this;
+
+      axios.get("api/bookings").then(function (res) {
+        _this.bookingsFuture = res.data.bookingsFuture;
+        _this.bookingsPast = res.data.bookingsPast;
+
+        _this.$eventHub.$emit('setPageLoaded', true);
+      })["catch"](function (error) {
+        console.log('Error! ', error);
+        _this.authStatus = 'Not authed';
+      });
+    },
+    makeBooking: function makeBooking() {
+      this.$router.push({
+        name: 'booking'
+      });
+    },
+    onConfirmCancel: function onConfirmCancel(id, movie) {
+      this.cancelId = id;
+      this.cancelMovieName = movie;
+      this.dialogCancel = true;
+    },
+    onCancellation: function onCancellation(id) {
+      var _this2 = this;
+
+      this.dialogCancel = false;
+      this.dialogCancelConfirmation = true;
+      axios.post("api/booking/cancel/".concat(id)).then(function (res) {
+        //if (res.status===200) this.test = res.data;
+        console.log('Screening Cancel Bookings: ', res.data.data);
+        _this2.cancellationStatus = res.data.data.status;
+        _this2.cancellationMessage = res.data.data.message; //this.bookingsFuture = res.data.bookingsFuture;
+        //this.loading = false;
+      })["catch"](function (error) {
+        console.log('Error! ', error);
+        _this2.authStatus = 'Not authed';
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -3269,6 +3736,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _packagesBase_components_AppHeading__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @packagesBase/components/AppHeading */ "./_packages/katzsimon/base/resources/js/components/AppHeading.vue");
 /* harmony import */ var _packagesBase_components_Loading__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @packagesBase/components/Loading */ "./_packages/katzsimon/base/resources/js/components/Loading.vue");
+/* harmony import */ var _packages_movie_resources_js_components_MovieDetails__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @packages/movie/resources/js/components/MovieDetails */ "./_packages/katzsimon/movie/resources/js/components/MovieDetails.vue");
+/* harmony import */ var _packages_cinema_resources_js_components_WatchMovie__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @packages/cinema/resources/js/components/WatchMovie */ "./_packages/katzsimon/cinema/resources/js/components/WatchMovie.vue");
 //
 //
 //
@@ -3276,19 +3745,172 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Home",
   components: {
+    WatchMovie: _packages_cinema_resources_js_components_WatchMovie__WEBPACK_IMPORTED_MODULE_3__.default,
+    MovieDetails: _packages_movie_resources_js_components_MovieDetails__WEBPACK_IMPORTED_MODULE_2__.default,
     AppHeading: _packagesBase_components_AppHeading__WEBPACK_IMPORTED_MODULE_0__.default,
     Loading: _packagesBase_components_Loading__WEBPACK_IMPORTED_MODULE_1__.default
   },
   data: function data() {
-    return {};
+    return {
+      movies: [],
+      upcomingBookings: [],
+      dialogCancel: false,
+      dialogCancelConfirmation: false,
+      cancelId: 0,
+      cancelMovieName: '',
+      cancellationStatus: '',
+      cancellationMessage: '',
+      loading: false
+    };
   },
-  mounted: function mounted() {},
-  methods: {}
+  mounted: function mounted() {
+    var _this = this;
+
+    var url = "api/home";
+    if (this.$store.getters.isLoggedIn) url = 'api/home/user';
+    axios.get(url).then(function (res) {
+      _this.movies = res.data.movies;
+      _this.upcomingBookings = res.data.upcomingBookings;
+
+      _this.$eventHub.$emit('setPageLoaded', true);
+    })["catch"](function (error) {
+      console.log('Error! ', error);
+      _this.authStatus = 'Not authed';
+    });
+  },
+  methods: {
+    onConfirmCancel: function onConfirmCancel(id, movie) {
+      this.cancelId = id;
+      this.cancelMovieName = movie;
+      this.dialogCancel = true;
+    },
+    onCancellation: function onCancellation(id) {
+      var _this2 = this;
+
+      this.dialogCancel = false;
+      this.dialogCancelConfirmation = true;
+      axios.post("api/booking/cancel/".concat(id)).then(function (res) {
+        _this2.cancellationStatus = res.data.data.status;
+        _this2.cancellationMessage = res.data.data.message;
+      })["catch"](function (error) {
+        console.log('Error! ', error);
+        _this2.authStatus = 'Not authed';
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -3448,8 +4070,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _packages_cinema_resources_js_pages_app_Cinemas__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @packages/cinema/resources/js/pages/app/Cinemas */ "./_packages/katzsimon/cinema/resources/js/pages/app/Cinemas.vue");
 /* harmony import */ var _packages_movie_resources_js_pages_app_Movies__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @packages/movie/resources/js/pages/app/Movies */ "./_packages/katzsimon/movie/resources/js/pages/app/Movies.vue");
 /* harmony import */ var _packages_cinema_resources_js_pages_app_UpcomingMovies__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @packages/cinema/resources/js/pages/app/UpcomingMovies */ "./_packages/katzsimon/cinema/resources/js/pages/app/UpcomingMovies.vue");
-/* harmony import */ var _packages_auth_resources_js_middleware_auth__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @packages/auth/resources/js/middleware/auth */ "./_packages/katzsimon/auth/resources/js/middleware/auth.js");
-/* harmony import */ var _packages_auth_resources_js_middleware_guest__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @packages/auth/resources/js/middleware/guest */ "./_packages/katzsimon/auth/resources/js/middleware/guest.js");
+/* harmony import */ var _packages_cinema_resources_js_pages_app_Booking__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @packages/cinema/resources/js/pages/app/Booking */ "./_packages/katzsimon/cinema/resources/js/pages/app/Booking.vue");
+/* harmony import */ var _packages_auth_resources_js_middleware_auth__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @packages/auth/resources/js/middleware/auth */ "./_packages/katzsimon/auth/resources/js/middleware/auth.js");
+/* harmony import */ var _packages_auth_resources_js_middleware_guest__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @packages/auth/resources/js/middleware/guest */ "./_packages/katzsimon/auth/resources/js/middleware/guest.js");
+
 
 
 
@@ -3468,21 +4092,21 @@ var routes = [{
   path: '/account',
   component: _pages_app_Account__WEBPACK_IMPORTED_MODULE_3__.default,
   meta: {
-    middleware: [_packages_auth_resources_js_middleware_auth__WEBPACK_IMPORTED_MODULE_7__.default]
+    middleware: [_packages_auth_resources_js_middleware_auth__WEBPACK_IMPORTED_MODULE_8__.default]
   }
 }, {
   name: 'register',
   path: '/register',
   component: _packages_auth_resources_js_pages_app_Register__WEBPACK_IMPORTED_MODULE_0__.default,
   meta: {
-    middleware: [_packages_auth_resources_js_middleware_guest__WEBPACK_IMPORTED_MODULE_8__.default]
+    middleware: [_packages_auth_resources_js_middleware_guest__WEBPACK_IMPORTED_MODULE_9__.default]
   }
 }, {
   name: 'login',
   path: '/login',
   component: _packages_auth_resources_js_pages_app_Login__WEBPACK_IMPORTED_MODULE_1__.default,
   meta: {
-    middleware: [_packages_auth_resources_js_middleware_guest__WEBPACK_IMPORTED_MODULE_8__.default]
+    middleware: [_packages_auth_resources_js_middleware_guest__WEBPACK_IMPORTED_MODULE_9__.default]
   }
 }, {
   name: 'cinemas',
@@ -3496,6 +4120,27 @@ var routes = [{
   name: 'upcoming-movies',
   path: '/upcoming-movies',
   component: _packages_cinema_resources_js_pages_app_UpcomingMovies__WEBPACK_IMPORTED_MODULE_6__.default
+}, {
+  name: 'booking',
+  path: '/booking',
+  component: _packages_cinema_resources_js_pages_app_Booking__WEBPACK_IMPORTED_MODULE_7__.default,
+  meta: {
+    middleware: [_packages_auth_resources_js_middleware_auth__WEBPACK_IMPORTED_MODULE_8__.default]
+  }
+}, {
+  name: 'booking-screening',
+  path: '/booking/screening/:screening',
+  component: _packages_cinema_resources_js_pages_app_Booking__WEBPACK_IMPORTED_MODULE_7__.default,
+  meta: {
+    middleware: [_packages_auth_resources_js_middleware_auth__WEBPACK_IMPORTED_MODULE_8__.default]
+  }
+}, {
+  name: 'booking-movie',
+  path: '/booking/movie/:movie',
+  component: _packages_cinema_resources_js_pages_app_Booking__WEBPACK_IMPORTED_MODULE_7__.default,
+  meta: {
+    middleware: [_packages_auth_resources_js_middleware_auth__WEBPACK_IMPORTED_MODULE_8__.default]
+  }
 }];
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (routes);
 
@@ -3591,6 +4236,54 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, ".v-card__title[data-v-03ae2323] {\n  text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/app/Account.vue?vue&type=style&index=0&id=5036d1c6&scoped=true&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/app/Account.vue?vue&type=style&index=0&id=5036d1c6&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".booking[data-v-5036d1c6] {\n  border:1px solid #ccc;\n  padding:1rem;\n  margin-bottom:1rem;\n  position:relative;\n}\n.booking[data-v-5036d1c6]:last-child {\n  margin-bottom:0;\n}\n.btn-cancel-booking[data-v-5036d1c6] {\n  position:absolute;\n  right:1rem;\n  bottom:1rem;\n}\n@media (max-width:960px) {\n.btn-cancel-booking[data-v-5036d1c6] {\n    position: relative;\n    right:auto;\n    bottom:auto;\n    margin-top:0.5rem;\n}\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/app/Home.vue?vue&type=style&index=0&id=bf8f77d4&scoped=true&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/app/Home.vue?vue&type=style&index=0&id=bf8f77d4&scoped=true&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".booking[data-v-bf8f77d4] {\n  border:1px solid #ccc;\n  padding:1rem;\n  margin-bottom:1rem;\n  position:relative;\n}\n.booking[data-v-bf8f77d4]:last-child {\n  margin-bottom:0;\n}\n.btn-cancel-booking[data-v-bf8f77d4] {\n  position:absolute;\n  right:1rem;\n  bottom:1rem;\n}\n@media (max-width:960px) {\n.btn-cancel-booking[data-v-bf8f77d4] {\n    position: relative;\n    right:auto;\n    bottom:auto;\n    margin-top:0.5rem;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -21236,6 +21929,66 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/app/Account.vue?vue&type=style&index=0&id=5036d1c6&scoped=true&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/app/Account.vue?vue&type=style&index=0&id=5036d1c6&scoped=true&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Account_vue_vue_type_style_index_0_id_5036d1c6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Account.vue?vue&type=style&index=0&id=5036d1c6&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/app/Account.vue?vue&type=style&index=0&id=5036d1c6&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Account_vue_vue_type_style_index_0_id_5036d1c6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Account_vue_vue_type_style_index_0_id_5036d1c6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/app/Home.vue?vue&type=style&index=0&id=bf8f77d4&scoped=true&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/app/Home.vue?vue&type=style&index=0&id=bf8f77d4&scoped=true&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_style_index_0_id_bf8f77d4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Home.vue?vue&type=style&index=0&id=bf8f77d4&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/app/Home.vue?vue&type=style&index=0&id=bf8f77d4&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_style_index_0_id_bf8f77d4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_style_index_0_id_bf8f77d4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/templates/AppNav.vue?vue&type=style&index=0&id=0c055776&scoped=true&lang=css&":
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/templates/AppNav.vue?vue&type=style&index=0&id=0c055776&scoped=true&lang=css& ***!
@@ -21861,6 +22614,45 @@ component.options.__file = "_packages/katzsimon/cinema/resources/js/components/W
 
 /***/ }),
 
+/***/ "./_packages/katzsimon/cinema/resources/js/pages/app/Booking.vue":
+/*!***********************************************************************!*\
+  !*** ./_packages/katzsimon/cinema/resources/js/pages/app/Booking.vue ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Booking_vue_vue_type_template_id_367af32c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Booking.vue?vue&type=template&id=367af32c&scoped=true& */ "./_packages/katzsimon/cinema/resources/js/pages/app/Booking.vue?vue&type=template&id=367af32c&scoped=true&");
+/* harmony import */ var _Booking_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Booking.vue?vue&type=script&lang=js& */ "./_packages/katzsimon/cinema/resources/js/pages/app/Booking.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _Booking_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _Booking_vue_vue_type_template_id_367af32c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Booking_vue_vue_type_template_id_367af32c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "367af32c",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "_packages/katzsimon/cinema/resources/js/pages/app/Booking.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./_packages/katzsimon/cinema/resources/js/pages/app/Cinemas.vue":
 /*!***********************************************************************!*\
   !*** ./_packages/katzsimon/cinema/resources/js/pages/app/Cinemas.vue ***!
@@ -22032,15 +22824,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Account_vue_vue_type_template_id_5036d1c6_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Account.vue?vue&type=template&id=5036d1c6&scoped=true& */ "./resources/js/pages/app/Account.vue?vue&type=template&id=5036d1c6&scoped=true&");
 /* harmony import */ var _Account_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Account.vue?vue&type=script&lang=js& */ "./resources/js/pages/app/Account.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _Account_vue_vue_type_style_index_0_id_5036d1c6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Account.vue?vue&type=style&index=0&id=5036d1c6&scoped=true&lang=css& */ "./resources/js/pages/app/Account.vue?vue&type=style&index=0&id=5036d1c6&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
   _Account_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
   _Account_vue_vue_type_template_id_5036d1c6_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
   _Account_vue_vue_type_template_id_5036d1c6_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
@@ -22071,15 +22865,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Home_vue_vue_type_template_id_bf8f77d4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Home.vue?vue&type=template&id=bf8f77d4&scoped=true& */ "./resources/js/pages/app/Home.vue?vue&type=template&id=bf8f77d4&scoped=true&");
 /* harmony import */ var _Home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Home.vue?vue&type=script&lang=js& */ "./resources/js/pages/app/Home.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _Home_vue_vue_type_style_index_0_id_bf8f77d4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Home.vue?vue&type=style&index=0&id=bf8f77d4&scoped=true&lang=css& */ "./resources/js/pages/app/Home.vue?vue&type=style&index=0&id=bf8f77d4&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
   _Home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
   _Home_vue_vue_type_template_id_bf8f77d4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
   _Home_vue_vue_type_template_id_bf8f77d4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
@@ -22266,6 +23062,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./_packages/katzsimon/cinema/resources/js/pages/app/Booking.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************!*\
+  !*** ./_packages/katzsimon/cinema/resources/js/pages/app/Booking.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Booking_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Booking.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./_packages/katzsimon/cinema/resources/js/pages/app/Booking.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Booking_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./_packages/katzsimon/cinema/resources/js/pages/app/Cinemas.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************!*\
   !*** ./_packages/katzsimon/cinema/resources/js/pages/app/Cinemas.vue?vue&type=script&lang=js& ***!
@@ -22417,6 +23229,32 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/pages/app/Account.vue?vue&type=style&index=0&id=5036d1c6&scoped=true&lang=css&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/pages/app/Account.vue?vue&type=style&index=0&id=5036d1c6&scoped=true&lang=css& ***!
+  \*****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Account_vue_vue_type_style_index_0_id_5036d1c6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Account.vue?vue&type=style&index=0&id=5036d1c6&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/app/Account.vue?vue&type=style&index=0&id=5036d1c6&scoped=true&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/app/Home.vue?vue&type=style&index=0&id=bf8f77d4&scoped=true&lang=css&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/pages/app/Home.vue?vue&type=style&index=0&id=bf8f77d4&scoped=true&lang=css& ***!
+  \**************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_style_index_0_id_bf8f77d4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Home.vue?vue&type=style&index=0&id=bf8f77d4&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/app/Home.vue?vue&type=style&index=0&id=bf8f77d4&scoped=true&lang=css&");
+
+
+/***/ }),
+
 /***/ "./resources/js/templates/AppNav.vue?vue&type=style&index=0&id=0c055776&scoped=true&lang=css&":
 /*!****************************************************************************************************!*\
   !*** ./resources/js/templates/AppNav.vue?vue&type=style&index=0&id=0c055776&scoped=true&lang=css& ***!
@@ -22562,6 +23400,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WatchMovie_vue_vue_type_template_id_73dd9406_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WatchMovie_vue_vue_type_template_id_73dd9406_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./WatchMovie.vue?vue&type=template&id=73dd9406&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./_packages/katzsimon/cinema/resources/js/components/WatchMovie.vue?vue&type=template&id=73dd9406&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./_packages/katzsimon/cinema/resources/js/pages/app/Booking.vue?vue&type=template&id=367af32c&scoped=true&":
+/*!******************************************************************************************************************!*\
+  !*** ./_packages/katzsimon/cinema/resources/js/pages/app/Booking.vue?vue&type=template&id=367af32c&scoped=true& ***!
+  \******************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Booking_vue_vue_type_template_id_367af32c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Booking_vue_vue_type_template_id_367af32c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Booking_vue_vue_type_template_id_367af32c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Booking.vue?vue&type=template&id=367af32c&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./_packages/katzsimon/cinema/resources/js/pages/app/Booking.vue?vue&type=template&id=367af32c&scoped=true&");
 
 
 /***/ }),
@@ -23367,6 +24222,204 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./_packages/katzsimon/cinema/resources/js/pages/app/Booking.vue?vue&type=template&id=367af32c&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./_packages/katzsimon/cinema/resources/js/pages/app/Booking.vue?vue&type=template&id=367af32c&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("app-heading", [_vm._v("Make a Movie Booking")]),
+      _vm._v(" "),
+      _c(
+        "v-form",
+        {
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.onSubmitBooking($event)
+            }
+          }
+        },
+        [
+          _c("v-select", {
+            attrs: {
+              items: _vm.movies,
+              label: "Select The Movie",
+              "error-messages": this.errors.movie_id,
+              outlined: ""
+            },
+            on: {
+              input: function($event) {
+                return _vm.setMovie(_vm.movieId)
+              }
+            },
+            model: {
+              value: _vm.movieId,
+              callback: function($$v) {
+                _vm.movieId = $$v
+              },
+              expression: "movieId"
+            }
+          }),
+          _vm._v(" "),
+          _c("v-select", {
+            attrs: {
+              items: _vm.screenings,
+              label: "Select The Screening",
+              outlined: "",
+              input: "loadScreeningDetails(screeningId)",
+              "error-messages": this.errors.screening_id
+            },
+            on: {
+              input: function($event) {
+                return _vm.setScreening(_vm.screeningId)
+              }
+            },
+            model: {
+              value: _vm.screeningId,
+              callback: function($$v) {
+                _vm.screeningId = $$v
+              },
+              expression: "screeningId"
+            }
+          }),
+          _vm._v(" "),
+          _c("v-select", {
+            attrs: {
+              items: _vm.seats,
+              label: "Number Of Seats To Book",
+              "error-messages": this.errors.seats,
+              outlined: ""
+            },
+            model: {
+              value: _vm.seatsToBook,
+              callback: function($$v) {
+                _vm.seatsToBook = $$v
+              },
+              expression: "seatsToBook"
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              attrs: {
+                color: "primary",
+                type: "submit",
+                loading: _vm.buttonLoading
+              },
+              on: {
+                click: function($event) {
+                  _vm.buttonLoading = true
+                }
+              }
+            },
+            [_vm._v("\n            Book Now\n        ")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-dialog", {
+        attrs: { width: "500" },
+        scopedSlots: _vm._u([
+          {
+            key: "default",
+            fn: function(dialog) {
+              return [
+                _c(
+                  "v-card",
+                  [
+                    _c(
+                      "v-toolbar",
+                      {
+                        staticClass: "text-h5",
+                        attrs: { color: _vm.dialogColor, dark: "" }
+                      },
+                      [_vm._v("Reservation")]
+                    ),
+                    _vm._v(" "),
+                    _c("v-card-text", { staticClass: "pa-6" }, [
+                      _c("div", { staticClass: "text-subtitle-1 mb-3" }, [
+                        _c("strong", [_vm._v(_vm._s(_vm.bookingMessage))])
+                      ]),
+                      _vm._v(" "),
+                      _vm.bookingReference
+                        ? _c("div", { staticClass: "text-subtitle-1" }, [
+                            _vm._v("Booking Reference: "),
+                            _c("strong", [_vm._v(_vm._s(_vm.bookingReference))])
+                          ])
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "v-card-actions",
+                      { staticClass: "justify-end" },
+                      [
+                        _c(
+                          "v-btn",
+                          {
+                            attrs: { text: "" },
+                            on: {
+                              click: function($event) {
+                                dialog.value = false
+                              }
+                            }
+                          },
+                          [_vm._v("Close")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-btn",
+                          {
+                            staticClass: "white--text",
+                            attrs: { color: _vm.dialogColor },
+                            on: { click: _vm.onBooked }
+                          },
+                          [_vm._v("OK")]
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]
+            }
+          }
+        ]),
+        model: {
+          value: _vm.dialog,
+          callback: function($$v) {
+            _vm.dialog = $$v
+          },
+          expression: "dialog"
+        }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./_packages/katzsimon/cinema/resources/js/pages/app/Cinemas.vue?vue&type=template&id=67a2ec16&scoped=true&":
 /*!*********************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./_packages/katzsimon/cinema/resources/js/pages/app/Cinemas.vue?vue&type=template&id=67a2ec16&scoped=true& ***!
@@ -23898,7 +24951,442 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("app-heading", [_vm._v("My Account")])], 1)
+  return _c(
+    "div",
+    [
+      _c("app-heading", [_vm._v("My Account")]),
+      _vm._v(" "),
+      _c("loading"),
+      _vm._v(" "),
+      !_vm.bookingsFuture.length
+        ? _c(
+            "v-card",
+            {
+              staticClass: "mx-auto elevation-8 mb-12",
+              attrs: { outlined: "" }
+            },
+            [
+              _c(
+                "v-card-title",
+                { staticClass: "headline primary white--text pa-6" },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "d-flex flex-row justify-space-between",
+                      staticStyle: { width: "100%" }
+                    },
+                    [
+                      _c("div", [
+                        _vm._v("You Have No Upcoming Bookings Yet...")
+                      ])
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("v-card-text", { staticClass: "pt-4" }, [
+                _c("div", { staticClass: "mb-5 font-bold" }, [
+                  _vm._v("Some useful links in the mean time:")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mb-5" },
+                  [
+                    _c("v-btn", { attrs: { to: "/cinemas" } }, [
+                      _vm._v("Where can I watch a movie?")
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mb-5" },
+                  [
+                    _c("v-btn", { attrs: { to: "/upcoming-movies" } }, [
+                      _vm._v("What movies are screening?")
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  [
+                    _c("v-btn", { attrs: { to: "/booking" } }, [
+                      _vm._v("Make a new Booking")
+                    ])
+                  ],
+                  1
+                )
+              ])
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.bookingsFuture.length
+        ? _c(
+            "v-card",
+            {
+              staticClass: "mx-auto elevation-8 mb-12",
+              attrs: { outlined: "" }
+            },
+            [
+              _c(
+                "v-card-title",
+                { staticClass: "headline primary white--text pa-6" },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "d-flex flex-row justify-space-between",
+                      staticStyle: { width: "100%" }
+                    },
+                    [
+                      _c("div", [_vm._v("Upcoming Bookings")]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        [
+                          _c("v-btn", { on: { click: _vm.makeBooking } }, [
+                            _vm._v("Make a new Booking")
+                          ])
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                { staticClass: "pt-4" },
+                [
+                  _vm._l(_vm.bookingsFuture, function(booking, index) {
+                    return _c(
+                      "div",
+                      { key: index, staticClass: "booking" },
+                      [
+                        _c("div", [
+                          _vm._v("Reference: "),
+                          _c("strong", [_vm._v(_vm._s(booking.reference))])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-h6" }, [
+                          _c("strong", [
+                            _vm._v(_vm._s(booking.screening_movie))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", {
+                          domProps: {
+                            innerHTML: _vm._s(booking.screening_theatre)
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", [
+                          _c("strong", [_vm._v(_vm._s(booking.screening_when))])
+                        ]),
+                        _vm._v(" "),
+                        booking.can_cancel
+                          ? _c(
+                              "v-btn",
+                              {
+                                staticClass: "btn-cancel-booking",
+                                attrs: { small: "", color: "red lighten-4" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.onConfirmCancel(
+                                      booking.id,
+                                      booking.screening_movie
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                    Cancel Booking\n                "
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    )
+                  }),
+                  _vm._v(" "),
+                  !_vm.bookingsFuture
+                    ? _c("div", [
+                        _vm._v(
+                          "\n                You have no upcoming bookings\n            "
+                        )
+                      ])
+                    : _vm._e()
+                ],
+                2
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.bookingsPast.length
+        ? _c(
+            "v-card",
+            { staticClass: "mx-auto elevation-8", attrs: { outlined: "" } },
+            [
+              _c(
+                "v-card-title",
+                { staticClass: "headline grey lighten-2 pa-6" },
+                [_vm._v("\n            Past Bookings\n        ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                { staticClass: "pt-4" },
+                _vm._l(_vm.bookingsPast, function(booking, index) {
+                  return _c(
+                    "div",
+                    { key: index, staticClass: "booking" },
+                    [
+                      _c("div", [
+                        _vm._v("Reference: "),
+                        _c("strong", [_vm._v(_vm._s(booking.reference))])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "text-h6" }, [
+                        _c("strong", [_vm._v(_vm._s(booking.screening_movie))])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", {
+                        domProps: {
+                          innerHTML: _vm._s(booking.screening_theatre)
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c("strong", [_vm._v(_vm._s(booking.screening_when))])
+                      ]),
+                      _vm._v(" "),
+                      booking.can_cancel
+                        ? _c(
+                            "v-btn",
+                            {
+                              staticClass: "btn-cancel-booking",
+                              attrs: { small: "", color: "red lighten-4" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.onConfirmCancel(
+                                    booking.id,
+                                    booking.screening_movie
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                    Cancel Booking\n                "
+                              )
+                            ]
+                          )
+                        : _vm._e()
+                    ],
+                    1
+                  )
+                }),
+                0
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c("v-dialog", {
+        attrs: { width: "500" },
+        scopedSlots: _vm._u([
+          {
+            key: "default",
+            fn: function(dialog) {
+              return [
+                _c(
+                  "v-card",
+                  [
+                    _c(
+                      "v-toolbar",
+                      {
+                        staticClass: "text-h5",
+                        attrs: { color: "red", dark: "" }
+                      },
+                      [_vm._v("Cancellation")]
+                    ),
+                    _vm._v(" "),
+                    _c("v-card-text", { staticClass: "pa-6" }, [
+                      _c("div", { staticClass: "text-subtitle-1 mb-3" }, [
+                        _vm._v(_vm._s(_vm.cancelMovieName))
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "text-subtitle-1 mb-3" }, [
+                        _c("strong", [
+                          _vm._v(
+                            "Are you sure you want to cancel this booking?"
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "text-subtitle-1" }, [
+                        _vm._v(
+                          "You can only cancel when the booking is over an hour away"
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "v-card-actions",
+                      { staticClass: "justify-end" },
+                      [
+                        _c(
+                          "v-btn",
+                          {
+                            attrs: { text: "" },
+                            on: {
+                              click: function($event) {
+                                _vm.dialogCancel = false
+                              }
+                            }
+                          },
+                          [_vm._v("No")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-btn",
+                          {
+                            staticClass: "white--text",
+                            attrs: { color: "red" },
+                            on: {
+                              click: function($event) {
+                                return _vm.onCancellation(_vm.cancelId)
+                              }
+                            }
+                          },
+                          [_vm._v("Yes")]
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]
+            }
+          }
+        ]),
+        model: {
+          value: _vm.dialogCancel,
+          callback: function($$v) {
+            _vm.dialogCancel = $$v
+          },
+          expression: "dialogCancel"
+        }
+      }),
+      _vm._v(" "),
+      _c("v-dialog", {
+        attrs: { width: "500" },
+        scopedSlots: _vm._u([
+          {
+            key: "default",
+            fn: function(dialog) {
+              return [
+                _c(
+                  "v-card",
+                  [
+                    _c(
+                      "v-toolbar",
+                      {
+                        staticClass: "text-h5",
+                        attrs: { color: "red", dark: "" }
+                      },
+                      [_vm._v("Cancellation Confirmation")]
+                    ),
+                    _vm._v(" "),
+                    _c("v-card-text", { staticClass: "pa-6" }, [
+                      _c(
+                        "div",
+                        { staticClass: "d-flex justify-center" },
+                        [
+                          _vm.loading
+                            ? _c("v-progress-circular", {
+                                attrs: { indeterminate: "", color: "red" }
+                              })
+                            : _vm._e()
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "text-subtitle-1 mb-3" }, [
+                        _c("strong", [_vm._v(_vm._s(_vm.cancellationStatus))])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "text-subtitle-1" }, [
+                        _vm._v(_vm._s(_vm.cancellationMessage))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "v-card-actions",
+                      { staticClass: "justify-end" },
+                      [
+                        _c(
+                          "v-btn",
+                          {
+                            attrs: { text: "" },
+                            on: {
+                              click: function($event) {
+                                _vm.dialogCancelConfirmation = false
+                              }
+                            }
+                          },
+                          [_vm._v("Close")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-btn",
+                          {
+                            staticClass: "white--text",
+                            attrs: { color: "red" },
+                            on: {
+                              click: function($event) {
+                                _vm.dialogCancelConfirmation = false
+                                _vm.loadBookings
+                              }
+                            }
+                          },
+                          [_vm._v("OK")]
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]
+            }
+          }
+        ]),
+        model: {
+          value: _vm.dialogCancelConfirmation,
+          callback: function($$v) {
+            _vm.dialogCancelConfirmation = $$v
+          },
+          expression: "dialogCancelConfirmation"
+        }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -23923,7 +25411,322 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("app-heading", [_vm._v("Home")])], 1)
+  return _c(
+    "div",
+    [
+      _c("loading"),
+      _vm._v(" "),
+      _vm.movies.length > 0
+        ? _c(
+            "v-card",
+            { staticClass: "card" },
+            [
+              _c(
+                "v-card-title",
+                { staticClass: "headline grey darken-3 white--text" },
+                [_vm._v("\n            Featured Movies\n        ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                _vm._l(_vm.movies, function(movie, index) {
+                  return _c("movie-details", {
+                    key: index,
+                    staticClass: "movie-detail",
+                    attrs: {
+                      movie: movie,
+                      index: index,
+                      total: _vm.movies.length - 1
+                    }
+                  })
+                }),
+                1
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c("watch-movie"),
+      _vm._v(" "),
+      _vm.upcomingBookings.length > 0
+        ? _c("div", { staticClass: "card mt-12" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _c("div", { staticClass: "flex flex-row justify-between" }, [
+                _c("div", { staticClass: "card-title flex-grow" }, [
+                  _vm._v("Upcoming Bookings")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {},
+                  [
+                    _c(
+                      "v-btn",
+                      {
+                        staticClass: "white--text",
+                        attrs: { small: "", color: "blue", to: "/booking" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Make a New Booking\n                    "
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "card-body" },
+              _vm._l(_vm.upcomingBookings, function(item, index) {
+                return _c(
+                  "div",
+                  {
+                    key: index,
+                    staticClass: "border border-gray-400 p-3 mb-3 relative"
+                  },
+                  [
+                    _c("div", [
+                      _vm._v("Reference: "),
+                      _c("strong", [_vm._v(_vm._s(item["reference"]))])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "text-h6" }, [
+                      _c("strong", [_vm._v(_vm._s(item["screening_movie"]))])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", [
+                      _vm._v(
+                        _vm._s(item["screening_cinema"]) +
+                          ", " +
+                          _vm._s(item["screening_theatre"]) +
+                          " (" +
+                          _vm._s(item["seats"]) +
+                          " seats)"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c("strong", [_vm._v(_vm._s(item["screening_when"]))])
+                    ]),
+                    _vm._v(" "),
+                    item.can_cancel
+                      ? _c(
+                          "v-btn",
+                          {
+                            staticClass: "btn-cancel-booking",
+                            attrs: { small: "", color: "red lighten-4" },
+                            on: {
+                              click: function($event) {
+                                return _vm.onConfirmCancel(
+                                  item.id,
+                                  item.screening_movie
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                    Cancel Booking\n                "
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ],
+                  1
+                )
+              }),
+              0
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("v-dialog", {
+        attrs: { width: "500" },
+        scopedSlots: _vm._u([
+          {
+            key: "default",
+            fn: function(dialog) {
+              return [
+                _c(
+                  "v-card",
+                  [
+                    _c(
+                      "v-toolbar",
+                      {
+                        staticClass: "text-h5",
+                        attrs: { color: "red", dark: "" }
+                      },
+                      [_vm._v("Cancellation")]
+                    ),
+                    _vm._v(" "),
+                    _c("v-card-text", { staticClass: "pa-6" }, [
+                      _c("div", { staticClass: "text-subtitle-1 mb-3" }, [
+                        _vm._v(_vm._s(_vm.cancelMovieName))
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "text-subtitle-1 mb-3" }, [
+                        _c("strong", [
+                          _vm._v(
+                            "Are you sure you want to cancel this booking?"
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "text-subtitle-1" }, [
+                        _vm._v(
+                          "You can only cancel when the booking is over an hour away"
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "v-card-actions",
+                      { staticClass: "justify-end" },
+                      [
+                        _c(
+                          "v-btn",
+                          {
+                            attrs: { text: "" },
+                            on: {
+                              click: function($event) {
+                                _vm.dialogCancel = false
+                              }
+                            }
+                          },
+                          [_vm._v("No")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-btn",
+                          {
+                            staticClass: "white--text",
+                            attrs: { color: "red" },
+                            on: {
+                              click: function($event) {
+                                return _vm.onCancellation(_vm.cancelId)
+                              }
+                            }
+                          },
+                          [_vm._v("Yes")]
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]
+            }
+          }
+        ]),
+        model: {
+          value: _vm.dialogCancel,
+          callback: function($$v) {
+            _vm.dialogCancel = $$v
+          },
+          expression: "dialogCancel"
+        }
+      }),
+      _vm._v(" "),
+      _c("v-dialog", {
+        attrs: { width: "500" },
+        scopedSlots: _vm._u([
+          {
+            key: "default",
+            fn: function(dialog) {
+              return [
+                _c(
+                  "v-card",
+                  [
+                    _c(
+                      "v-toolbar",
+                      {
+                        staticClass: "text-h5",
+                        attrs: { color: "red", dark: "" }
+                      },
+                      [_vm._v("Cancellation Confirmation")]
+                    ),
+                    _vm._v(" "),
+                    _c("v-card-text", { staticClass: "pa-6" }, [
+                      _c(
+                        "div",
+                        { staticClass: "d-flex justify-center" },
+                        [
+                          _vm.loading
+                            ? _c("v-progress-circular", {
+                                attrs: { indeterminate: "", color: "red" }
+                              })
+                            : _vm._e()
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "text-subtitle-1 mb-3" }, [
+                        _c("strong", [_vm._v(_vm._s(_vm.cancellationStatus))])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "text-subtitle-1" }, [
+                        _vm._v(_vm._s(_vm.cancellationMessage))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "v-card-actions",
+                      { staticClass: "justify-end" },
+                      [
+                        _c(
+                          "v-btn",
+                          {
+                            attrs: { text: "" },
+                            on: {
+                              click: function($event) {
+                                _vm.dialogCancelConfirmation = false
+                              }
+                            }
+                          },
+                          [_vm._v("Close")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-btn",
+                          {
+                            staticClass: "white--text",
+                            attrs: { color: "red" },
+                            on: {
+                              click: function($event) {
+                                _vm.dialogCancelConfirmation = false
+                                _vm.loadBookings
+                              }
+                            }
+                          },
+                          [_vm._v("OK")]
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]
+            }
+          }
+        ]),
+        model: {
+          value: _vm.dialogCancelConfirmation,
+          callback: function($$v) {
+            _vm.dialogCancelConfirmation = $$v
+          },
+          expression: "dialogCancelConfirmation"
+        }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -24042,7 +25845,7 @@ var render = function() {
                 {
                   staticClass: "btn-nav-app ma-2",
                   attrs: {
-                    to: { name: "upcoming-movies" },
+                    to: { name: "booking" },
                     text: "",
                     plain: "",
                     outlined: ""

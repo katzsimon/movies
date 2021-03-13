@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::group(['prefix' => 'api', 'middleware'=>['api']], function () {
 
-
+    Route::get('home/user', [AppController::class, 'home'])->name('api.home.auth')->middleware(config('settings.api_guard')==='sanctum'?'auth:sanctum':'auth:api');
+    Route::get('home', [AppController::class, 'home'])->name('api.home');
 
 });

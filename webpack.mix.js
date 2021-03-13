@@ -43,6 +43,8 @@ if (mode==='vue' || mode==='app' || mode==='') {
             postCss: [tailwindcss('./tailwind.config.js')],
         })
     ;
+
+
 }
 
 mix.browserSync({proxy:'movies.test',notify:false});

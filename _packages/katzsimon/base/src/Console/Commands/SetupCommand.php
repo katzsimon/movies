@@ -65,6 +65,7 @@ class SetupCommand extends Command
 
         Publish::test($baseDir.'/../tests/BaseCRUDTest.php');
         Publish::test($baseDir.'/../tests/BaseRepositoryTest.php');
+        Publish::test($baseDir.'/../tests/Unit/OutputTest.php');
 
         $this->line('Base Package has been setup');
 

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class AppController extends Controller
 {
 
-    public function show(Request $request)
+    public function home(Request $request)
     {
 
         return view('katzsimon::pages.app.home');

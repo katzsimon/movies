@@ -14,7 +14,7 @@
         <v-btn :to="{ name: 'movies' }" class="btn-nav-app ma-2" text plain outlined>All Movies</v-btn>
         <v-btn :to="{ name: 'upcoming-movies' }" class="btn-nav-app ma-2" text plain outlined>Upcoming Movies</v-btn>
 
-        <v-btn :to="{ name: 'upcoming-movies' }" class="btn-nav-app ma-2"  v-if="$store.getters.isLoggedIn" text plain outlined>Make a Booking</v-btn>
+        <v-btn :to="{ name: 'booking' }" class="btn-nav-app ma-2"  v-if="$store.getters.isLoggedIn" text plain outlined>Make a Booking</v-btn>
 
         <v-spacer></v-spacer>
 
