@@ -32,6 +32,8 @@ class AuthAdminBladeTest extends DuskTestCase
      * Create a User and check that login works
      *
      * @throws \Throwable
+     *
+     * @group blade
      */
     public function testLogin()
     {
@@ -62,6 +64,8 @@ class AuthAdminBladeTest extends DuskTestCase
      * Tests User registration works and that the user appears in the database after Registration
      *
      * @throws \Throwable
+     *
+     * @group blade
      */
     public function testRegister()
     {

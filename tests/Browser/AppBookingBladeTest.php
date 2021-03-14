@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class AppBookingTest extends DuskTestCase
+class AppBookingBladeTest extends DuskTestCase
 {
 
     protected $truncateTables = false;
@@ -48,6 +48,8 @@ class AppBookingTest extends DuskTestCase
      * Check that a logged in User can make a Booking Successfully
      *
      * @throws \Throwable
+     *
+     * @group blade
      */
     public function testMakeBooking()
     {
@@ -83,6 +85,8 @@ class AppBookingTest extends DuskTestCase
      * Check that a booking will fail without all the required inputs
      *
      * @throws \Throwable
+     *
+     * @group blade
      */
     public function testMakeBookingIncorrect()
     {

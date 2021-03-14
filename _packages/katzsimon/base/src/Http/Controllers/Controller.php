@@ -55,7 +55,6 @@ class Controller extends BaseController
         if (empty($output) && $json) $output = 'json';
         if (empty($output)) $output = config($this->getOutput());
 
-
         if (isset($this->model)) {
             $model = new $this->model;
             $ui = $model->getUI();

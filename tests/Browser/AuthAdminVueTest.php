@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class AuthAppBladeTest extends DuskTestCase
+class AuthAdminVueTest extends DuskTestCase
 {
 
     protected $truncateTables = true;
@@ -33,7 +33,7 @@ class AuthAppBladeTest extends DuskTestCase
      *
      * @throws \Throwable
      *
-     * @group blade
+     * @group vue
      */
     public function testLogin()
     {
@@ -41,13 +41,16 @@ class AuthAppBladeTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use($user) {
 
-            $browser->visit('/login')
+            $browser->visit('/admin')
                 ->assertSee('Login')
+                ->clickLink('Login')
+                ->assertSee('Email')
+                ->pause(500)
                 ->type('email', $user->email)
                 ->type('password', 'password')
                 ->press('Login')
-                ->waitForText('Account', 10)
-                ->assertSee('Account')
+                ->waitForText('Dashboard', 10)
+                ->assertSee('Dashboard')
                 ->clickLink('Logout')
                 ->waitForText('Login', 5)
                 ->assertSee('Login')
@@ -63,7 +66,7 @@ class AuthAppBladeTest extends DuskTestCase
      *
      * @throws \Throwable
      *
-     * @group blade
+     * @group vue
      */
     public function testRegister()
     {
@@ -71,7 +74,7 @@ class AuthAppBladeTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use($user) {
 
-            $browser->visit('/')
+            $browser->visit('/admin')
                 ->assertSee('Register')
                 ->clickLink('Register')
                 ->waitForText('Email', 5)
@@ -81,8 +84,8 @@ class AuthAppBladeTest extends DuskTestCase
                 ->type('password', 'password')
                 ->type('password_confirmation', 'password')
                 ->press('Register')
-                ->waitForText('Account', 10)
-                ->assertSee('Account')
+                ->waitForText('Dashboard', 10)
+                ->assertSee('Dashboard')
                 ->clickLink('Logout')
                 ->waitForText('Login', 5)
                 ->assertSee('Login')

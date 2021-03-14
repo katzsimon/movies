@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class AppUpcomingMoviesTest extends DuskTestCase
+class AppUpcomingMoviesBladeTest extends DuskTestCase
 {
 
     protected $truncateTables = true;
@@ -40,7 +40,7 @@ class AppUpcomingMoviesTest extends DuskTestCase
     }
 
     /**
-     * Check that
+     * Check that only upcoming movies show
      *
      * @return void
      */

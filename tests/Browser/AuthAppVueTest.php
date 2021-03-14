@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class AuthAppBladeTest extends DuskTestCase
+class AuthAppVueTest extends DuskTestCase
 {
 
     protected $truncateTables = true;
@@ -17,6 +17,7 @@ class AuthAppBladeTest extends DuskTestCase
     public function setUp():void
     {
         parent::setUp();
+
     }
 
     public function tearDown():void
@@ -33,24 +34,25 @@ class AuthAppBladeTest extends DuskTestCase
      *
      * @throws \Throwable
      *
-     * @group blade
+     * @group vue
      */
     public function testLogin()
     {
-        $user = \App\Models\User::factory()->create();
 
-        $this->browse(function (Browser $browser) use($user) {
+        $this->browse(function (Browser $browser) {
+
+            $user = \App\Models\User::factory()->create();
 
             $browser->visit('/login')
-                ->assertSee('Login')
+                ->assertSee('LOGIN')
                 ->type('email', $user->email)
                 ->type('password', 'password')
-                ->press('Login')
-                ->waitForText('Account', 10)
-                ->assertSee('Account')
+                ->press('LOGIN')
+                ->waitForText('ACCOUNT', 60)
+                ->assertSee('ACCOUNT')
                 ->clickLink('Logout')
-                ->waitForText('Login', 5)
-                ->assertSee('Login')
+                ->waitForText('LOGIN', 5)
+                ->assertSee('LOGIN')
             ;
 
         });
@@ -63,16 +65,18 @@ class AuthAppBladeTest extends DuskTestCase
      *
      * @throws \Throwable
      *
-     * @group blade
+     * @group vue
      */
     public function testRegister()
     {
-        $user = \App\Models\User::factory()->make();
 
-        $this->browse(function (Browser $browser) use($user) {
+
+        $this->browse(function (Browser $browser) {
+
+            $user = \App\Models\User::factory()->make();
 
             $browser->visit('/')
-                ->assertSee('Register')
+                ->assertSee('REGISTER')
                 ->clickLink('Register')
                 ->waitForText('Email', 5)
                 ->assertSee('Email')
@@ -80,12 +84,12 @@ class AuthAppBladeTest extends DuskTestCase
                 ->type('email', $user->email)
                 ->type('password', 'password')
                 ->type('password_confirmation', 'password')
-                ->press('Register')
-                ->waitForText('Account', 10)
-                ->assertSee('Account')
+                ->press('REGISTER')
+                ->waitForText('ACCOUNT', 10)
+                ->assertSee('ACCOUNT')
                 ->clickLink('Logout')
-                ->waitForText('Login', 5)
-                ->assertSee('Login')
+                ->waitForText('LOGIN', 5)
+                ->assertSee('LOGIN')
             ;
 
             $this->assertDatabaseHas('users', ['email'=>$user->email, 'name'=>$user->name]);

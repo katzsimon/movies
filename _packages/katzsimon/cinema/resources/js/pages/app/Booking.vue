@@ -1,9 +1,10 @@
 <template>
     <div>
-        <app-heading>Make a Movie Booking</app-heading>
+        <app-heading>Make a Booking</app-heading>
 
         <v-form @submit.prevent="onSubmitBooking">
 
+            <div id="selectMovie">
             <v-select
                 v-model="movieId"
                 :items="movies"
@@ -11,7 +12,9 @@
                 @input="setMovie(movieId)"
                 :error-messages="this.errors.movie_id"
                 outlined
+                name="movie_id"
             ></v-select>
+            </div>
 
             <v-select
                 v-model="screeningId"
@@ -21,6 +24,7 @@
                 input="loadScreeningDetails(screeningId)"
                 @input="setScreening(screeningId)"
                 :error-messages="this.errors.screening_id"
+                name="screening_id"
             ></v-select>
 
 
@@ -30,6 +34,7 @@
                 label="Number Of Seats To Book"
                 :error-messages="this.errors.seats"
                 outlined
+                name="seats"
             ></v-select>
 
 
