@@ -27,10 +27,6 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         if (config('settings.api_guard')==='passport') {
-            $this->policies = [
-                //'App\Models\Model' => 'App\Policies\ModelPolicy',
-            ];
-
             $this->registerPolicies();
             if (!$this->app->routesAreCached()) {
                 Passport::routes();

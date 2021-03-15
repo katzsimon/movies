@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Katzsimon\Base\AppController;
-
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 Route::group(['prefix' => 'api', 'middleware'=>['api']], function () {
 
+	// Home page if the user is loggeed in
     Route::get('home/user', [AppController::class, 'home'])->name('api.home.auth')->middleware(config('settings.api_guard')==='sanctum'?'auth:sanctum':'auth:api');
+
+    // Home page if the user is not logged in
     Route::get('home', [AppController::class, 'home'])->name('api.home');
 
 });

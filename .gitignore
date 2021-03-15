@@ -4,6 +4,10 @@
 /public/storage
 /public_html/hot
 /public_html/storage
+/public_html/css/admin.css
+/public_html/css/app.css
+/public_html/js/app.js
+/public_html/js/admin.js
 /storage
 /vendor
 .env
@@ -17,3 +21,6 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+.editorconfig
+.rnd
+

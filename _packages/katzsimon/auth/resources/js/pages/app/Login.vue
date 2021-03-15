@@ -15,7 +15,7 @@
 
                 <v-text-field
                     v-model="form.email"
-                    label="E-mail"
+                    label="Email"
                     required
                     outlined
                     name="email"
