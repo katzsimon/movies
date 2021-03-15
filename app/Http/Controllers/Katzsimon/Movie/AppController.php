@@ -19,7 +19,7 @@ class AppController extends \Katzsimon\Movie\Http\Controllers\AppController
     public function movies(Request $request, ScreeningRepositoryInterface $repositryScreening)
     {
 
-        $items = $repositryScreening->upcomingMovies();
+        $items = $repositryScreening->allMoviesWithScreenings();
 
         return $this->output(['view'=>'katzsimon::app.movie.index', 'items'=>$items]);
     }

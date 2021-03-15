@@ -100,4 +100,23 @@ class ScreeningRepository extends BaseRepository implements ScreeningRepositoryI
             ->get();
     }
 
+	/**
+	 * Return Movies that have Upcoming Screening
+	 *
+	 * @param array $order
+	 * @return Collection
+	 */
+	public function allMoviesWithScreenings($order=[]): Collection
+	{
+
+		$orderField = $order[0] ?? 'name';
+		$orderSort = $order[1] ?? 'asc';
+
+		return $this->movie->newQuery()
+			->with('screenings')
+			->orderBy($orderField, $orderSort)
+			->get();
+
+	}
+
 }
