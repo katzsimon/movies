@@ -11,7 +11,7 @@
 <script>
 
 import CinemaForm from '@packages/cinema/resources/js/pages/admin/cinemas/Form'
-import ItemCreate from "@packagesBase/mixins/ItemCreate";
+import ItemCreate from "@packagesBase/mixins/itemCreate";
 export default {
     name: "Create",
     mixins: [ItemCreate],

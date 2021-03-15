@@ -11,7 +11,7 @@
 <script>
 
 import ScreeningForm from '@packages/cinema/resources/js/pages/admin/screenings/Form'
-import ItemCreate from "@packagesBase/mixins/ItemCreate";
+import ItemCreate from "@packagesBase/mixins/itemCreate";
 export default {
     name: "Create",
     mixins: [ItemCreate],

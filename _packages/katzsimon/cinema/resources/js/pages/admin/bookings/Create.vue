@@ -10,7 +10,7 @@
 
 <script>
 import BookingForm from '@packages/cinema/resources/js/pages/admin/bookings/Form'
-import ItemCreate from "@packagesBase/mixins/ItemCreate"
+import ItemCreate from "@packagesBase/mixins/itemCreate"
 
 export default {
     name: "Create",
