@@ -11,7 +11,7 @@ return [
     */
 
 	// Set the default output for the Admin CRUD and App
-	// Possible options: blade, vueapp, inertia
+	// Possible options: blade, vueapp, inertia, json
     'output'=>[
         'admin'=>env('OUTPUT_ADMIN', 'blade'),
         'app'=>env('OUTPUT_APP', 'blade')

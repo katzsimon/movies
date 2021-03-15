@@ -71,7 +71,7 @@ abstract class BaseCRUDTest extends TestCase
         $items = $this->model->factory(5)->create();
 
         // Check index :: Get the json response from index and check if the above factory is in it
-        $response = $this->get($this->baseUrl)->assertStatus(200);
+        $response = $this->get($this->baseUrl, ['FORCE_CONTENT_TYPE'=>'json'])->assertStatus(200);
         $data = $response->json()['data']??[];
 
 

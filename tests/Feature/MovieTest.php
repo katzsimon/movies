@@ -29,7 +29,7 @@ class MovieTest extends \Tests\BaseCRUDTest
 
 
         // Check index :: Get the json response from index and check if the above factory is in it
-        $response = $this->get($this->baseUrl)->assertStatus(200);
+        $response = $this->get($this->baseUrl, ['FORCE_CONTENT_TYPE'=>'json'])->assertStatus(200);
         $data = $response->json()['data']??[];
 
         // Check that the returned data from the index, has at least as many items created by the factory
