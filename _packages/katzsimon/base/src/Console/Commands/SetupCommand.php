@@ -46,6 +46,7 @@ class SetupCommand extends Command
         Extend::controller($baseDir.'/Http/Controllers/Controller.php', ['root'=>true, 'force'=>true]);
         Extend::controller($baseDir.'/Http/Controllers/AdminController.php');
         Extend::controller($baseDir.'/Http/Controllers/AppController.php');
+        Extend::controller($baseDir.'/Http/Controllers/ProtectController.php');
 
         Publish::view($baseDir.'/../resources/views/templates/admin_nav.blade.php');
         Publish::view($baseDir.'/../resources/views/templates/app_nav.blade.php');

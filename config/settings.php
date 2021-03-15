@@ -19,4 +19,9 @@ return [
 
     'api_guard'=>env('API_GUARD', 'sanctum'),
 
+    'protect'=>[
+        'enabled'=>env('PROTECT_ENABLED', false),
+        'password'=>env('PROTECT_PASSWORD', 'x1x@x1x')
+    ],
+
 ];
