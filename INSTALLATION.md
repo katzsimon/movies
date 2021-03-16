@@ -166,7 +166,7 @@ To run a specific test
     
     php artisan test --filter [NAMETest]
 
-###Browser Tests
+### Browser Tests
 * When running tests through PHPStorm and with hitting API end points, I have setup the base DuskTestCase to swap out the .env file for the .env.dusk while the tests are running 
   * See the comments in DuskTestCase::setUp and DuskTestCase::tearDown for more details
 
@@ -201,5 +201,8 @@ To run the Browser Tests for Vue
     * The expected outcome is that the 1st test will successfully book all the seats and that the 2nd test will return with an error, that no seats are available
 
 
+```
     Terminal 1: php artisan test tests/Race/BookingRace1SuccessTest.php
     Terminal 2: php artisan test tests/Race/BookingRace2ErrorTest.php
+```
+

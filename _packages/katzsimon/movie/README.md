@@ -14,4 +14,4 @@
 
 ###
 ### Repositories
-* There is a method to build an array of the distinct genres
+* There is a method to build an array of the distinct genres from the Movies in the database

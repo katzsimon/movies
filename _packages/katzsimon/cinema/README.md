@@ -1,13 +1,13 @@
 # Cinema Package
-###Handles all the Cinema related functionality and data
-* Cinemas
+### Handles all the Cinema related functionality and data
+* **Cinemas**
     * A Cinema has many Theatres 
-* Theatres
+* **Theatres**
     * Has a maximum number of seats
     * Additional seats can be added and made available to book 
-* Screenings
+* **Screenings**
     * The date, time and location of when/where a Movie will be screened  
-* Bookings
+* **Bookings**
     * Associates a User with a Screening
     * Can only be cancelled before a certain amount of minutes before the Screening
         * The number of minutes is set in the Models cancelMinutesThreshold (default is 60) 
@@ -95,9 +95,10 @@ The factories have some additional states
         * The 2nd test should wait until the 1st test has complete to attempt making its Booking
     * The expected outcome is that the 1st test will successfully book all the seats and that the 2nd test will return with an error, that no seats are available  
 
-
+```
     Terminal 1: php artisan test tests/Race/BookingRace1SuccessTest.php
     Terminal 2: php artisan test tests/Race/BookingRace2ErrorTest.php
+```
 
 **BookingTest**
 * Tests that Bookings can be cancelled

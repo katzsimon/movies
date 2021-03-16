@@ -1,10 +1,14 @@
 # Authentication Package
-###Handles all the Authentication functionality
+### Handles all the Authentication functionality. 
 
 *There is obviously a lot more that can be added to this package, but it is out of the scope of this project*
 
 ###
-###Authentication Methods Used
+### Authentication Methods Used
+* The same User Registration/Login details are used for the App and Admin CRUD
+    * *Obviously this would not be done in production but it fits the scope of this project* 
+  
+
 * Blade: Standard Laravel Illuminate\Support\Facades\Auth methods used
 * Inertia: Authentication information is passed via the HandleInertiaRequests Middleware
 * API: Laravel Sanctum/Passport tokens used for API Authentication
@@ -27,7 +31,7 @@
     * Combination of VueX Store and Local Storage used for this  
 
 ###
-###Switching Between Sanctum and Passport
+### Switching Between Sanctum and Passport
 To switch between Sanctum API Tokens and Passport API Tokens, you only need to use the corresponding in  app/Models/User
 
     use Laravel\Sanctum\HasApiTokens;
