@@ -2,7 +2,7 @@
 
     <admin-layout :title="'Create a New '+ui.name" :breadcrumbs="breadcrumbs">
         <div class="box">
-            <theatre-form :errors="errors" :form="form" type="create" :ui="ui"></theatre-form>
+            <theatre-form :errors="errors" :form="form" type="create" :ui="ui" :options="options"  :parent="parent"></theatre-form>
         </div>
     </admin-layout>
 
@@ -17,6 +17,15 @@ export default {
     mixins: [ItemCreate],
     components: {
         TheatreForm
+    },
+    props: {
+        cinema_options: Object,
+        parent: Object
+    },
+    computed: {
+        options: function(){
+            return {cinema_options:this.cinema_options};
+        }
     },
 }
 </script>

@@ -15,7 +15,7 @@
                 <th>MAX SEATS</th>
                 <th>CINEMA</th>
                 <th class="">
-                    <layout-item-create :item="ui.items" :name="ui.name"></layout-item-create>
+                    <layout-item-create :item="ui.items" :name="ui.name" :parent="parentData"></layout-item-create>
                 </th>
             </tr>
             </thead>
@@ -26,7 +26,7 @@
                     <td>{{ item.max_seats }}</td>
                     <td>{{ item.cinema_name }}</td>
                     <td class="">
-                        <layout-item-menu :edit="true" :delete="true" :item="ui.items" :id="item.id" :title="item.title" :parent="parentData"></layout-item-menu>
+                        <layout-item-menu :edit="true" :delete="true" :item="ui.items" :id="item.id" :title="item.name" :parent="parentData"></layout-item-menu>
                     </td>
                 </tr>
             </tbody>
@@ -57,7 +57,7 @@ export default {
         parentData: function() {
             return {id: this.parent.id, item:this.ui['parent-items']};
         }
-    },
+    }
 }
 </script>
 

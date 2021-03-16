@@ -37,7 +37,7 @@ export default {
             if (this.type==='create') {
 
                 if (this.parent) {
-                    this.$inertia.post(this.$route(`admin.${this.ui['parent-items']}.${this.ui.items}.store`, [this.parent.id]), this.form, {
+                    this.$inertia.post(this.$route(`admin.${this.ui['parent-items']}.${this.ui['items']}.store`, [this.parent.id]), this.form, {
                         onSuccess: page => {
                             this.$eventHub.$emit('toast', `The ${this.ui.name} has been created`, 'Success', 'success');
                         },

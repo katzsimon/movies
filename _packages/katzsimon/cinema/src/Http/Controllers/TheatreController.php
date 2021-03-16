@@ -67,9 +67,13 @@ class TheatreController extends Controller
      */
     public function create(Theatre $item, Cinema $parent=null)
     {
-        $item = $this->repository->empty();
 
-        return $this->output(['view'=>"katzsimon::admin.{$this->ui['items']}.create", 'parent'=>$parent, 'data'=>['item'=>$item, 'parent'=>$parent]]);
+        $data = [
+            'item'=>$this->repository->empty(),
+            'cinema_options'=>\App\Models\Cinema::options(['parent'=>$parent])
+        ];
+
+        return $this->output(['view'=>"katzsimon::admin.{$this->ui['items']}.create", 'parent'=>$parent, 'data'=>$data]);
     }
 
     /**
@@ -82,9 +86,10 @@ class TheatreController extends Controller
     public function store(AdminTheatreRequest $request, Cinema $parent=null)
     {
         //
+
         $item = $this->repository->create( $request->validated() );
 
-        return $this->redirect(['route'=>"admin.{$this->ui['parent-items']}.{$this->ui['items']}.index", 'params'=>[$parent], 'message'=>["type"=>"success", "message"=>"{$this->ui['name']} has been created"]]);
+        return $this->redirect(['route'=>"admin.{$this->ui['parent-items']}.{$this->ui['items']}.index", 'params'=>[$parent->id], 'message'=>["type"=>"success", "message"=>"{$this->ui['name']} has been created"]]);
     }
 
 
@@ -153,7 +158,7 @@ class TheatreController extends Controller
         //
         $item->delete();
 
-        return $this->redirect(['route'=>"admin.{$this->ui['parent-items']}.{$this->ui['items']}.index", 'params'=>[$parent], 'message'=>["type"=>"success", "message"=>"{$this->ui['name']} has been deleted"]]);
+        return $this->redirect(['route'=>"admin.{$this->ui['parent-items']}.{$this->ui['items']}.index", 'params'=>[$parent->id], 'message'=>["type"=>"success", "message"=>"{$this->ui['name']} has been deleted"]]);
 
     }
 }

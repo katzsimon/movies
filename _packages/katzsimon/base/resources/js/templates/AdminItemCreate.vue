@@ -20,11 +20,16 @@ export default {
     },
     props: {
         name: String,
-        item: String
+        item: String,
+        parent: {type:Object|null, default:null}
     },
     computed: {
         href: function(){
-            return `/admin/${this.item}/create`;
+            if (this.parent!==null) {
+                return `/admin/${this.parent.item}/${this.parent.id}/${this.item}/create`;
+            } else {
+                return `/admin/${this.item}/create`;
+            }
         }
     }
 }

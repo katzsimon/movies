@@ -67,19 +67,37 @@ export default {
                 .then(value => {
 
                     if (value===true) {
-                        this.$inertia.delete(`/admin/${this.item}/${this.id}`, {
-                            preserveScroll: true,
-                            onSuccess: page => {
-                                this.$bvToast.toast(`"${this.title}" has been deleted`, {
-                                    title: `Deleted`,
-                                    variant: 'success',
-                                    solid: true
-                                })
-                            },
-                            onError: errors => {
-                                console.log('Delete Error: ', errors);
-                            }
-                        });
+
+                        if (this.parent) {
+                            this.$inertia.delete(this.$route(`admin.${this.parent.item}.${this.item}.destroy`, [this.parent.id, this.id]), {
+                                preserveScroll: true,
+                                onSuccess: page => {
+                                    this.$bvToast.toast(`"${this.title}" has been deleted`, {
+                                        title: `Deleted`,
+                                        variant: 'success',
+                                        solid: true
+                                    })
+                                },
+                                onError: errors => {
+                                    console.log('Delete Error: ', errors);
+                                }
+                            });
+                        } else {
+                            this.$inertia.delete(this.$route(`admin.${this.item}.destroy`, [this.id]), {
+                                preserveScroll: true,
+                                onSuccess: page => {
+                                    this.$bvToast.toast(`"${this.title}" has been deleted`, {
+                                        title: `Deleted`,
+                                        variant: 'success',
+                                        solid: true
+                                    })
+                                },
+                                onError: errors => {
+                                    console.log('Delete Error: ', errors);
+                                }
+                            });
+                        }
+
                     }
                 });
         },

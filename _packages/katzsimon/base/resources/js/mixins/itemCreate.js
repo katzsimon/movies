@@ -13,6 +13,7 @@ export default {
         item: Object,
         ui: Object,
         breadcrumbs: Array,
+        parent: Object
     },
     remember: ['item', 'form'],
     created: function () {
