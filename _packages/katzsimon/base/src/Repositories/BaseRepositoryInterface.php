@@ -37,7 +37,7 @@ interface BaseRepositoryInterface
      * @return Model
      * @throws ModelNotFoundException
      */
-    public function findByCriteria(array $criteria, array $columns = ['*'], array $relations = []): Model;
+    public function findByCriteria(array $criteria, array $columns = ['*'], array $relations = []): ?Model;
 
     /**
      * @param array $criteria

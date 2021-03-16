@@ -10,6 +10,8 @@ use Illuminate\Support\Collection;
 class BaseRepository implements BaseRepositoryInterface
 {
     /**
+     * The Model associated to the Repository
+     *
      * @var Model
      */
     protected $model;
@@ -27,6 +29,8 @@ class BaseRepository implements BaseRepositoryInterface
 
 
     /**
+     * Return an instance of the Model bound to the Repository
+     *
      * @return Model
      */
     public function model(): Model
@@ -37,6 +41,8 @@ class BaseRepository implements BaseRepositoryInterface
 
 
     /**
+     * Finds a Model from its ID
+     *
      * @param int $id
      * @return Model|null
      */
@@ -77,11 +83,11 @@ class BaseRepository implements BaseRepositoryInterface
      * @param array $criteria
      * @param array|string[] $columns
      * @param array $relations
-     * @return Model
+     * @return Model|null
      */
-    public function findByCriteria(array $criteria, array $columns = ['*'], array $relations = []): Model
+    public function findByCriteria(array $criteria, array $columns = ['*'], array $relations = []): ?Model
     {
-        return $this->newQuery()->select($columns)->with($relations)->where($criteria)->firstOrFail();
+        return $this->newQuery()->select($columns)->with($relations)->where($criteria)->first();
     }
 
 

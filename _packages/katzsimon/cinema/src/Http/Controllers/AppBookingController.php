@@ -8,6 +8,7 @@ use App\Models\Movie;
 use App\Models\Screening;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Katzsimon\Cinema\Repositories\BookingRepositoryInterface;
 use Katzsimon\Cinema\Repositories\ScreeningRepositoryInterface;
@@ -137,41 +138,76 @@ class AppBookingController extends Controller
     /**
      * Handle the Booking Request
      *
+     * Locks the Screening table while processing,
+     * to prevent multiple users booking the same seats at the same time
+     *
      * @param AppBookingRequest $request
      * @return false|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
      */
     public function handleBooking(AppBookingRequest $request) {
 
+        // Only used for testing
+        $pause = $request->get('pause', 0);
 
-        $screening = $this->repositoryScreening->find($request->get('screening_id'));
+        try {
 
-        if ($request->get('seats')>$screening->seats_available) {
-            // Not enough seats available
+            DB::beginTransaction();
+            // Lock the screenings while processing the Booking
+            DB::table('screenings')->where('id', $request->get('screening_id'))->lockForUpdate()->get();
+
+            $screening = $this->repositoryScreening->find($request->get('screening_id'));
+
+            // Pause here if this method is being tested
+            if (config('app.debug')===true && $pause>0) sleep($pause);
+
+            if ($request->get('seats')>$screening->seats_available) {
+                // Not enough seats available
+                $data = [
+                    'status'=>'error',
+                    'message'=>'There are not enough seats available. Please try again.',
+                    'reference'=>null,
+                ];
+
+                DB::rollBack();
+
+            } else {
+
+                $booking = $this->repositoryBooking->create([
+                    'user_id'=>$request->user()->id,
+                    'screening_id'=>$request->get('screening_id'),
+                    'seats'=>$request->get('seats')
+                ]);
+
+
+                DB::commit();
+
+                // There are enough seats for the booking to proceed
+                $data = [
+                    'status'=>'success',
+                    'message'=>'Booking successful',
+                    'reference'=>$booking->reference,
+                ];
+            }
+
+            $message = json_encode($data);
+
+            return $this->redirect(['route'=>'account', 'data'=>$data, 'with'=>['message'=>$message]]);
+
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+
             $data = [
                 'status'=>'error',
-                'message'=>'There are not enough seats available. Please try again.',
+                'message'=>'There was an error. Please try again.',
                 'reference'=>null,
             ];
 
-        } else {
+            $message = json_encode($data);
 
-            $booking = $this->repositoryBooking->create([
-                'user_id'=>$request->user()->id,
-                'screening_id'=>$request->get('screening_id'),
-                'seats'=>$request->get('seats')
-            ]);
+            return $this->redirect(['route'=>'account', 'data'=>$data, 'with'=>['message'=>$message]]);
 
-            // There are enough seats for the booking to proceed
-            $data = [
-                'status'=>'success',
-                'message'=>'Booking successful',
-                'reference'=>$booking->reference,
-            ];
         }
-
-        $message = json_encode($data);
-
-        return $this->redirect(['route'=>'account', 'data'=>$data, 'with'=>['message'=>$message]]);
 
     }
 
