@@ -1,3 +1,8 @@
+{{--
+The Submit button for the Admin CRUD form
+
+It will automatically try change its text from Create to Update depending on the URL
+--}}
 @php
     $buttonText = $buttonText ?? '';
     if (empty($buttonText)) {

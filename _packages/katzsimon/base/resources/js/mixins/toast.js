@@ -1,10 +1,12 @@
+/*
+Functionality for displaying a toast message
+ */
 export default {
     props: {
         flash:Object,
     },
     mounted: function () {
         this.$eventHub.$on('toast', this.toast);
-        //console.log('Flash Message: ', this.$page.props.flash.message);
         if (this.$page.props.flash && this.$page.props.flash.message) {
             let message = this.$page.props.flash.message.message || this.$page.props.flash.message || '';
             let title = this.$page.props.flash.message.title || '';

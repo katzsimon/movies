@@ -3,11 +3,14 @@
 namespace Tests\Feature;
 
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class BookingTest extends \Tests\BaseCRUDTest
 {
 
     protected $repository = null;
+    protected $skipBaseTests = true;
+    protected $truncateTables = false;
 
     public function setUp():void
     {
@@ -20,6 +23,17 @@ class BookingTest extends \Tests\BaseCRUDTest
         parent::setUp();
 
     }
+
+    public function truncate()
+    {
+        if ($this->truncateTables) {
+            DB::table('screenings')->truncate();
+            DB::table('movies')->truncate();
+            DB::table('cinemas')->truncate();
+            DB::table('theatres')->truncate();
+        }
+    }
+
 
     /**
      * Check that a future Booking can be cancelled
@@ -48,7 +62,7 @@ class BookingTest extends \Tests\BaseCRUDTest
     /**
      * Check that a Booking can't be cancelled within 60 minutes of its Showing
      */
-    public function testCancelBookingWithin60Mins() {
+    public function testCancelBookingWithinThresholdMins() {
         $booking = $this->repository->model()->factory()->dateTime(Carbon::now()->addMinutes(10)->format('Y-m-d H:i:s'))->create();
 
         $this->assertFalse($booking->cancelBooking());

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| API Routes for Movies Pakcage
+| API Routes for Movies Package
 |--------------------------------------------------------------------------
 |
 |

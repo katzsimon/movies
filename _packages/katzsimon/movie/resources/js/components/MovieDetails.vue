@@ -1,3 +1,4 @@
+<!-- Displays a card with the Movie details and link to screenings if there are  -->
 <template>
     <div>
         <v-card :class="cls">

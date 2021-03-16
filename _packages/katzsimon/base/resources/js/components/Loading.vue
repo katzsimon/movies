@@ -1,3 +1,9 @@
+<!--
+Display an animated circular loader while the page is loading
+
+Hidden with the $eventHub method:
+this.$eventHub.$emit('setPageLoaded', true);
+-->
 <template>
     <div class="d-flex justify-center">
         <v-progress-circular v-if="!pageLoaded"

@@ -1,3 +1,6 @@
+/*
+Common functionality for the Admin Edit Form
+ */
 import AdminLayout from '@packagesBase/templates/AdminLayout'
 export default {
     components: {

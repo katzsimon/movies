@@ -27,7 +27,6 @@ Route::group(['prefix' => 'api', 'middleware' => ['api', config('settings.api_gu
 
 
 Route::group(['prefix' => 'api', 'middleware' => ['api']], function () {
-    Route::get('test', [AppController::class, 'test'])->name('testapi');
     Route::get('upcoming-screenings', [AppController::class, 'indexUpcoming']);
     Route::get('upcoming-movies', [AppController::class, 'upcomingMovies'])->name('api.screenings.movies');
     Route::get('screenings/{movie}', [AppController::class, 'upcomingMovieScreenings'])->name('api.screenings');

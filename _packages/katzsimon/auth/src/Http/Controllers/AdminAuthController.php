@@ -16,13 +16,23 @@ class AdminAuthController extends Controller
 
     protected $admin = true;
 
+    /**
+     * Shows the Admin Registration form
+     *
+     * @return false|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Inertia\Response|string
+     */
     public function register()
     {
         return $this->output(['view'=>'katzsimon::admin.register']);
     }
 
 
-
+    /**
+     * Attempts to Register a User
+     *
+     * @param AdminRegisterRequest $request
+     * @return false|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
+     */
     public function handleRegister(AdminRegisterRequest $request) {
 
         $user = User::create([
@@ -37,7 +47,13 @@ class AdminAuthController extends Controller
     }
 
 
-
+    /**
+     * Shows the Admin Login form
+     *
+     * @param Request $request
+     * @param User $item
+     * @return false|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse|\Inertia\Response|string
+     */
     public function login(Request $request, User $item) {
 
 
@@ -50,7 +66,12 @@ class AdminAuthController extends Controller
     }
 
 
-
+    /**
+     * Attempts to login a User to the Admin CRUD
+     *
+     * @param AdminLoginRequest $request
+     * @return false|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
+     */
     public function handleLogin(AdminLoginRequest $request) {
 
         if (Auth::attempt($request->only(['email', 'password']))) {
@@ -61,7 +82,12 @@ class AdminAuthController extends Controller
     }
 
 
-
+    /**
+     * Logs the User out of the Admin CRUD
+     *
+     * @param Request $request
+     * @return false|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
+     */
     public function logout(Request $request) {
 
 

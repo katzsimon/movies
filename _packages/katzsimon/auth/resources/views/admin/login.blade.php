@@ -1,7 +1,7 @@
 @extends('katzsimon::templates.admin')
 
 @section('title')
-    Login
+    Blade Login
 @endsection
 
 

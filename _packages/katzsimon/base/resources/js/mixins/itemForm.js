@@ -1,3 +1,6 @@
+/*
+Common functionality for working with an Admin Form
+ */
 import FormfieldInput from "@packagesBase/components/FormfieldInput";
 import FormfieldSubmit from "@packagesBase/components/FormfieldSubmit";
 import FormfieldSelect from "@packagesBase/components/FormfieldSelect";

@@ -1,3 +1,4 @@
+{{-- Default template for an Index Admin page --}}
 @extends('katzsimon::templates.admin')
 
 @section('title')

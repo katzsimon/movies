@@ -1,7 +1,7 @@
 @extends('katzsimon::templates.admin')
 
 @section('title')
-    Register
+    Blade Register
 @endsection
 
 

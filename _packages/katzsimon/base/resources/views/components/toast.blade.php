@@ -1,4 +1,9 @@
-@php $message = json_decode(session()->get('message'), true); if(!is_array($message)) dd($message); @endphp
+{{--
+Very simple Toast component, to display flashed messages
+
+Decodes the message string, which will always be published as json
+ --}}
+@php $message = json_decode(session()->get('message'), true); @endphp
 <div class="toaster {{ $message['type']??'' }}" id="toast">
     {!! $message['message']??'' !!}
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" id="closeToast" class="absolute top-1 right-1 cursor-pointer">

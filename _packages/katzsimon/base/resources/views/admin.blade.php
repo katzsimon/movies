@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- Main Base Page for the Admin CRUD --}}<!DOCTYPE html>
 <html>
 <head>
     <title>{{ config('app.name') }} Admin</title>

@@ -1,3 +1,26 @@
+{{--
+
+The Dropdown Item Menu for the index Admin CRUD
+
+Contains Edit and Delete by default and you can add additional items if needed
+
+---
+To add additional menu items:
+Create a file in /resources/views/vendor/katzsimon/admin/PACKAGENAME/_menu_extra.blade.php
+
+With example:
+
+{!! Form::open(['url' => route('route.name', $item['id']), 'method'=>'POST']) !!}
+<button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:no-underline whitespace-nowrap w-full text-left">
+    BUTTON TEXT
+</button>
+{!! Form::close() !!}
+
+Or
+
+<a href="#" class="block px-4 py-2 text-sm text-gray-700>LINK TEXT</a>
+
+--}}
 <div class="relative inline-block text-left">
     <div>
         <button type="button" class="inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-2 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50" id="btn-options-menu{{ $id }}" aria-haspopup="true" aria-expanded="true">

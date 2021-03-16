@@ -1,3 +1,4 @@
+{{-- Shows the Breadcrumbs in the Admin CRUD --}}
 @if(is_array($breadcrumbs) && count($breadcrumbs)>0)
 <ol class="breadcrumb flex flex-row justify-end">
 @foreach($breadcrumbs as $breadcrumb)

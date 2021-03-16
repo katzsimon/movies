@@ -1,3 +1,10 @@
+<!--
+The page to make a Booking with drop downs (Movie, Screenings, Seats)
+
+URL changes, when the Movie and Screening are selected
+to allow linking to the Booking page from a Movie or Screening selection
+
+-->
 <template>
     <div>
         <app-heading>Make a Booking</app-heading>

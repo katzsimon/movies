@@ -1,3 +1,6 @@
+<!--
+Admin Submit Button(s) Component
+-->
 <template>
     <div>
         <div class="">

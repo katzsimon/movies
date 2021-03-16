@@ -29,7 +29,12 @@ class Movie extends \App\Models\Model
     ];
 
 
-
+    /**
+     * Build the options array for all the movies used for a select drop down
+     *
+     * @param array $options
+     * @return array
+     */
     public static function options($options=[]) {
         $items = Movie::orderBy('name', 'asc')->get();
 

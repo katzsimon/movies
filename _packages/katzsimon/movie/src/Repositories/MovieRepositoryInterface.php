@@ -9,8 +9,10 @@ interface MovieRepositoryInterface extends BaseRepositoryInterface
 {
 
 
-
+    /**
+     * @return array
+     */
     public function getGenres():array;
 
-    public function upcomingMoviesScreening($order=[]): Collection;
+
 }

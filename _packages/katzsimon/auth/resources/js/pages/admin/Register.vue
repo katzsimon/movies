@@ -1,5 +1,5 @@
 <template>
-    <admin-layout title="Inertia Register">
+    <admin-layout title="Register">
 
         <div class="box">
 

@@ -14,13 +14,12 @@ abstract class BaseCRUDTest extends TestCase
      * Abstract class to extend for Resource Model CRUD testing
      */
 
-    use DatabaseTransactions;
-
     protected $user = null;
     protected $model = null;
     protected $table = null;
     protected $baseUrl = null;
     protected $truncateTables = true;
+    protected $skipBaseTests = false;
 
     protected $createdModel = null;
 
@@ -67,6 +66,7 @@ abstract class BaseCRUDTest extends TestCase
      */
     public function testIndex()
     {
+        if ($this->skipBaseTests) $this->markTestSkipped('Skipping Base Tests');
 
         $items = $this->model->factory(5)->create();
 
@@ -87,6 +87,8 @@ abstract class BaseCRUDTest extends TestCase
      */
     public function testStore() {
 
+        if ($this->skipBaseTests) $this->markTestSkipped('Skipping Base Tests');
+
         $item = $this->model->factory()->make();
 
         // Check create :: Create model
@@ -103,6 +105,8 @@ abstract class BaseCRUDTest extends TestCase
      */
     public function testUpdate()
     {
+
+        if ($this->skipBaseTests) $this->markTestSkipped('Skipping Base Tests');
 
         $item = $this->model->factory()->create();
         $updatedItem = $this->model->factory()->make();
@@ -134,6 +138,8 @@ abstract class BaseCRUDTest extends TestCase
 
     public function testShow()
     {
+
+        if ($this->skipBaseTests) $this->markTestSkipped('Skipping Base Tests');
 
         $item = $this->model->factory()->create();
 
@@ -170,6 +176,8 @@ abstract class BaseCRUDTest extends TestCase
      */
     public function testDestroy()
     {
+        if ($this->skipBaseTests) $this->markTestSkipped('Skipping Base Tests');
+
         $item = $this->model->factory()->create();
 
         // Removes the dates for comparison

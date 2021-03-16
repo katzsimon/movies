@@ -43,6 +43,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Create the options for a select drop down of the different Users
+     * @param array $options
+     * @return array
+     */
     public static function options($options=[]) {
 
         $items = User::orderBy('name', 'asc')->get();

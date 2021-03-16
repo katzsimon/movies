@@ -43,6 +43,14 @@ class Model extends \Illuminate\Database\Eloquent\Model
         return $ui;
     }
 
+
+    /**
+     * Automatically build the Breadcrumb items and urls
+     *
+     * @param string $type
+     * @param array $options
+     * @return array|mixed
+     */
     public function getBreadcrumbs($type='index', $options=[]) {
 
         $admin = $options['admin'] ?? true;

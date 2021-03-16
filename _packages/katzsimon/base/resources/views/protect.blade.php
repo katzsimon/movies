@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- Displays the Password prompt for the Protect Middleware --}}<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">

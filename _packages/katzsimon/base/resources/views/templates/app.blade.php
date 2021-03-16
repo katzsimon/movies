@@ -1,3 +1,4 @@
+{{-- Basic structure for the Blade App --}}
 @extends('katzsimon::app')
 
 @section('page-content')

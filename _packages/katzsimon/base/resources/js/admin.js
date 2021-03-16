@@ -1,4 +1,6 @@
-require('./bootstrap');
+import lodash from '@packagesBase/plugins/_lodash';
+
+import axios from '@packagesBase/plugins/_axios';
 
 import { App, plugin } from '@inertiajs/inertia-vue'
 import Vue from 'vue'
@@ -8,7 +10,6 @@ Vue.prototype.$route = route
 
 import { InertiaProgress } from '@inertiajs/progress'
 InertiaProgress.init()
-
 
 import bs from '@packagesBase/plugins/_bootstrap_admin.js';
 

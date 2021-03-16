@@ -44,8 +44,6 @@ class AppController extends \Katzsimon\Base\Http\Controllers\AppController
 
         $movies = $this->repositoryScreening->featuredMovies();
 
-        //if (strpos(url()->current(), '/api/')!==false) return $movies;
-
         $data = [
             'upcomingBookings'=>$upcomingBookingsResource,
             'movies' => MovieResource::collection($movies)->toArray(request())

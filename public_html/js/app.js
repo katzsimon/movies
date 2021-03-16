@@ -1950,22 +1950,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./_packages/katzsimon/base/resources/js/bootstrap.js":
-/*!************************************************************!*\
-  !*** ./_packages/katzsimon/base/resources/js/bootstrap.js ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
-
-window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.baseURL = "http://movies.test";
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.headers.common['Accept'] = 'application/json';
-window.axios.defaults.headers.common['Content-Type'] = 'application/json';
-window.axios.defaults.withCredentials = true;
-
-/***/ }),
-
 /***/ "./_packages/katzsimon/base/resources/js/mixins/toast.js":
 /*!***************************************************************!*\
   !*** ./_packages/katzsimon/base/resources/js/mixins/toast.js ***!
@@ -1977,12 +1961,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/*
+Functionality for displaying a toast message
+ */
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     flash: Object
   },
   mounted: function mounted() {
-    this.$eventHub.$on('toast', this.toast); //console.log('Flash Message: ', this.$page.props.flash.message);
+    this.$eventHub.$on('toast', this.toast);
 
     if (this.$page.props.flash && this.$page.props.flash.message) {
       var message = this.$page.props.flash.message.message || this.$page.props.flash.message || '';
@@ -2004,6 +1991,37 @@ __webpack_require__.r(__webpack_exports__);
     }
   }
 });
+
+/***/ }),
+
+/***/ "./_packages/katzsimon/base/resources/js/plugins/_axios.js":
+/*!*****************************************************************!*\
+  !*** ./_packages/katzsimon/base/resources/js/plugins/_axios.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+window.axios.defaults.baseURL = "http://movies.test";
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['Accept'] = 'application/json';
+window.axios.defaults.headers.common['Content-Type'] = 'application/json';
+window.axios.defaults.withCredentials = true;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (axios);
+
+/***/ }),
+
+/***/ "./_packages/katzsimon/base/resources/js/plugins/_lodash.js":
+/*!******************************************************************!*\
+  !*** ./_packages/katzsimon/base/resources/js/plugins/_lodash.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 /***/ }),
 
@@ -2496,6 +2514,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AppHeading",
   props: {}
@@ -2514,6 +2533,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2638,6 +2662,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2824,6 +2854,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _packagesBase_components_AppHeading__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @packagesBase/components/AppHeading */ "./_packages/katzsimon/base/resources/js/components/AppHeading.vue");
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3251,6 +3288,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
 //
 //
 //
@@ -4160,7 +4198,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".container[data-v-0ce22d01] {\n  max-width:800px;\n  margin:auto;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".container[data-v-0ce22d01] {\n  max-width:800px;\n  margin:auto;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -4184,7 +4222,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".v-card__title[data-v-03ae2323] {\n  text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".v-card__title[data-v-03ae2323] {\n  text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -4208,7 +4246,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".booking[data-v-5036d1c6] {\n  border:1px solid #ccc;\n  padding:1rem;\n  margin-bottom:1rem;\n  position:relative;\n}\n.booking[data-v-5036d1c6]:last-child {\n  margin-bottom:0;\n}\n.btn-cancel-booking[data-v-5036d1c6] {\n  position:absolute;\n  right:1rem;\n  bottom:1rem;\n}\n@media (max-width:960px) {\n.btn-cancel-booking[data-v-5036d1c6] {\n    position: relative;\n    right:auto;\n    bottom:auto;\n    margin-top:0.5rem;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".booking[data-v-5036d1c6] {\n  border:1px solid #ccc;\n  padding:1rem;\n  margin-bottom:1rem;\n  position:relative;\n}\n.booking[data-v-5036d1c6]:last-child {\n  margin-bottom:0;\n}\n.btn-cancel-booking[data-v-5036d1c6] {\n  position:absolute;\n  right:1rem;\n  bottom:1rem;\n}\n@media (max-width:960px) {\n.btn-cancel-booking[data-v-5036d1c6] {\n    position: relative;\n    right:auto;\n    bottom:auto;\n    margin-top:0.5rem;\n}\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -4232,7 +4270,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".booking[data-v-bf8f77d4] {\n  border:1px solid #ccc;\n  padding:1rem;\n  margin-bottom:1rem;\n  position:relative;\n}\n.booking[data-v-bf8f77d4]:last-child {\n  margin-bottom:0;\n}\n.btn-cancel-booking[data-v-bf8f77d4] {\n  position:absolute;\n  right:1rem;\n  bottom:1rem;\n}\n@media (max-width:960px) {\n.btn-cancel-booking[data-v-bf8f77d4] {\n    position: relative;\n    right:auto;\n    bottom:auto;\n    margin-top:0.5rem;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".booking[data-v-bf8f77d4] {\n  border:1px solid #ccc;\n  padding:1rem;\n  margin-bottom:1rem;\n  position:relative;\n}\n.booking[data-v-bf8f77d4]:last-child {\n  margin-bottom:0;\n}\n.btn-cancel-booking[data-v-bf8f77d4] {\n  position:absolute;\n  right:1rem;\n  bottom:1rem;\n}\n@media (max-width:960px) {\n.btn-cancel-booking[data-v-bf8f77d4] {\n    position: relative;\n    right:auto;\n    bottom:auto;\n    margin-top:0.5rem;\n}\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -4256,7 +4294,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@media (max-width:1024px) {\n.btn-nav-app[data-v-0c055776]  {\n    display:none;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@media (max-width:1024px) {\n.btn-nav-app[data-v-0c055776]  {\n    display:none;\n}\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23525,7 +23563,7 @@ var render = function() {
                 [
                   _c("v-text-field", {
                     attrs: {
-                      label: "E-mail",
+                      label: "Email",
                       required: "",
                       outlined: "",
                       name: "email",
@@ -24030,25 +24068,25 @@ var render = function() {
                                       _c("tr", [
                                         _c("th", { staticClass: "text-left" }, [
                                           _vm._v(
-                                            "\n                                    Cinema\n                                "
+                                            "\r\n                                    Cinema\r\n                                "
                                           )
                                         ]),
                                         _vm._v(" "),
                                         _c("th", { staticClass: "text-left" }, [
                                           _vm._v(
-                                            "\n                                    Theatre\n                                "
+                                            "\r\n                                    Theatre\r\n                                "
                                           )
                                         ]),
                                         _vm._v(" "),
                                         _c("th", { staticClass: "text-left" }, [
                                           _vm._v(
-                                            "\n                                    When\n                                "
+                                            "\r\n                                    When\r\n                                "
                                           )
                                         ]),
                                         _vm._v(" "),
                                         _c("th", { staticClass: "text-left" }, [
                                           _vm._v(
-                                            "\n                                    Seats Available\n                                "
+                                            "\r\n                                    Seats Available\r\n                                "
                                           )
                                         ]),
                                         _vm._v(" "),
@@ -89625,30 +89663,33 @@ var __webpack_exports__ = {};
   !*** ./_packages/katzsimon/base/resources/js/app.js ***!
   \******************************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var _packagesBase_plugins_store_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @packagesBase/plugins/_store.js */ "./_packages/katzsimon/base/resources/js/plugins/_store.js");
-/* harmony import */ var _packagesBase_plugins_router_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @packagesBase/plugins/_router.js */ "./_packages/katzsimon/base/resources/js/plugins/_router.js");
-/* harmony import */ var _packagesBase_plugins_vuetify_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @packagesBase/plugins/_vuetify.js */ "./_packages/katzsimon/base/resources/js/plugins/_vuetify.js");
-/* harmony import */ var _packagesBase_plugins_meta__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @packagesBase/plugins/_meta */ "./_packages/katzsimon/base/resources/js/plugins/_meta.js");
-/* harmony import */ var _packagesBase_App_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @packagesBase/App.vue */ "./_packages/katzsimon/base/resources/js/App.vue");
-__webpack_require__(/*! ./bootstrap */ "./_packages/katzsimon/base/resources/js/bootstrap.js");
+/* harmony import */ var _packagesBase_plugins_lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @packagesBase/plugins/_lodash */ "./_packages/katzsimon/base/resources/js/plugins/_lodash.js");
+/* harmony import */ var _packagesBase_plugins_lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_packagesBase_plugins_lodash__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _packagesBase_plugins_axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @packagesBase/plugins/_axios */ "./_packages/katzsimon/base/resources/js/plugins/_axios.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var _packagesBase_plugins_store_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @packagesBase/plugins/_store.js */ "./_packages/katzsimon/base/resources/js/plugins/_store.js");
+/* harmony import */ var _packagesBase_plugins_router_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @packagesBase/plugins/_router.js */ "./_packages/katzsimon/base/resources/js/plugins/_router.js");
+/* harmony import */ var _packagesBase_plugins_vuetify_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @packagesBase/plugins/_vuetify.js */ "./_packages/katzsimon/base/resources/js/plugins/_vuetify.js");
+/* harmony import */ var _packagesBase_plugins_meta__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @packagesBase/plugins/_meta */ "./_packages/katzsimon/base/resources/js/plugins/_meta.js");
+/* harmony import */ var _packagesBase_App_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @packagesBase/App.vue */ "./_packages/katzsimon/base/resources/js/App.vue");
+
 
 window.axios.defaults.headers.common['Request-Source'] = 'vue';
 
-window.Vue = vue__WEBPACK_IMPORTED_MODULE_0__.default;
+window.Vue = vue__WEBPACK_IMPORTED_MODULE_2__.default;
 
 
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_0__.default.prototype.$eventHub = new vue__WEBPACK_IMPORTED_MODULE_0__.default();
-var app = new vue__WEBPACK_IMPORTED_MODULE_0__.default({
+vue__WEBPACK_IMPORTED_MODULE_2__.default.prototype.$eventHub = new vue__WEBPACK_IMPORTED_MODULE_2__.default();
+var app = new vue__WEBPACK_IMPORTED_MODULE_2__.default({
   el: '#app',
-  vuetify: _packagesBase_plugins_vuetify_js__WEBPACK_IMPORTED_MODULE_3__.default,
-  router: _packagesBase_plugins_router_js__WEBPACK_IMPORTED_MODULE_2__.default,
-  store: _packagesBase_plugins_store_js__WEBPACK_IMPORTED_MODULE_1__.default,
+  vuetify: _packagesBase_plugins_vuetify_js__WEBPACK_IMPORTED_MODULE_5__.default,
+  router: _packagesBase_plugins_router_js__WEBPACK_IMPORTED_MODULE_4__.default,
+  store: _packagesBase_plugins_store_js__WEBPACK_IMPORTED_MODULE_3__.default,
   render: function render(h) {
-    return h(_packagesBase_App_vue__WEBPACK_IMPORTED_MODULE_5__.default);
+    return h(_packagesBase_App_vue__WEBPACK_IMPORTED_MODULE_7__.default);
   },
   beforeCreate: function beforeCreate() {
     this.$store.commit('initialiseStore');
@@ -89656,7 +89697,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0__.default({
   created: function created() {
     var _this = this;
 
-    axios.interceptors.request.use(function (request) {
+    _packagesBase_plugins_axios__WEBPACK_IMPORTED_MODULE_1__.default.interceptors.request.use(function (request) {
       var token = _this.$store.state.token;
 
       if (token !== '') {

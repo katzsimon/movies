@@ -28,6 +28,7 @@ class Booking extends \App\Models\Model
 
     protected $cancelMinutesThreshold = 60;
 
+    // Always used with the Screening to display the needed information
     protected $with = ['screening'];
 
     public function screening()

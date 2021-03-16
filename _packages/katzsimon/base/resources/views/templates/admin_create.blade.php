@@ -1,3 +1,4 @@
+{{-- Default template for a Create Admin Page --}}
 @extends('katzsimon::templates.admin')
 
 @section('title')

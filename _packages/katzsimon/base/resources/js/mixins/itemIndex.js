@@ -1,3 +1,6 @@
+/*
+Common functionality for the Admin Index pages
+ */
 import AdminLayout from "@packagesBase/templates/AdminLayout";
 import LayoutItemCreate from "@packagesBase/templates/AdminItemCreate";
 import LayoutItemMenu from "@packagesBase/templates/AdminItemMenu";

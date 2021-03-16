@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- Main Base Page for the Vue App --}}<!DOCTYPE html>
 <html>
 <head>
     <title>{{ config('app.name') }} App</title>

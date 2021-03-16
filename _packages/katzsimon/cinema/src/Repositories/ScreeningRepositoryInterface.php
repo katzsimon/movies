@@ -40,4 +40,11 @@ interface ScreeningRepositoryInterface extends BaseRepositoryInterface
      * @return Collection
      */
     public function featuredMovies($limit=3): Collection;
+
+
+    /**
+     * @param array $order
+     * @return Collection
+     */
+    public function allMoviesWithScreenings($order=[]): Collection;
 }

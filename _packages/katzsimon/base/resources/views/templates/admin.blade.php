@@ -1,3 +1,4 @@
+{{-- Basic page structure of the Admin CRUD --}}
 @extends('katzsimon::admin')
 
 @section('page-content')

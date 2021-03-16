@@ -22,13 +22,12 @@ class MovieRepository extends BaseRepository implements MovieRepositoryInterface
     }
 
 
-    public function getWithScreenings($order='asc'): Collection
-    {
-        return $this->newQuery()->with('future_screenings')->orderBy('id', $order)->get();
-    }
+
 
 
     /**
+     * Get the unique genres from the movies that are in the database
+     *
      * @return array
      */
     public function getGenres():array {
@@ -55,28 +54,7 @@ class MovieRepository extends BaseRepository implements MovieRepositoryInterface
         return $genres;
     }
 
-    /**
-     * @param array $order
-     * @return Collection
-     */
-    public function upcomingMoviesScreening($order=[]): Collection
-    {
 
-        $orderField = $order[0] ?? 'datetime';
-        $orderSort = $order[1] ?? 'asc';
-
-
-        return $this->newQuery()->select('*', 'movies.id as id')
-            ->where('movies.id', '>', 0)
-            ->join('screenings', 'screenings.movie_id', '=', 'movies.id')
-            ->groupBy('screenings.movie_id')
-            ->get();
-
-        //return Screening::where('datetime', '>=', Date('Y-m-d H:i:s'))->groupBy('movie_id')->with('movie')->orderBy($orderField, $orderSort)->get();
-        //->where('time', '>=', Date('H:i:s'))
-        //return $this->newQuery()->where('datetime', '>=', Date('Y-m-d H:i:s'))->orderBy('datetime', $order)->get();
-        //return $this->newQuery()->where('date', '>=', Date('Y-m-d'))->orderBy('date', $order)->orderBy('time', $order)->get();
-    }
 
 
 }

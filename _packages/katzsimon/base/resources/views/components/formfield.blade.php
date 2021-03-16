@@ -1,4 +1,13 @@
+{{--
+Component/View wrapped around the Form element
+
+Enables a more common syntax of using form elements and automatically displays validation errors
+
+Allows changing how the Form elements display and function in 1 central place
+--}}
 @php
+    //  Some preprocessing of variables is needed to make this component much simpler
+
     $class = $class ?? '';
     $value = $value ?? null;
     $readonly = $readonly ?? null;

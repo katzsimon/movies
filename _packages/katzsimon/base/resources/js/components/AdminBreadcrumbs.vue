@@ -1,3 +1,4 @@
+<!-- Display the Admin CRUD Breadcrumbs -->
 <template>
     <div>
         <ol class="w-full flex flex-row justify-end">

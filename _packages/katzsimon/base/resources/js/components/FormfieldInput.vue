@@ -1,3 +1,8 @@
+<!--
+Form Input Component
+
+Wraps the common functionality to make working with Form Elements easier
+-->
 <template>
     <div>
 

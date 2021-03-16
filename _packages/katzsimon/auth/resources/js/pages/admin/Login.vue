@@ -1,5 +1,5 @@
 <template>
-    <admin-layout title="Inertia Login">
+    <admin-layout title="Login">
 
         <div class="box">
 

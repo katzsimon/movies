@@ -1,3 +1,4 @@
+<!-- Display the Main Heading for the page -->
 <template>
     <h1 class="page-title">
         <slot />

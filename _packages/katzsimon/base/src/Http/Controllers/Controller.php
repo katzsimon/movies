@@ -32,10 +32,17 @@ class Controller extends BaseController
     }
 
 
+    /**
+     * Prepare request data and output it in the required format
+     *
+     * @param array $options
+     * @return false|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Inertia\Response|string
+     */
     public function output($options=[]) {
 
         $debug = $options['debug'] ?? false;
 
+        // Check headers if JSON is the required output
         $json = false;
         if (
             request()->header('force-content-type')==='json' ||
@@ -47,14 +54,16 @@ class Controller extends BaseController
             request()->header('request-source')==='vue'
         ) $json = true;
 
+        // Checks if a view has been set
         $view = $options['view'] ?? '';
 
+        // Checks if an output has been specified
         $output = $options['output'] ?? request()->get('output', '');
-
-
+        // If not then, determine what output is needed
         if (empty($output) && $json) $output = 'json';
         if (empty($output)) $output = config($this->getOutput());
 
+        // If a base Model is set in the Controller, Instantiates the Model and gets it UI data
         if (isset($this->model)) {
             $model = new $this->model;
             $ui = $model->getUI();
@@ -67,6 +76,7 @@ class Controller extends BaseController
         $parent = $options['parent'] ?? null;
         if (!empty($parent)) $data['parent'] = $parent;
 
+        // Build the breadcrumbs
         $breadcrumbs = $options['breadcrumbs'] ?? [];
         if ($breadcrumbs!==false && !empty($model)) {
             if (Str::contains($view, 'index')) {
@@ -78,7 +88,7 @@ class Controller extends BaseController
             }
         }
 
-
+        // Formats a flashed message if it has been set
         $with = $options['with'] ?? null;
         $message = $with['message'] ?? $options['message'] ?? null;
         if (!empty($message)) {
@@ -86,11 +96,13 @@ class Controller extends BaseController
             session()->flash('message', $message);
         }
 
+        // The base Eloquent Resource to use
         $resource = $options['resource'] ?? $this->resource;
 
+
+        // Checks for the commons data items
         $items = $options['items'] ?? null;
         $item = $options['item'] ?? null;
-
         $data = $options['data'] ?? [];
 
         $data['items'] = $data['items'] ?? $items ?? null;
@@ -139,7 +151,7 @@ class Controller extends BaseController
         $data['ui'] = $ui;
 
         if ($output==='inertia') {
-
+            // Returns the output for Inertia
 
             if (empty($component) && !empty($view)) {
                 list($namespace, $path) = explode('::', $view);
@@ -157,6 +169,7 @@ class Controller extends BaseController
         }
 
         if ($output==='vueapp') {
+            // Returns the output for Vue
 
             $view = 'katzsimon::app';
 
@@ -183,19 +196,32 @@ class Controller extends BaseController
 
     }
 
+
+    /**
+     * Handle redirects appropriately for the required output method
+     *
+     * @param array $options
+     * @return false|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
+     */
     public function redirect($options=[]) {
 
         $route = $options['route'] ?? '';
         $parameters = $options['params'] ?? [];
 
+        // Check if the request came from Inertia
         $inertia = request()->header('x-inertia')==='true';
 
+        // Check if the output is set from a HTTP header
         $output = $options['output'] ?? request()->header('force-content-type')??'';
+
+        // Check if the source has been specified
         $source = $options['source'] ?? request()->header('request-source')??'';
 
+        // Determine the output needed
         if ($inertia) $output = 'inertia';
         if (empty($output)) $output = config($this->getOutput());
 
+        // Formats the Flashed message if it is set
         $with = $options['with'] ?? null;
         $message = $with['message'] ?? $options['message'] ?? null;
         if (!empty($message)) {
@@ -250,17 +276,36 @@ class Controller extends BaseController
     }
 
 
+    /**
+     * Get the UI data from the base Model set in the Controller
+     *
+     * @param null $model
+     * @return mixed
+     */
     public function getUI($model=null) {
         if (empty($model)) $model = $this->model;
         $modelInstance = new $model;
         return $modelInstance->getUI();
     }
 
+    /**
+     * Check if a variable can be used with count()
+     *
+     * @param mixed $data
+     * @return bool
+     */
     public function isCountable($data=null)
     {
         return is_array($data) || $data instanceof Countable;
     }
 
+    /**
+     * Return the count() of a variable if it is countable
+     * Returns 0 otherwise
+     *
+     * @param mixed $data
+     * @return int
+     */
     public function counted($data=null)
     {
         if ($this->isCountable($data)) {
@@ -269,6 +314,11 @@ class Controller extends BaseController
         return 0;
     }
 
+    /**
+     * Get the default output set in the config file
+     *
+     * @return string
+     */
     public function getOutput()
     {
         if ($this->admin) return 'settings.output.admin';

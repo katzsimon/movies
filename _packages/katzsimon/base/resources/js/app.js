@@ -1,14 +1,19 @@
-require('./bootstrap');
+import lodash from '@packagesBase/plugins/_lodash';
 
+import axios from '@packagesBase/plugins/_axios';
 window.axios.defaults.headers.common['Request-Source'] = 'vue';
 
 import Vue from 'vue';
 window.Vue = Vue;
 
 import store from '@packagesBase/plugins/_store.js';
+
 import router from '@packagesBase/plugins/_router.js';
+
 import vuetify from '@packagesBase/plugins/_vuetify.js';
+
 import meta from '@packagesBase/plugins/_meta';
+
 import App from '@packagesBase/App.vue';
 
 Vue.prototype.$eventHub = new Vue();
