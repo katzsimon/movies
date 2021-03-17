@@ -15126,7 +15126,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@media (max-width:1024px) {\n.btn-nav-app[data-v-0c055776]  {\n    display:none;\n}\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@media (max-width:1024px) {\n.btn-nav-app[data-v-0c055776]  {\n    display:none;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43231,7 +43231,7 @@ var render = function() {
       _c(
         "v-navigation-drawer",
         {
-          attrs: { absolute: "", temporary: "" },
+          attrs: { fixed: "", temporary: "" },
           model: {
             value: _vm.drawer,
             callback: function($$v) {
@@ -43266,7 +43266,9 @@ var render = function() {
                   _c(
                     "v-list-item-content",
                     [
-                      _c("v-list-item-title", [_vm._v("Movie Booking System")]),
+                      _c("v-list-item-title", [
+                        _vm._v("Movie Booking Systemm")
+                      ]),
                       _vm._v(" "),
                       _c("v-list-item-subtitle", [_vm._v("Senior Assignment")])
                     ],

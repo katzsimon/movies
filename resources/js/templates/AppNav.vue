@@ -34,7 +34,7 @@
 
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" absolute temporary>
+    <v-navigation-drawer v-model="drawer" fixed temporary>
         <v-list nav dense>
 
 
@@ -47,7 +47,7 @@
                     ></v-img>
                 </v-list-item-avatar>
                 <v-list-item-content>
-                    <v-list-item-title>Movie Booking System</v-list-item-title>
+                    <v-list-item-title>Movie Booking Systemmmm</v-list-item-title>
                     <v-list-item-subtitle>Senior Assignment</v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>

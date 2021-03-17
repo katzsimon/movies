@@ -55,13 +55,20 @@
                     :error-messages="this.errors.password_confirmation"
                 ></v-text-field>
 
-                <div class="d-flex justify-end">
+                <div class="d-flex justify-space-between">
                 <v-btn
                     color="primary"
                     type="submit"
                 >
                     Register
                 </v-btn>
+
+                    <v-btn
+                        color="light"
+                        to="/login"
+                    >
+                        Or Login
+                    </v-btn>
                 </div>
 
 

@@ -18,7 +18,7 @@
                                 <th class="text-left">
                                     When
                                 </th>
-                                <th class="text-left">
+                                <th class="text-left whitespace-nowrap">
                                     Seats Available
                                 </th>
                                 <th>
@@ -31,10 +31,10 @@
                                 v-for="item in screenings"
                                 :key="item.id"
                             >
-                                <td>{{ item.cinema_name }}</td>
-                                <td>{{ item.theatre_name }}</td>
-                                <td>{{ item.datetime }}</td>
-                                <td>{{ item.seats_available }}</td>
+                                <td class="whitespace-nowrap">{{ item.cinema_name }}</td>
+                                <td class="whitespace-nowrap">{{ item.theatre_name }}</td>
+                                <td class="whitespace-nowrap">{{ item.datetime }}</td>
+                                <td class="whitespace-nowrap">{{ item.seats_available }}</td>
                                 <td>
                                     <v-btn
                                         color="blue"

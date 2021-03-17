@@ -34,7 +34,7 @@
                     :error-messages="this.errors.password"
                 ></v-text-field>
 
-                <div class="d-flex justify-end">
+                <div class="d-flex justify-space-between">
                 <v-btn
                     color="primary"
                     type="submit"
@@ -43,6 +43,13 @@
                 >
                     Login
                 </v-btn>
+
+                    <v-btn
+                        color="light"
+                        to="/register"
+                    >
+                        Or Register
+                    </v-btn>
                 </div>
 
 
